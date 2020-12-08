@@ -4,9 +4,10 @@ namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\Controller;
 use App\Models\Article;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
-class ArticleApiController extends Controller
+class CategoryApiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +16,7 @@ class ArticleApiController extends Controller
      */
     public function index()
     {
-        return Article::paginate(3);
+        return Category::all()->jsonSerialize();
     }
 
     /**
@@ -42,26 +43,21 @@ class ArticleApiController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Article  $article
+     * @param  \App\Models\Category  $article
      * @return \Illuminate\Http\Response
      */
-    public function show(Article $article)
+    public function show(Category $article)
     {
-        $result = [
-            "data" => $article->jsonSerialize()
-        ];
-
-        return $result;
-
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Article  $article
+     * @param  \App\Models\Category  $article
      * @return \Illuminate\Http\Response
      */
-    public function edit(Article $article)
+    public function edit(Category $article)
     {
         //
     }
@@ -70,10 +66,10 @@ class ArticleApiController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Article  $article
+     * @param  \App\Models\Category  $article
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Article $article)
+    public function update(Request $request, Category $article)
     {
         //
     }
@@ -81,10 +77,10 @@ class ArticleApiController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Article  $article
+     * @param  \App\Models\Category  $article
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Article $article)
+    public function destroy(Category $article)
     {
         //
     }

@@ -14,8 +14,14 @@ const routes = [
         component: index
     },
     {
-        path: '/category',
-        component: Articles
+        path: '/articles',
+        name: 'Articles',
+        component: Articles,
+    },
+    {
+        path: '/category/:id',
+        name: 'Category',
+        component: Articles,
     },
     {
         path: '/article/:id',

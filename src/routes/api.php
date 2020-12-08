@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\v1\ArticleApiController;
+use App\Http\Controllers\Api\v1\CategoryApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,3 +21,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::resource('article', ArticleApiController::class);
+Route::resource('category', CategoryApiController::class);

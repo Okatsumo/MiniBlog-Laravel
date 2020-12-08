@@ -1,5 +1,4 @@
 <template>
-
     <div>
         <section class="hero-wrap hero-wrap-2" style="background-image: url('https://i.pinimg.com/originals/ab/d3/91/abd391cf3428d8d3cb03c7993342ce91.jpg');">
             <div class="overlay"></div>
@@ -100,7 +99,6 @@ export default {
     methods: {
         LoadArticles(){
             axios.get('api/article').then(res =>{
-                console.log(res.data)
                 this.articles = res.data.data;
                 this.loading = false;
             })

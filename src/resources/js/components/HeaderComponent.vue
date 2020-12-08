@@ -8,8 +8,17 @@
 
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <router-link to="/" class="nav-link">Главная</router-link>
+                    </li>
+
+                    <li class="nav-item active">
+                        <router-link :to="{name: 'Articles'}" class="nav-link">Все записи</router-link>
+                    </li>
+
+
                     <li class="nav-item active" v-for="link in links">
-                        <router-link :to="link.href" class="nav-link">{{link.title}}</router-link>
+                        <router-link :to="{name: 'Category', params: {id: link.category_id}}" class="nav-link">{{link.name}}</router-link>
                     </li>
                 </ul>
             </div>
@@ -18,23 +27,24 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
     data(){
         return {
-            links: [
-                {
-                    title: 'Главная',
-                    href: '/',
-                },
-                {
-                    title: 'Бэкенд',
-                    href: '/category',
-                },
-                {
-                    title: 'Фронтенд',
-                    href: '/category',
-                }
-            ]
+            links: []
+        }
+    },
+
+    mounted() {
+      this.articleLoad()
+    },
+
+    methods:{
+        articleLoad(){
+            axios.get('api/category').then(res=>{
+                this.links = res.data
+            })
         }
     }
 }

@@ -192,7 +192,6 @@
 </template>
 
 <script>
-
 import axios from 'axios'
 import spin from '../components/Spinner'
 
@@ -215,8 +214,7 @@ export default {
 
     methods:{
         loadingArticle(){
-            axios.get('/api/articles/1').then(res=>{
-                console.log(res)
+            axios.get(`/api/article/${this.$route.params.id}`).then(res=>{
                 this.article = res.data.data;
                 this.loading = false;
             })

@@ -1908,6 +1908,8 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -1927,20 +1929,33 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      links: [{
-        title: 'Главная',
-        href: '/'
-      }, {
-        title: 'Бэкенд',
-        href: '/category'
-      }, {
-        title: 'Фронтенд',
-        href: '/category'
-      }]
+      links: []
     };
+  },
+  mounted: function mounted() {
+    this.articleLoad();
+  },
+  methods: {
+    articleLoad: function articleLoad() {
+      var _this = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/category').then(function (res) {
+        _this.links = res.data;
+      });
+    }
   }
 });
 
@@ -2197,8 +2212,7 @@ __webpack_require__.r(__webpack_exports__);
     loadingArticle: function loadingArticle() {
       var _this = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/articles/1').then(function (res) {
-        console.log(res);
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/article/".concat(this.$route.params.id)).then(function (res) {
         _this.article = res.data.data;
         _this.loading = false;
       });
@@ -2298,7 +2312,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2320,7 +2333,6 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.get('api/article').then(function (res) {
-        console.log(res.data);
         _this.articles = res.data.data;
         _this.loading = false;
       });
@@ -38636,21 +38648,60 @@ var render = function() {
               _c(
                 "ul",
                 { staticClass: "navbar-nav ml-auto" },
-                _vm._l(_vm.links, function(link) {
-                  return _c(
+                [
+                  _c(
                     "li",
                     { staticClass: "nav-item active" },
                     [
                       _c(
                         "router-link",
-                        { staticClass: "nav-link", attrs: { to: link.href } },
-                        [_vm._v(_vm._s(link.title))]
+                        { staticClass: "nav-link", attrs: { to: "/" } },
+                        [_vm._v("Главная")]
                       )
                     ],
                     1
-                  )
-                }),
-                0
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "li",
+                    { staticClass: "nav-item active" },
+                    [
+                      _c(
+                        "router-link",
+                        {
+                          staticClass: "nav-link",
+                          attrs: { to: { name: "Articles" } }
+                        },
+                        [_vm._v("Все записи")]
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _vm._l(_vm.links, function(link) {
+                    return _c(
+                      "li",
+                      { staticClass: "nav-item active" },
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "nav-link",
+                            attrs: {
+                              to: {
+                                name: "Category",
+                                params: { id: link.category_id }
+                              }
+                            }
+                          },
+                          [_vm._v(_vm._s(link.name))]
+                        )
+                      ],
+                      1
+                    )
+                  })
+                ],
+                2
               )
             ]
           )
@@ -55066,7 +55117,12 @@ var routes = [{
   path: '/',
   component: _views_index__WEBPACK_IMPORTED_MODULE_2__["default"]
 }, {
-  path: '/category',
+  path: '/articles',
+  name: 'Articles',
+  component: _views_Articles__WEBPACK_IMPORTED_MODULE_4__["default"]
+}, {
+  path: '/category/:id',
+  name: 'Category',
   component: _views_Articles__WEBPACK_IMPORTED_MODULE_4__["default"]
 }, {
   path: '/article/:id',
