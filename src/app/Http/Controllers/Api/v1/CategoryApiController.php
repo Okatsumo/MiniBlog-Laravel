@@ -43,21 +43,38 @@ class CategoryApiController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Category  $article
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $article)
+    public function show(Category $category)
     {
-        //
+        $article = new Article();
+
+        $data = $article->getWithConnections()
+            ->where('category_id', '=', $category->category_id)
+            ->paginate(6)
+            ->makeHidden(['category_id', 'author_id']);
+
+        return [
+            'category'=>[
+                'name'=>$category->name,
+                'id'=>$category->category_id
+            ],
+            'articles'=>$data
+        ];
+
+
+
+
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Category  $article
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $article)
+    public function edit(Category $category)
     {
         //
     }
@@ -66,10 +83,10 @@ class CategoryApiController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Category  $article
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $article)
+    public function update(Request $request, Category $category)
     {
         //
     }
@@ -77,10 +94,10 @@ class CategoryApiController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Category  $article
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $article)
+    public function destroy(Category $category)
     {
         //
     }

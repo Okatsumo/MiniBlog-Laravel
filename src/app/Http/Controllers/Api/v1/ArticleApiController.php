@@ -15,7 +15,7 @@ class ArticleApiController extends Controller
      */
     public function index()
     {
-        return Article::paginate(3);
+        return Article::paginate(6);
     }
 
     /**

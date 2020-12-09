@@ -12,7 +12,27 @@ class Article extends Model
     protected $primaryKey = 'article_id';
 
 
+    /**
+     * Вернет модель со связями
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function getWithConnections(){
+        return $this->
+            with([
+                'category'=> function($query){
+                    $query->select(['category_id','name']);
+                },
+                'author'=>function($query){
+                    $query->select(['user_id','name']);
+                }
+            ]);
+    }
+
     public function category(){
         return $this->hasOne(Category::class, 'category_id', 'category_id');
+    }
+
+    public function author(){
+        return $this->hasOne(User::class, 'user_id', 'author_id');
     }
 }
