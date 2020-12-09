@@ -1,6 +1,6 @@
 # MiniBlog-Laravel
 
-MiniBlog-Laravel - скрипт блога работающий на фреймворке Laravel.
+MiniBlog-Laravel - скрипт блога. Бэкенд работает на фреймворке Laravel(PHP), фронтенд на VueJS (SPA Aplication).
 Основной функционал:
 * Авторизация\регистрация
 * Свой API
