@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Api\v1;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\Category;
+use http\Env\Response;
 use Illuminate\Http\Request;
+use function MongoDB\BSON\toJSON;
 
 class CategoryApiController extends Controller
 {
@@ -43,8 +45,8 @@ class CategoryApiController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
+     * @param \App\Models\Category $category
+     * @return array
      */
     public function show(Category $category)
     {
@@ -55,17 +57,13 @@ class CategoryApiController extends Controller
             ->paginate(6)
             ->makeHidden(['category_id', 'author_id']);
 
-        return [
+        return $response =  [
             'category'=>[
                 'name'=>$category->name,
                 'id'=>$category->category_id
             ],
             'articles'=>$data
         ];
-
-
-
-
     }
 
     /**

@@ -13,7 +13,7 @@ class Article extends Model
 
 
     /**
-     * Вернет модель со связями
+     * Вернет модель со всеми связями
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function getWithConnections(){
