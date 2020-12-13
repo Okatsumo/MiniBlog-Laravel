@@ -3,8 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="5b0a19f5-8089-418c-95bd-227219e29c25" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Http/Controllers/Api/v1/CategoryApiController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Http/Controllers/Api/v1/CategoryApiController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Models/Article.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Models/Article.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/.env.example" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/src/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/views/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/views/index.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -137,9 +138,11 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -152,20 +155,22 @@
       <updated>1607446461531</updated>
       <workItem from="1607446463300" duration="8344000" />
       <workItem from="1607514721479" duration="8573000" />
+      <workItem from="1607895258308" duration="1518000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
-  <component name="WindowStateProjectService">
-    <state x="1242" y="600" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1607449220398">
-      <screen x="0" y="0" width="3008" height="1692" />
-    </state>
-    <state x="1242" y="600" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.3008.1692@0.0.3008.1692" timestamp="1607449220398" />
-    <state x="1169" y="408" key="run.anything.popup" timestamp="1607516841431">
-      <screen x="0" y="0" width="3008" height="1692" />
-    </state>
-    <state x="1169" y="408" key="run.anything.popup/0.0.3008.1692@0.0.3008.1692" timestamp="1607516841431" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
