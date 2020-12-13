@@ -5,8 +5,8 @@
             <div class="container">
                 <div class="row no-gutters slider-text align-items-end justify-content-center">
                     <div class="col-md-9 ftco-animate pb-5 text-center">
-                        <h1 class="mb-3 bread">Lifestyle</h1>
-                        <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>Lifestyle <i class="ion-ios-arrow-forward"></i></span></p>
+                        <h1 class="mb-3 bread">Все записи</h1>
+                        <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Домашняя <i class="ion-ios-arrow-forward"></i></a></span> <span>все записи <i class="ion-ios-arrow-forward"></i></span></p>
                     </div>
                 </div>
             </div>
@@ -99,7 +99,7 @@ export default {
     methods: {
         LoadArticles(){
             axios.get('api/article').then(res =>{
-                this.articles = res.data.data;
+                this.articles = res.data;
                 this.loading = false;
             })
         }

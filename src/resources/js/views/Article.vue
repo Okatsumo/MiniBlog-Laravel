@@ -7,19 +7,18 @@
                     <div class="col-md-9 pb-5 text-center">
                         <spin v-if="loading"></spin>
                         <h1 class="mb-3 bread">{{article.title}}</h1>
-                        <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Главная </a> / </span> <span>{{article.title}}<i class="ion-ios-arrow-forward"></i></span></p>
+                        <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Главная </a> / </span> <span>{{category.name}}<i class="ion-ios-arrow-forward"></i></span></p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="ftco-section">
+        <section class="ftco-section" v-if="!loading">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8 order-lg-last ">
 
                         <div class="content">
-                            <spin v-if="loading"></spin>
                             {{article.content}}
                         </div>
 
@@ -34,11 +33,11 @@
 
                         <div class="about-author d-flex p-4 bg-light">
                             <div class="bio mr-5">
-                                <img src="images/person_1.jpg" alt="Image placeholder" class="img-fluid mb-4">
+                                <img :src="'/storage/images/avatars/' + author.avatar" alt="Image placeholder" class="img-fluid mb-4">
                             </div>
                             <div class="desc">
-                                <h3>Admin</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!</p>
+                                <h3>{{author.name}}</h3>
+                                <p>{{author.dec}}</p>
                             </div>
                         </div>
 
@@ -205,6 +204,8 @@ export default {
 
     data: ()=>({
       article: {},
+      author: {},
+      category: {},
       loading: true
     }),
 
@@ -215,8 +216,13 @@ export default {
     methods:{
         loadingArticle(){
             axios.get(`/api/article/${this.$route.params.id}`).then(res=>{
-                this.article = res.data.data;
+                this.article = res.data[0];
+                this.author = res.data[0].author
+                this.category = res.data[0].category
                 this.loading = false;
+            })
+            .catch(error=>{
+                console.log('Произошла ошибка')
             })
         }
     }

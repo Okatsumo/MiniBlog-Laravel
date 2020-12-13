@@ -23,7 +23,7 @@ class Article extends Model
                     $query->select(['category_id','name']);
                 },
                 'author'=>function($query){
-                    $query->select(['user_id','name']);
+                    $query->select(['user_id','name', 'dec', 'avatar']);
                 }
             ]);
     }

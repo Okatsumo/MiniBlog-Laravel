@@ -3,7 +3,7 @@
         <div class="container">
             <router-link class="navbar-brand" to="/" >МиниБлог<span>.</span></router-link>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="oi oi-menu"></span> Menu
+                <span class="oi oi-menu"></span> Меню
             </button>
 
             <div class="collapse navbar-collapse" id="ftco-nav">

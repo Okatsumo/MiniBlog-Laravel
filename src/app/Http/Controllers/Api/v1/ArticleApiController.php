@@ -15,7 +15,13 @@ class ArticleApiController extends Controller
      */
     public function index()
     {
-        return Article::paginate(6);
+        $article = new Article();
+
+        $data = $article->getWithConnections()
+            ->paginate(6)
+            ->makeHidden(['category_id', 'author_id']);
+
+        return $data;
     }
 
     /**
@@ -47,11 +53,11 @@ class ArticleApiController extends Controller
      */
     public function show(Article $article)
     {
-        $result = [
-            "data" => $article->jsonSerialize()
-        ];
+        $data = $article->getWithConnections()
+            ->paginate(1)
+            ->makeHidden(['category_id', 'author_id']);
 
-        return $result;
+        return $data;
 
     }
 

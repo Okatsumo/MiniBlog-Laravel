@@ -2191,7 +2191,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2202,6 +2201,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       article: {},
+      author: {},
+      category: {},
       loading: true
     };
   },
@@ -2213,8 +2214,12 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/article/".concat(this.$route.params.id)).then(function (res) {
-        _this.article = res.data.data;
+        _this.article = res.data[0];
+        _this.author = res.data[0].author;
+        _this.category = res.data[0].category;
         _this.loading = false;
+      })["catch"](function (error) {
+        console.log('Произошла ошибка');
       });
     }
   }
@@ -2333,7 +2338,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.get('api/article').then(function (res) {
-        _this.articles = res.data.data;
+        _this.articles = res.data;
         _this.loading = false;
       });
     }
@@ -38729,7 +38734,7 @@ var staticRenderFns = [
           "aria-label": "Toggle navigation"
         }
       },
-      [_c("span", { staticClass: "oi oi-menu" }), _vm._v(" Menu\n        ")]
+      [_c("span", { staticClass: "oi oi-menu" }), _vm._v(" Меню\n        ")]
     )
   }
 ]
@@ -38828,7 +38833,7 @@ var render = function() {
                     _vm._m(0),
                     _vm._v(" "),
                     _c("span", [
-                      _vm._v(_vm._s(_vm.article.title)),
+                      _vm._v(_vm._s(_vm.category.name)),
                       _c("i", { staticClass: "ion-ios-arrow-forward" })
                     ])
                   ])
@@ -38841,35 +38846,47 @@ var render = function() {
       ]
     ),
     _vm._v(" "),
-    _c("section", { staticClass: "ftco-section" }, [
-      _c("div", { staticClass: "container" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-lg-8 order-lg-last " }, [
-            _c(
-              "div",
-              { staticClass: "content" },
-              [
-                _vm.loading ? _c("spin") : _vm._e(),
-                _vm._v(
-                  "\n                        " +
-                    _vm._s(_vm.article.content) +
-                    "\n                    "
-                )
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _vm._m(1),
-            _vm._v(" "),
-            _vm._m(2),
-            _vm._v(" "),
-            _vm._m(3)
-          ]),
-          _vm._v(" "),
-          _vm._m(4)
+    !_vm.loading
+      ? _c("section", { staticClass: "ftco-section" }, [
+          _c("div", { staticClass: "container" }, [
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-lg-8 order-lg-last " }, [
+                _c("div", { staticClass: "content" }, [
+                  _vm._v(
+                    "\n                        " +
+                      _vm._s(_vm.article.content) +
+                      "\n                    "
+                  )
+                ]),
+                _vm._v(" "),
+                _vm._m(1),
+                _vm._v(" "),
+                _c("div", { staticClass: "about-author d-flex p-4 bg-light" }, [
+                  _c("div", { staticClass: "bio mr-5" }, [
+                    _c("img", {
+                      staticClass: "img-fluid mb-4",
+                      attrs: {
+                        src: "/storage/images/avatars/" + _vm.author.avatar,
+                        alt: "Image placeholder"
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "desc" }, [
+                    _c("h3", [_vm._v(_vm._s(_vm.author.name))]),
+                    _vm._v(" "),
+                    _c("p", [_vm._v(_vm._s(_vm.author.dec))])
+                  ])
+                ]),
+                _vm._v(" "),
+                _vm._m(2)
+              ]),
+              _vm._v(" "),
+              _vm._m(3)
+            ])
+          ])
         ])
-      ])
-    ])
+      : _vm._e()
   ])
 }
 var staticRenderFns = [
@@ -38909,29 +38926,6 @@ var staticRenderFns = [
         ])
       ]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "about-author d-flex p-4 bg-light" }, [
-      _c("div", { staticClass: "bio mr-5" }, [
-        _c("img", {
-          staticClass: "img-fluid mb-4",
-          attrs: { src: "images/person_1.jpg", alt: "Image placeholder" }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "desc" }, [
-        _c("h3", [_vm._v("Admin")]),
-        _vm._v(" "),
-        _c("p", [
-          _vm._v(
-            "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!"
-          )
-        ])
-      ])
-    ])
   },
   function() {
     var _vm = this
@@ -39399,19 +39393,19 @@ var staticRenderFns = [
                 { staticClass: "col-md-9 ftco-animate pb-5 text-center" },
                 [
                   _c("h1", { staticClass: "mb-3 bread" }, [
-                    _vm._v("Lifestyle")
+                    _vm._v("Все записи")
                   ]),
                   _vm._v(" "),
                   _c("p", { staticClass: "breadcrumbs" }, [
                     _c("span", { staticClass: "mr-2" }, [
                       _c("a", { attrs: { href: "index.html" } }, [
-                        _vm._v("Home "),
+                        _vm._v("Домашняя "),
                         _c("i", { staticClass: "ion-ios-arrow-forward" })
                       ])
                     ]),
                     _vm._v(" "),
                     _c("span", [
-                      _vm._v("Lifestyle "),
+                      _vm._v("все записи "),
                       _c("i", { staticClass: "ion-ios-arrow-forward" })
                     ])
                   ])
@@ -55361,8 +55355,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/m9snikfeed/Desktop/Coding/Web/MiniBlog-Laravel/src/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/m9snikfeed/Desktop/Coding/Web/MiniBlog-Laravel/src/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /var/www/html/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /var/www/html/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
