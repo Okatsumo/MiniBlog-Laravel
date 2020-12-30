@@ -13,13 +13,14 @@
             </div>
         </section>
 
-        <section class="ftco-section" v-if="!loading">
+        <section class="ftco-section container-content" v-if="!loading">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8 order-lg-last ">
 
                         <div class="content">
-                            {{article.content}}
+                            <span v-html="article.content"></span>
+
                         </div>
 
                         <div class="tag-widget post-tag-container mb-5 mt-5">
@@ -47,10 +48,10 @@
                             <ul class="comment-list">
                                 <li class="comment">
                                     <div class="vcard bio">
-                                        <img src="images/person_1.jpg" alt="Image placeholder">
+                                        <img src="/storage/images/avatars/default.png" alt="Image placeholder">
                                     </div>
                                     <div class="comment-body">
-                                        <h3>John Doe</h3>
+                                        <h3>Admin</h3>
                                         <div class="meta">October 03, 2018 at 2:21pm</div>
                                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
                                         <p><a href="#" class="reply">Reply</a></p>
@@ -59,10 +60,10 @@
 
                                 <li class="comment">
                                     <div class="vcard bio">
-                                        <img src="images/person_1.jpg">
+                                        <img src="/storage/images/avatars/default.png">
                                     </div>
                                     <div class="comment-body">
-                                        <h3>John Doe</h3>
+                                        <h3>Admin</h3>
                                         <div class="meta">October 03, 2018 at 2:21pm</div>
                                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
                                         <p><a href="#" class="reply">Reply</a></p>
@@ -71,10 +72,10 @@
                                     <ul class="children">
                                         <li class="comment">
                                             <div class="vcard bio">
-                                                <img src="images/person_1.jpg">
+                                                <img src="/storage/images/avatars/default.png">
                                             </div>
                                             <div class="comment-body">
-                                                <h3>John Doe</h3>
+                                                <h3>Admin</h3>
                                                 <div class="meta">October 03, 2018 at 2:21pm</div>
                                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
                                                 <p><a href="#" class="reply">Reply</a></p>
@@ -84,70 +85,30 @@
                                             <ul class="children">
                                                 <li class="comment">
                                                     <div class="vcard bio">
-                                                        <img src="images/person_1.jpg" alt="Image placeholder">
+                                                        <img src="/storage/images/avatars/default.png" alt="Image placeholder">
                                                     </div>
                                                     <div class="comment-body">
-                                                        <h3>John Doe</h3>
+                                                        <h3>Admin</h3>
                                                         <div class="meta">October 03, 2018 at 2:21pm</div>
                                                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
                                                         <p><a href="#" class="reply">Reply</a></p>
                                                     </div>
-
-                                                    <ul class="children">
-                                                        <li class="comment">
-                                                            <div class="vcard bio">
-                                                                <img src="images/person_1.jpg">
-                                                            </div>
-                                                            <div class="comment-body">
-                                                                <h3>John Doe</h3>
-                                                                <div class="meta">October 03, 2018 at 2:21pm</div>
-                                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                                                                <p><a href="#" class="reply">Reply</a></p>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
                                                 </li>
                                             </ul>
                                         </li>
                                     </ul>
                                 </li>
-
-                                <li class="comment">
-                                    <div class="vcard bio">
-                                        <img src="images/person_1.jpg" alt="Image placeholder">
-                                    </div>
-                                    <div class="comment-body">
-                                        <h3>John Doe</h3>
-                                        <div class="meta">October 03, 2018 at 2:21pm</div>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                                        <p><a href="#" class="reply">Reply</a></p>
-                                    </div>
-                                </li>
                             </ul>
                             <!-- END comment-list -->
 
                             <div class="comment-form-wrap pt-5">
-                                <h3 class="mb-5">Leave a comment</h3>
                                 <form action="#" class="p-5 bg-light">
                                     <div class="form-group">
-                                        <label for="name">Name *</label>
-                                        <input type="text" class="form-control" id="name">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="email">Email *</label>
-                                        <input type="email" class="form-control" id="email">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="website">Website</label>
-                                        <input type="url" class="form-control" id="website">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="message">Message</label>
+                                        <label for="message">Отправить комментарий: </label>
                                         <textarea name="" id="message" cols="30" rows="10" class="form-control"></textarea>
                                     </div>
                                     <div class="form-group">
-                                        <input type="submit" value="Post Comment" class="btn py-3 px-4 btn-primary">
+                                        <input type="submit" value="Отправить" class="btn py-3 px-4 btn-primary">
                                     </div>
 
                                 </form>
@@ -199,7 +160,7 @@ export default {
 
 
     components: {
-        spin
+        spin,
     },
 
     data: ()=>({
@@ -216,9 +177,9 @@ export default {
     methods:{
         loadingArticle(){
             axios.get(`/api/article/${this.$route.params.id}`).then(res=>{
-                this.article = res.data[0];
-                this.author = res.data[0].author
-                this.category = res.data[0].category
+                this.article = res.data.article;
+                this.author = res.data.author
+                this.category = res.data.category
                 this.loading = false;
             })
             .catch(error=>{

@@ -20,7 +20,7 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('v-header', require('./components/HeaderComponent.vue').default);
+Vue.component('modalLogin', require('./components/ModalLogin').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -29,8 +29,14 @@ Vue.component('v-header', require('./components/HeaderComponent.vue').default);
  */
 
 import router from "./router";
+import notifications from "./notifications";
+import VModal from "./modal";
+
+require('../css/app.css');
 
 const app = new Vue({
     el: '#app',
-    router: router
+    router: router,
 });
+
+

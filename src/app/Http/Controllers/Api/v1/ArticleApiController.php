@@ -17,11 +17,10 @@ class ArticleApiController extends Controller
     {
         $article = new Article();
 
-        $data = $article->getWithConnections()
+        return $article->makeHidden(['category_id', 'author_id'])
+            ->getWithConnections()
             ->paginate(6)
-            ->makeHidden(['category_id', 'author_id']);
-
-        return $data;
+            ->jsonSerialize();
     }
 
     /**
@@ -53,11 +52,13 @@ class ArticleApiController extends Controller
      */
     public function show(Article $article)
     {
-        $data = $article->getWithConnections()
-            ->paginate(1)
-            ->makeHidden(['category_id', 'author_id']);
+        $relations = $article
+            ->getWithConnections()->first()
+            ->getRelations();
 
-        return $data;
+        return [
+                'article' =>$article->makeHidden(['category_id', 'author_id'])
+            ] + $relations ;
 
     }
 

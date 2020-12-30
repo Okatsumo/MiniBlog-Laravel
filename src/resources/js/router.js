@@ -7,6 +7,7 @@ Vue.use(VueRouter)
 import index from './views/index';
 import Article from './views/Article';
 import Articles from "./views/Articles";
+import Modal from "./components/ModalLogin";
 
 const routes = [
     {
@@ -27,7 +28,7 @@ const routes = [
         path: '/article/:id',
         name: 'article',
         component: Article
-    },
+    }
 ]
 
 
