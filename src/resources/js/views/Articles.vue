@@ -13,15 +13,15 @@
         </section>
 
 
-        <modal name="login" :height="375" :draggable = true :adaptive = true>
-            <form class="form-horizontal">
+        <modal name="login" :height="'auto'" :draggable = true :adaptive = true>
+            <form class="form-horizontal" v-if="authForm === 'login'">
                 <span class="heading">АВТОРИЗАЦИЯ</span>
                 <div class="form-group">
-                    <input type="email" class="form-control" id="inputEmail" placeholder="E-mail" v-model="email">
+                    <input type="email" class="form-control" placeholder="E-mail" v-model="email">
                     <i class="fa fa-user"></i>
                 </div>
                 <div class="form-group help">
-                    <input type="password" class="form-control" id="inputPassword" placeholder="Пароль" v-model="password">
+                    <input type="password" class="form-control" placeholder="Пароль" v-model="password">
                     <i class="fa fa-lock"></i>
                     <a href="#" class="fa fa-question-circle"></a>
                 </div>
@@ -30,10 +30,50 @@
                         <input type="checkbox" value="none" id="checkbox1" name="check"/>
                         <label for="checkbox1"></label>
                     </div>
-                    <span class="text" style="color: #ffffff">Запомнить</span>
-                    <span class="btn btn-primary" v-on:click="login()">ВХОД</span>
+
+                    <div class="row">
+                        <div class="col">
+                            <span class="text" style="color: #ffffff">Запомнить</span>
+                        </div>
+                    </div>
+
+                    <div class="row" style="padding-top: 1rem">
+                        <div class="col">
+                            <span class="btn btn-primary float-left" v-on:click="login()">ВХОД</span>
+                            <span class="btn btn-primary float-right" v-on:click="authForm = 'register'">Регистрация</span>
+                        </div>
+                    </div>
                 </div>
                 <p v-text="loginMes" style="color: #ffffff"></p>
+            </form>
+
+
+            <form class="form-horizontal" v-if="authForm === 'register'">
+                <span class="heading">РЕГИСТРАЦИЯ</span>
+                <div class="form-group">
+                    <input type="email" class="form-control" placeholder="E-mail">
+                    <i class="fa fa-user"></i>
+                </div>
+                <div class="form-group help">
+                    <input type="password" class="form-control" placeholder="Пароль">
+                    <i class="fa fa-lock"></i>
+                    <a href="#" class="fa fa-question-circle"></a>
+                </div>
+
+                <div class="form-group help">
+                    <input type="password" class="form-control" placeholder="Повторите пароль">
+                    <i class="fa fa-lock"></i>
+                    <a href="#" class="fa fa-question-circle"></a>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col">
+                            <span class="btn btn-primary float-left" v-on:click="login()">Зарегистрироваться</span>
+                            <span class="btn btn-primary float-right" v-on:click="authForm = 'login'">Авторизация</span>
+                        </div>
+                    </div>
+                </div>
             </form>
         </modal>
 
@@ -104,6 +144,7 @@ export default {
         email: undefined,
         password: undefined,
         loginMes: undefined,
+        authForm: "login"
     }),
     mounted(){
         this.LoadArticles()
