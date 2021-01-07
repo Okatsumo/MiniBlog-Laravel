@@ -106,7 +106,7 @@ export default {
         loginMes: undefined,
     }),
     mounted(){
-        this.LoadArticles(),
+        this.LoadArticles()
         this.$modal.show('login')
     },
     methods: {
@@ -133,12 +133,19 @@ export default {
                     document.cookie = `refresh = ${res.data['tokens']['refresh']}`;
 
                     Vue.notify({group: 'auth',title: 'Авторизация',text: 'Вы успешно вошли в аккаунт!'})
-
                 }
                 else{
                     this.loginMes = "Введен неверный логин или пароль"
                 }
             })
+        },
+
+
+        getCookie(name) {
+            let matches = document.cookie.match(new RegExp(
+                "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+            ));
+            return matches ? decodeURIComponent(matches[1]) : undefined;
         }
     }
 }

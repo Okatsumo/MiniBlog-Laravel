@@ -2,34 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5b0a19f5-8089-418c-95bd-227219e29c25" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/app/Http/Controllers/Api/Auth/LoginApiController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/Modules/JwtToken.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/resources/js/components/ModalLogin.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/resources/js/modal.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/resources/js/notifications.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/MiniBlog-Laravel.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/MiniBlog-Laravel.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/resources/js/components/Navbar.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/resources/js/components/SidebarAdmin.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/resources/js/views/AddArticlesAdmin.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/resources/js/views/IndexAdmin.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Http/Controllers/Api/v1/ArticleApiController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Http/Controllers/Api/v1/ArticleApiController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Http/Kernel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Providers/AuthServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Providers/AuthServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/src/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/Http/Controllers/Api/v1/AdminApiController.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/public/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/public/mix-manifest.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/resources/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/css/app.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/components/HeaderComponent.vue" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/resources/js/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/router.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/views/Article.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/views/Article.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/resources/js/views/Articles.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/views/Articles.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/views/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/views/index.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/resources/views/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/views/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/api.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/webpack.mix.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/webpack.mix.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,6 +28,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JavaScript File" />
+        <option value="composer.json" />
         <option value="Vue Single File Component" />
       </list>
     </option>
@@ -176,11 +161,12 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Color Scheme Font" />
+    <property name="settings.editor.selected.configurable" value="zd.zero.waifu-motivator-plugin" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/resources/js/views" />
       <recent name="$PROJECT_DIR$/src/app/Http/Controllers/Api/v1" />
       <recent name="$PROJECT_DIR$/src/app" />
       <recent name="C:\Users\M9snikFeed\Desktop\MiniBlog-Laravel\src\resources\js" />
@@ -214,6 +200,9 @@
       <workItem from="1609170266815" duration="628000" />
       <workItem from="1609231803424" duration="17481000" />
       <workItem from="1609320966729" duration="15609000" />
+      <workItem from="1609405991926" duration="15119000" />
+      <workItem from="1609432106351" duration="812000" />
+      <workItem from="1610019422637" duration="12454000" />
     </task>
     <servers />
   </component>
