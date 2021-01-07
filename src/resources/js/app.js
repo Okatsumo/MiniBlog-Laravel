@@ -22,6 +22,7 @@ window.Vue = require('vue');
 
 Vue.component('modalLogin', require('./components/ModalLogin').default);
 Vue.component('navbar', require('./components/Navbar').default);
+Vue.component('spinner', require('./components/Spinner').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

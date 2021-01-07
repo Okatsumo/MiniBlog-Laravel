@@ -5,7 +5,7 @@
             <div class="container">
                 <div class="row no-gutters slider-text align-items-end justify-content-center">
                     <div class="col-md-9 pb-5 text-center">
-                        <spin v-if="loading"></spin>
+                        <spinner v-if="loading"></spinner>
                         <h1 class="mb-3 bread">{{article.title}}</h1>
                         <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Главная </a> / </span> <span>{{category.name}}<i class="ion-ios-arrow-forward"></i></span></p>
                     </div>
@@ -20,7 +20,6 @@
 
                         <div class="content">
                             <span v-html="article.content"></span>
-
                         </div>
 
                         <div class="tag-widget post-tag-container mb-5 mt-5">
@@ -34,7 +33,7 @@
 
                         <div class="about-author d-flex p-4 bg-light">
                             <div class="bio mr-5">
-                                <img :src="'/storage/images/avatars/' + author.avatar" alt="Image placeholder" class="img-fluid mb-4">
+                                <img :src="'/storage/images/avatars/' + author.avatar" alt="Image placeholder" class="img-fluid mb-4" w>
                             </div>
                             <div class="desc">
                                 <h3>{{author.name}}</h3>
@@ -153,15 +152,9 @@
 
 <script>
 import axios from 'axios'
-import spin from '../components/Spinner'
 
 export default {
     name: "Article",
-
-
-    components: {
-        spin,
-    },
 
     data: ()=>({
       article: {},

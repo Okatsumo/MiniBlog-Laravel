@@ -33,7 +33,7 @@
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="todo-date d-flex mr-3">
                                             <i class="ri-calendar-2-line text-success mr-2"></i>
-                                            <span>Всего записей: {{articles.length}}</span>
+                                            <span v-if="!loading">Всего записей: {{articles.length}}</span>
                                         </div>
                                         <div class="todo-notification d-flex align-items-center">
                                              <router-link class="btn iq-bg-success" :to = "{name: 'adminPanel.articlesAdd'}">Добавить новую запись</router-link>
@@ -43,6 +43,7 @@
                             </div>
                         </div>
                         <div class="col-md-8">
+                            <spinner v-if="loading"></spinner>
                             <div class="iq-card">
                                 <div class="iq-card-body p-0">
                                     <ul class="todo-task-lists m-0 p-0">
@@ -78,7 +79,9 @@ export default {
 
     data: ()=>({
         articles: [],
-        categories: []
+        categories: [],
+        loading: true
+
     }),
 
     mounted(){
@@ -92,23 +95,18 @@ export default {
                 axios.get("/api/category/" + categoryId).then(res => {
                     this.articles = res.data.articles;
                     this.loading = false;
-
-                    console.log(res.data.data)
                 })
             }
             else{
                 axios.get('/api/article').then(res => {
                     this.articles = res.data.data;
                     this.loading = false;
-
-                    console.log(res.data.data)
                 })
             }
         },
         loadCategories(){
             axios.get("/api/category/").then(res => {
                 this.categories = res.data;
-                console.log(res.data);
             })
         }
     }
