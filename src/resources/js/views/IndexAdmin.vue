@@ -34,7 +34,7 @@ export default {
                 console.log(token)
             }
             else{
-                alert("Упс.. Вы не авторизованы!")
+                this.$router.push("/")
             }
         },
         getCookie(name) {

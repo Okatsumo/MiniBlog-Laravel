@@ -20,7 +20,7 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('modalLogin', require('./components/ModalLogin').default);
+Vue.component('modalLogin', require('./components/ModalVue').default);
 Vue.component('navbar', require('./components/Navbar').default);
 Vue.component('spinner', require('./components/Spinner').default);
 

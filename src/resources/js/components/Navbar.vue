@@ -23,22 +23,23 @@
                     </li>
 
 
-                    <li class="nav-item">
+                    <li class="nav-item" v-if="auth">
                         <router-link class="nav-link" :to="{name : 'adminPanel.index'}">Панель администратора</router-link>
                     </li>
 
 
                     <li class="nav-item" v-if="auth">
-                        <a class="nav-link">Выход</a>
+                        <a class="nav-link" v-on:click="logOut()">Выход</a>
                     </li>
                     <li class="nav-item" v-else>
-                        <a class="nav-link">Авторизация</a>
+                        <a class="nav-link" v-on:click="$modal.show('login')">Авторизация</a>
                     </li>
 
 
                 </ul>
             </div>
         </div>
+        <modalLogin></modalLogin>
     </nav>
 </template>
 
@@ -80,6 +81,13 @@ export default {
                 this.auth = false;
             }
         },
+        logOut(){
+
+            if(confirm("Вы действительно хотите выйти?")){
+                document.cookie ="access = '123'; max-age = 0";
+                document.cookie = "refresh = '123'; max-age = 0";
+            }
+        }
     }
 }
 </script>
