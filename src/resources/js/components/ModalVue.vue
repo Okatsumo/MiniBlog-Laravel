@@ -36,6 +36,12 @@
 
         <form class="form-horizontal" v-if="authForm === 'register'">
             <span class="heading">РЕГИСТРАЦИЯ</span>
+
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Логин">
+                <i class="fa fa-user"></i>
+            </div>
+
             <div class="form-group">
                 <input type="email" class="form-control" placeholder="E-mail">
                 <i class="fa fa-user"></i>
@@ -56,7 +62,7 @@
                 <div class="row">
                     <div class="col">
                         <span class="btn btn-primary float-left" v-on:click="login()">Зарегистрироваться</span>
-                        <span class="btn btn-primary float-right" v-on:click="authForm = 'login'">Авторизация</span>
+                        <span class="btn btn-primary float-right" v-on:click="authForm = 'login' ">Авторизация</span>
                     </div>
                 </div>
             </div>
@@ -88,14 +94,13 @@ export default {
                     let accessToken = JSON.parse(atob(res.data['tokens']['access'].split(".")[1]));
                     let refreshToken = JSON.parse(atob(res.data['tokens']['refresh'].split(".")[1]));
 
-
                     document.cookie = `access = ${res.data['tokens']['access']}; max-age = ${accessToken['exp']}`;
                     document.cookie = `refresh = ${res.data['tokens']['refresh']}; max-age = ${refreshToken['exp']}`;
 
-                    this.Navbar.$auth = true;
-
-
                     Vue.notify({group: 'auth',title: 'Авторизация',text: 'Вы успешно вошли в аккаунт!'})
+                    this.$root.$emit('Navbar')
+
+
 
                 }
                 else{

@@ -55,7 +55,11 @@ export default {
 
     mounted() {
       this.loadCategories()
-      this.verifyAuth()
+      this.verifyAuth(),
+      this.$root.$on('Navbar', () => {
+              // your code goes here
+              this.updateLogin()
+          })
     },
 
     methods: {
@@ -64,6 +68,14 @@ export default {
                 this.categories = res.data;
             })
         },
+
+        updateLogin(){
+            if(this.auth)
+                this.auth = false
+            else
+                this.auth = true;
+        },
+
 
         getCookie(name) {
             let matches = document.cookie.match(new RegExp(
@@ -86,7 +98,9 @@ export default {
                 document.cookie ="access = '123'; max-age = 0";
                 document.cookie = "refresh = '123'; max-age = 0";
                 Vue.notify({group: 'auth',title: 'Авторизация',text: 'Вы успешно вышли из аккаунта!'});
+                this.auth = false;
             }
+
         }
     }
 }

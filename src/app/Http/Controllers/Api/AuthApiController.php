@@ -1,10 +1,12 @@
 <?php
 
 
-namespace App\Http\Controllers\Api\Auth;
+namespace App\Http\Controllers\Api;
 
 use App\Models\User;
 use App\Modules\JwtToken;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -21,9 +23,49 @@ use Nowakowskir\JWT\TokenEncoded;
  * Class LoginApiController
  * @package App\Http\Controllers\Api\Auth
  */
-class LoginApiController
+class AuthApiController
 {
-    public function login(Request $request){
+
+    public function register(Request $request): array
+    {
+        $validator = Validator::make($request->all(),[
+            'name'=>'required',
+            'email'=>'required',
+            'password'=>'required'
+        ]);
+
+        if ($validator->fails()){
+            return [
+                'status' => false,
+                'errors' => $validator->getMessageBag()
+            ];
+        }
+
+        try{
+            $user = new User();
+            $user->name = $request->input('name');
+            $user->email = $request->input('email');
+            $user->password = $request->input('password');
+            $user->save();
+
+            return [
+                'status' => true,
+                'user'=>$user
+            ];
+        }
+        catch (QueryException $ex){
+            if($ex->errorInfo[1] == "1062")
+                return [
+                'status' => false,
+                'error'=>'Пользователь с таким логином или паролем уже существует!'
+            ];
+        }
+    }
+
+
+
+    public function login(Request $request): array
+    {
         $validator = Validator::make($request->all(),[
                 'email'=>'required',
                 'password'=>'required'
