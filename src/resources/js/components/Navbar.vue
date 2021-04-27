@@ -19,7 +19,7 @@
 
 
                     <li class="nav-item" v-for="category in categories">
-                        <router-link :to="{name: 'Articles'}" class="nav-link">{{category.name}}</router-link>
+                        <router-link :to="{name: 'Category', params: { id: category.category_id }}" class="nav-link">{{category.name}}</router-link>
                     </li>
 
 
@@ -57,7 +57,6 @@ export default {
       this.loadCategories()
       this.verifyAuth(),
       this.$root.$on('Navbar', () => {
-              // your code goes here
               this.updateLogin()
           })
     },
@@ -70,10 +69,7 @@ export default {
         },
 
         updateLogin(){
-            if(this.auth)
-                this.auth = false
-            else
-                this.auth = true;
+            this.auth = !this.auth;
         },
 
 

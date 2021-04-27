@@ -26,7 +26,7 @@ const routes = [
     {
         path: '/category/:id',
         name: 'Category',
-        component: Articles,
+        component: Articles
     },
 
     {

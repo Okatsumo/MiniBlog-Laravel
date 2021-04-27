@@ -71,6 +71,12 @@ export default {
         spin,
     },
 
+    watch: {
+        $route(to, from) {
+            this.LoadArticles()
+        }
+    },
+
     data: ()=>({
         articles: [],
         loading: true,
@@ -78,15 +84,28 @@ export default {
     }),
     mounted(){
         this.LoadArticles()
-        // this.$modal.show('login')
     },
     methods: {
         LoadArticles(){
-            axios.get('api/article').then(res =>{
+
+        if(this.$route.params.id){
+            axios.get(`/api/category/${this.$route.params.id}`).then(res =>{
+                this.articles = res.data.articles;
+                console.log(res.data)
+                this.loading = false;
+            })
+        }
+        else{
+            axios.get('/api/article').then(res =>{
                 this.articles = res.data.data;
                 console.log(res.data)
                 this.loading = false;
             })
+        }
+
+
+
+
         },
         searchFunc(){
             this.title = 'Поиск..';
