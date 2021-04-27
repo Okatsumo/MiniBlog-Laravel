@@ -82,10 +82,10 @@ export default {
             }
         },
         logOut(){
-
             if(confirm("Вы действительно хотите выйти?")){
                 document.cookie ="access = '123'; max-age = 0";
                 document.cookie = "refresh = '123'; max-age = 0";
+                Vue.notify({group: 'auth',title: 'Авторизация',text: 'Вы успешно вышли из аккаунта!'});
             }
         }
     }

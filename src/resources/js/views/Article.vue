@@ -160,6 +160,7 @@ export default {
       article: {},
       author: {},
       category: {},
+      categoriesList: {},
       loading: true
     }),
 
@@ -178,6 +179,9 @@ export default {
             .catch(error=>{
                 console.log('Произошла ошибка')
             })
+        },
+        loadCategories(){
+
         }
     }
 

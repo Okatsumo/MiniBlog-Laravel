@@ -7,6 +7,8 @@ use App\Models\Article;
 use App\Models\Category;
 use http\Env\Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use function GuzzleHttp\Promise\all;
 use function MongoDB\BSON\toJSON;
 
 class CategoryApiController extends Controller
@@ -18,7 +20,11 @@ class CategoryApiController extends Controller
      */
     public function index()
     {
-        return Category::all()->jsonSerialize();
+        return Category::all();
+
+//        return Category::join('articles', 'categories.category_id', '=', 'category_id')
+//            ->groupBy('category_id')
+//            ->get('*', DB::raw('COUNT(1)'));
     }
 
     /**

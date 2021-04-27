@@ -22,11 +22,9 @@ class JwtToken
      */
     public static function getAccessToken(string $email, string $password, int $time): \Nowakowskir\JWT\TokenEncoded
     {
-
         if(!$user = User::where('email', "=" , $email)->first()){
             throw new Exception('Wrong user');
         }
-
 
         if(!Hash::check($password, $user->password)){
             throw new Exception('Wrong password');
@@ -46,7 +44,7 @@ class JwtToken
             'type'=>'access'
         ];
 
-        $privateKey = 'secret';
+        $privateKey = config('jwt.privateKey');
 
         $tokenDecoded = new TokenDecoded($payLoad, $header);
         return $tokenDecoded->encode($privateKey, JWT::ALGORITHM_HS512);
@@ -60,7 +58,7 @@ class JwtToken
      * @throws Exception
      */
     public static function getRefreshToken(string $accessToken, int $time): \Nowakowskir\JWT\TokenEncoded{
-        $privateKey = 'secret';
+        $privateKey = config('jwt.privateKey');
 
         $tokenEncoded = new TokenEncoded($accessToken);
         $accessToken = $tokenEncoded->decode($privateKey, JWT::ALGORITHM_HS512);
@@ -70,10 +68,7 @@ class JwtToken
         }
 
         $tokenEncoded->validate($privateKey, JWT::ALGORITHM_HS512);
-
-
         $payload = $accessToken->getPayload();
-
 
         $exp = time() + 60 * $time;
 
@@ -89,7 +84,6 @@ class JwtToken
             'type'=>'refresh'
         ];
 
-
         $tokenDecoded = new TokenDecoded($payLoad, $header);
         return $tokenDecoded->encode($privateKey, JWT::ALGORITHM_HS512);
 
@@ -97,7 +91,7 @@ class JwtToken
 
 
     public static function validateToken($token){
-        $privateKey = 'secret';
+        $privateKey = config('jwt.privateKey');
         $tokenEncoded = new TokenEncoded($token);
 
         try{

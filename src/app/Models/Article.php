@@ -8,9 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Article extends Model
 {
     use HasFactory;
-
     protected $primaryKey = 'article_id';
-
 
     /**
      * Вернет модель со всеми связями

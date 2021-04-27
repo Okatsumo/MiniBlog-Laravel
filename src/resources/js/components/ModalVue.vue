@@ -92,9 +92,11 @@ export default {
                     document.cookie = `access = ${res.data['tokens']['access']}; max-age = ${accessToken['exp']}`;
                     document.cookie = `refresh = ${res.data['tokens']['refresh']}; max-age = ${refreshToken['exp']}`;
 
-                    vu.Navbar.auth = true;
+                    this.Navbar.$auth = true;
+
 
                     Vue.notify({group: 'auth',title: 'Авторизация',text: 'Вы успешно вошли в аккаунт!'})
+
                 }
                 else{
                     this.loginMes = "Введен неверный логин или пароль"

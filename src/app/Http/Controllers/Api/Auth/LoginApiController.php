@@ -3,8 +3,6 @@
 
 namespace App\Http\Controllers\Api\Auth;
 
-
-
 use App\Models\User;
 use App\Modules\JwtToken;
 use Illuminate\Http\Request;
@@ -26,9 +24,6 @@ use Nowakowskir\JWT\TokenEncoded;
 class LoginApiController
 {
     public function login(Request $request){
-        $email = $request->input('email');
-        $password = $request->input('password');
-
         $validator = Validator::make($request->all(),[
                 'email'=>'required',
                 'password'=>'required'
@@ -41,6 +36,9 @@ class LoginApiController
               'errors'=>$validator->getMessageBag()
             ];
         }
+
+        $email = $request->input('email');
+        $password = $request->input('password');
 
         try {
             $accessToken =  JwtToken::getAccessToken($email, $password, 30)->toString();
@@ -71,7 +69,6 @@ class LoginApiController
     {
         $accessToken = $request->input('accessToken');
 
-
         $validator = Validator::make($request->all(), [
             'accessToken'=>'required'
         ]);
@@ -82,7 +79,6 @@ class LoginApiController
                 'errors'=>$validator->getMessageBag()
             ];
         }
-
 
         try{
             $refreshToken = JwtToken::getRefreshToken($accessToken, 5)->toString();
@@ -102,13 +98,5 @@ class LoginApiController
             'refreshToken'=>$refreshToken
         ];
 
-    }
-
-
-    public function messages(){
-        return [
-            'email'=>'field email is empty',
-            'password'=>'field password is empty'
-        ];
     }
 }
