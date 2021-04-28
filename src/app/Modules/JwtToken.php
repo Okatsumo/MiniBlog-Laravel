@@ -36,6 +36,7 @@ class JwtToken
             'name'=>$user->name,
             'id'=>$user->user_id,
             'avatar'=>$user->avatar,
+            'admin'=>$user->admin,
             'exp'=>$exp
         ];
 
@@ -45,8 +46,8 @@ class JwtToken
         ];
 
         $privateKey = config('jwt.privateKey');
-
         $tokenDecoded = new TokenDecoded($payLoad, $header);
+
         return $tokenDecoded->encode($privateKey, JWT::ALGORITHM_HS512);
     }
 

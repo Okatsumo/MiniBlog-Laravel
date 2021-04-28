@@ -119,13 +119,13 @@
                         <div class="sidebar-box">
                             <ul class="categories">
                                 <h3 class="heading mb-4">Категории</h3>
-                                <li><a href="#">Бэкенд <span>(12)</span></a></li>
-                                <li><a href="#">Фронтенд <span>(22)</span></a></li>
+                                <li v-for="category in categoriesList"><router-link :to="{name: 'Category', params: { id: category.category_id }}" >{{category.name}} <span>(12)</span></router-link></li>
+
                             </ul>
                         </div>
 
                         <div class="sidebar-box ">
-                            <h3 class="heading mb-4">Похожие записи</h3>
+                            <h3 class="heading mb-4">Другие записи</h3>
                             <div class="block-21 mb-4 d-flex">
                                 <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
                                 <div class="text">
@@ -166,6 +166,7 @@ export default {
 
     mounted() {
         this.loadingArticle()
+        this.loadCategories()
     },
 
     methods:{
@@ -177,11 +178,16 @@ export default {
                 this.loading = false;
             })
             .catch(error=>{
-                console.log('Произошла ошибка')
+                console.log('Произошла ошибка при загрузке записи')
             })
         },
         loadCategories(){
-
+            axios.get(`/api/category`).then(res=>{
+                this.categoriesList = res.data
+            })
+            .catch(error=>{
+                    console.log('Произошла ошибка при загрузке категорий')
+            })
         }
     }
 

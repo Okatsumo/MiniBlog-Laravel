@@ -6,7 +6,7 @@
                 <div class="row no-gutters slider-text align-items-end justify-content-center">
                     <div class="col-md-9 ftco-animate pb-5 text-center">
                         <h1 class="mb-3 bread">{{title}}</h1>
-                        <p class="breadcrumbs"><span class="mr-2"><router-link to="/">Главная </router-link> </span> <span>все записи <i class="ion-ios-arrow-forward"></i></span></p>
+                        <p class="breadcrumbs"><span class="mr-2"><router-link to="/">Главная </router-link> </span> <span>{{title}} <i class="ion-ios-arrow-forward"></i></span></p>
                     </div>
                 </div>
             </div>
@@ -33,7 +33,7 @@
                                     </div>
                                     <div class="text px-md-4 px-lg-5 half pt-3">
                                         <h3><router-link :to="{name: 'article', params: { id: article.article_id } }">{{article.title}}</router-link></h3>
-                                        <p>{{article.content.slice(3,90)}} ...</p>
+                                        <div class="size" v-html="article.content"></div>
                                         <p class="mb-0"><router-link :to="{name: 'article', params: { id: article.article_id } }" class="btn btn-primary">Подробнее <span class="icon-arrow_forward ml-4"></span></router-link></p>
                                     </div>
                                 </div>
@@ -80,7 +80,7 @@ export default {
     data: ()=>({
         articles: [],
         loading: true,
-        title: 'Все записи',
+        title: "",
     }),
     mounted(){
         this.LoadArticles()
@@ -91,14 +91,14 @@ export default {
         if(this.$route.params.id){
             axios.get(`/api/category/${this.$route.params.id}`).then(res =>{
                 this.articles = res.data.articles;
-                console.log(res.data)
+                this.title = res.data.category.name;
                 this.loading = false;
             })
         }
         else{
             axios.get('/api/article').then(res =>{
                 this.articles = res.data.data;
-                console.log(res.data)
+                this.title = "Все записи"
                 this.loading = false;
             })
         }

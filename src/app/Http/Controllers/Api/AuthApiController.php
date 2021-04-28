@@ -45,7 +45,7 @@ class AuthApiController
             $user = new User();
             $user->name = $request->input('name');
             $user->email = $request->input('email');
-            $user->password = $request->input('password');
+            $user->password = Hash::make($request->input('password')) ;
             $user->save();
 
             return [
@@ -83,16 +83,17 @@ class AuthApiController
         $password = $request->input('password');
 
         try {
-            $accessToken =  JwtToken::getAccessToken($email, $password, 30)->toString();
-            $refreshToken = JwtToken::getRefreshToken($accessToken, 5)->toString();
+            $accessToken =  JwtToken::getAccessToken($email, $password, 30);
+            $refreshToken = JwtToken::getRefreshToken($accessToken->toString(), 5);
 
 
             return [
               'status'=>true,
               'tokens'=>[
-                  'access'=>$accessToken,
-                  'refresh'=>$refreshToken
-              ]
+                  'access'=>$accessToken->toString(),
+                  'refresh'=>$refreshToken->toString()
+              ],
+              'admin'=>(bool)$accessToken->decode()->getPayload()['admin']
             ];
 
         } catch (\Exception $ex) {

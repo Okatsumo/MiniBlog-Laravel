@@ -18,10 +18,10 @@ class CreateArticlesTable extends Migration
             $table->string('title');
             $table->text('content');
             $table->integer('rating');
+            $table->string('image');
 
             $table->bigInteger('author_id')->unsigned();
             $table->foreign('author_id')->on('users')->references('user_id')->onDelete('cascade');
-
 
             $table->bigInteger('category_id')->unsigned();
             $table->foreign('category_id')->on('categories')->references('category_id')->onDelete('cascade');

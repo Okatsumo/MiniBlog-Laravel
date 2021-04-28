@@ -1,7 +1,7 @@
 <template>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark ftco-navbar-light" id="ftco-navbar">
         <div class="container">
-            <router-link class="navbar-brand" to="/" >МиниБлог<span>.</span></router-link>
+            <router-link class="navbar-brand" to="/" >Technology<span>+</span></router-link>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="oi oi-menu"></span> Меню
             </button>
@@ -23,7 +23,7 @@
                     </li>
 
 
-                    <li class="nav-item" v-if="auth">
+                    <li class="nav-item" v-if="admin">
                         <router-link class="nav-link" :to="{name : 'adminPanel.index'}">Панель администратора</router-link>
                     </li>
 
@@ -50,12 +50,13 @@ export default {
     data: ()=>({
         categories: [],
         auth:false,
+        admin: false,
         user: []
     }),
 
     mounted() {
       this.loadCategories()
-      this.verifyAuth(),
+      this.verifyAuth()
       this.$root.$on('Navbar', () => {
               this.updateLogin()
           })
@@ -69,7 +70,15 @@ export default {
         },
 
         updateLogin(){
-            this.auth = !this.auth;
+//            this.auth = !this.auth;
+            if(this.auth){
+                this.admin = false;
+                this.auth = false;
+            }
+            else {
+                this.auth = true;
+                this.verifyAuth();
+            }
         },
 
 
@@ -84,6 +93,7 @@ export default {
             if(this.getCookie('refresh')){
                 this.user = atob(this.getCookie('refresh').split(".")[1]);
                 this.auth = true;
+                this.admin = JSON.parse(atob(this.getCookie('access').split(".")[1]))['admin'];
             }
             else{
                 this.auth = false;
