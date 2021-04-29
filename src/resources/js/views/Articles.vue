@@ -49,6 +49,11 @@
                         </div>
                     </div>
                 </div>
+                    <ul class="pagination">
+                        <li class="page-item"><a class="page-link" v-on:click="backPage()">Назад</a></li>
+                        <li class="page-item" v-for="page in pages"><a class="page-link" v-on:click="loadPage(page); thisPage = page">{{ page }}</a></li>
+                        <li class="page-item"><a class="page-link" v-on:click="nextPage()">Вперед</a></li>
+                    </ul>
             </div>
         </section>
     </div>
@@ -81,16 +86,52 @@ export default {
         articles: [],
         loading: true,
         title: "",
+        pages: 1,
+        thisPage: 1,
     }),
     mounted(){
         this.LoadArticles()
     },
     methods: {
-        LoadArticles(){
+        nextPage(){
+            if(this.thisPage + 1 <= this.pages){
+                this.thisPage +=1;
+                this.loadPage(this.thisPage)
+            }
+        },
 
+        backPage(){
+            if(this.thisPage > 1){
+                this.thisPage -=1;
+                this.loadPage(this.thisPage)
+            }
+        },
+
+        loadPage(page){
+            if(this.$route.params.id){
+                axios.get(`/api/category/${this.$route.params.id}?page=${page}`).then(res =>{
+                    console.log(res.data)
+                    this.articles = res.data.data;
+                    this.title = "Все записи"
+                    console.log(`page: ${this.thisPage}`)
+                })
+            }
+            else{
+                axios.get('/api/article/?page=' + page).then(res =>{
+                    this.articles = res.data.data;
+                    this.title = "Все записи"
+                    console.log(`page: ${this.thisPage}`)
+                })
+            }
+
+        },
+
+        LoadArticles(){
         if(this.$route.params.id){
             axios.get(`/api/category/${this.$route.params.id}`).then(res =>{
                 this.articles = res.data.articles;
+                console.log(res.data)
+                this.pages = res.data.last_page;
                 this.title = res.data.category.name;
                 this.loading = false;
             })
@@ -98,6 +139,8 @@ export default {
         else{
             axios.get('/api/article').then(res =>{
                 this.articles = res.data.data;
+                console.log(res.data)
+                this.pages = res.data.last_page;
                 this.title = "Все записи"
                 this.loading = false;
             })

@@ -59,9 +59,10 @@ class CategoryApiController extends Controller
         $article = new Article();
 
         $data = $article->getWithConnections()
-            ->where('category_id', '=', $category->category_id)
             ->paginate(6)
-            ->makeHidden(['category_id', 'author_id']);
+            ->makeHidden(['category_id', 'author_id'])
+            ->where('category_id', '=', $category->category_id)
+            ->jsonSerialize();
 
         return $response =  [
             'category'=>[

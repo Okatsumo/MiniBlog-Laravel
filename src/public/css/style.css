@@ -3475,7 +3475,8 @@ input[type="button"].btn-block {
   line-height: inherit;
   white-space: nowrap; }
   .navbar-brand:hover, .navbar-brand:focus {
-    text-decoration: none; }
+    text-decoration: none;
+  }
 
 .navbar-nav {
   display: -webkit-box;
@@ -8983,4 +8984,10 @@ textarea.form-control {
 
 .size img {
     display: none;
+}
+
+
+
+.router-link-exact-active{
+    color: white;
 }
