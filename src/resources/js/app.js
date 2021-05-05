@@ -5,7 +5,6 @@
  */
 
 
-
 require('./bootstrap');
 window.Vue = require('vue');
 
@@ -20,15 +19,24 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
+import MediumEditor from 'vuejs-medium-editor'
+
 Vue.component('modalLogin', require('./components/ModalVue').default);
 Vue.component('navbar', require('./components/Navbar').default);
 Vue.component('spinner', require('./components/Spinner').default);
+Vue.component('medium-editor', MediumEditor)
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+
+
+require ('medium-editor/dist/css/medium-editor.css');
+require ('vuejs-medium-editor/src/themes/default.css');
+// for the code highlighting
+require ('highlight.js/styles/ocean.css');
 
 import router from "./router";
 import notifications from "./notifications";

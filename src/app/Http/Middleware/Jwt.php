@@ -7,6 +7,7 @@ use App\Modules\JwtToken;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Nowakowskir\JWT\Exceptions\TokenExpiredException;
 use Nowakowskir\JWT\TokenEncoded;
 
 class Jwt
@@ -20,27 +21,26 @@ class Jwt
      */
     public function handle(Request $request, Closure $next)
     {
-        $refreshToken = $request->input('refreshToken');
-
-
         $validator = Validator::make($request->all(), [
            'refreshToken'=>'required'
         ]);
 
+        $refreshToken = $request->input('refreshToken');
+
         if($validator->fails()){
-            return redirect('/');
+            return abort(401, "Вы не авторизованы");
         }
 
-        $privateKey = 'secret';
+        $privateKey = config('jwt.privateKey');
         $tokenEncoded = new TokenEncoded($refreshToken);
 
         try{
             if(!$tokenEncoded->validate($privateKey, \Nowakowskir\JWT\JWT::ALGORITHM_HS512)){
-                return redirect('/');
+                return abort(401, "Ошибка авторизации");
             };
         }
-        catch (Exception $ex){
-            return redirect('/');
+        catch (TokenExpiredException $ex){
+            return abort(401, "Ошибка авторизации");
         }
 
         $payLoad = $tokenEncoded->decode($privateKey, \Nowakowskir\JWT\JWT::ALGORITHM_HS512)->getPayload();
@@ -49,10 +49,10 @@ class Jwt
 
 
         if($user['admin']){
-            return $next($request);
+            return $next($request, $user);
         }
         else{
-            return redirect('/');
+            return abort(401, "У вас недостаточно прав!");
         }
     }
 }

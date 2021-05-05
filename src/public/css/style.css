@@ -8986,8 +8986,14 @@ textarea.form-control {
     display: none;
 }
 
-
-
 .router-link-exact-active{
     color: white;
+}
+
+
+
+
+/* фикс админки */
+.container-content{
+    padding-left: 16rem;
 }

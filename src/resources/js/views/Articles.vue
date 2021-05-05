@@ -110,8 +110,7 @@ export default {
         loadPage(page){
             if(this.$route.params.id){
                 axios.get(`/api/category/${this.$route.params.id}?page=${page}`).then(res =>{
-                    console.log(res.data)
-                    this.articles = res.data.data;
+                    this.articles = res.data.articles.data;
                     this.title = "Все записи"
                     console.log(`page: ${this.thisPage}`)
                 })
@@ -124,14 +123,14 @@ export default {
                 })
             }
 
+            window.scrollBy(0, -3000);
         },
 
         LoadArticles(){
         if(this.$route.params.id){
             axios.get(`/api/category/${this.$route.params.id}`).then(res =>{
-                this.articles = res.data.articles;
-                console.log(res.data)
-                this.pages = res.data.last_page;
+                this.articles = res.data.articles.data;
+                this.pages = res.data.articles.last_page;
                 this.title = res.data.category.name;
                 this.loading = false;
             })
@@ -139,7 +138,6 @@ export default {
         else{
             axios.get('/api/article').then(res =>{
                 this.articles = res.data.data;
-                console.log(res.data)
                 this.pages = res.data.last_page;
                 this.title = "Все записи"
                 this.loading = false;

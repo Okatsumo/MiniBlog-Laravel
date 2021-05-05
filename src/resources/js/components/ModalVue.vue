@@ -122,6 +122,7 @@ export default {
             if (!this.email)
             {
                 this.mes = "Поле с email-ом не может быть пустым"
+
                 return;
             }
             if(!this.password){

@@ -93,7 +93,8 @@ export default {
         loadArticles(categoryId) {
             if(categoryId){
                 axios.get("/api/category/" + categoryId).then(res => {
-                    this.articles = res.data.articles;
+                    // console.log(res.data)
+                    this.articles = res.data.articles.data;
                     this.loading = false;
                 })
             }
