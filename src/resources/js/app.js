@@ -6,6 +6,7 @@
 
 
 require('./bootstrap');
+require('./pusher');
 window.Vue = require('vue');
 
 /**
@@ -20,6 +21,7 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 import MediumEditor from 'vuejs-medium-editor'
+
 
 Vue.component('modalLogin', require('./components/ModalVue').default);
 Vue.component('navbar', require('./components/Navbar').default);
