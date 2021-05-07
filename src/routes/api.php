@@ -21,7 +21,17 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::resource('article', ArticleApiController::class);
 Route::resource('category', CategoryApiController::class);
-Route::resource('comment', CommentController::class)->middleware('jwt');
+
+
+//Route::resource('comment', CommentController::class);
+
+Route::resource('comment', CommentController::class)->only([
+    'create', 'destroy'
+])->middleware('jwt');;
+
+Route::resource('comment', CommentController::class)->only([
+    'show'
+]);
 
 
 Route::group(['prefix'=>'auth'], function (){

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Api\v1;
 
+use App\Events\loadCommentsEven;
 use App\Http\Controllers\Controller;
+use App\Jobs\AddCommentJob;
 use App\Models\Article;
 use App\Models\Comment;
 use Illuminate\Database\Eloquent\Model;
@@ -10,11 +12,27 @@ use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
-use function App\Helpers\getUserFromAccessToken;
 use function App\Helpers\getUserFromRefreshToken;
 
 class CommentController extends Controller
 {
+
+    /**
+     * @return array
+     */
+    public function show($articleId){
+        $comment = new Comment();
+        return $comment
+            ->where('article_id', '=', $articleId)
+            ->with([
+                'author'=> function($query){
+                    $query->select(['user_id','name']);
+                }
+            ])
+            ->paginate(4)
+            ->jsonSerialize();
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -33,7 +51,10 @@ class CommentController extends Controller
                 'errors' => $validator->getMessageBag()
             ];
         }
+
+
         $user = getUserFromRefreshToken($request->refreshToken);
+
 
         try{
             $comment = new Comment();
@@ -42,13 +63,15 @@ class CommentController extends Controller
             $comment->content = $request->get('content');
             $comment->save();
 
+            broadcast(new loadCommentsEven($comment));
+
             return ['status'=>'true'];
+
+
         }
         catch (QueryException $ex){
             return ['status'=>false, 'message'=>'Произошла ошибка. Вероятно, вы ввели id несуществующей записи'];
         }
-
-
     }
 
     /**
