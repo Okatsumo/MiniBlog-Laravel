@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Category;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Support\Facades\Route;
@@ -30,3 +31,5 @@ Route::get('{any}', function () {
 })->where('any', '.*');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+

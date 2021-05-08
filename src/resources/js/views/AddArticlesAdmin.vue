@@ -13,8 +13,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="loadImage">Загрузить изображение</label>
-                    <input class="form-control" id="loadImage" type="file">
+                    <label for="image">Загрузить изображение</label>
+                    <input class="form-control" id="image" type="file">
                 </div>
 
                 <div class="form-group">
@@ -42,7 +42,7 @@
 
                 </div>
 
-                <button class="btn btn-primary float-left">Добавить</button>
+                <span class="btn btn-primary float-left" v-on:click="uploadImage()">Добавить</span>
                 <router-link class="btn btn-primary float-right" :to = "{name: 'adminPanel.articles'}">Назад</router-link>
             </form>
 
@@ -62,6 +62,8 @@ export default {
     },
 
     data: ()=>({
+        image: null,
+
         categories: [],
         name: null,
         categoryId: null,
@@ -113,20 +115,42 @@ export default {
 
 
     mounted() {
-      this.loadCategories()
+      this.loadCategories();
     },
 
     methods: {
         loadCategories(){
             axios.get('/api/category').then(res => {
                 this.categories = res.data;
-                console.log(res.data)
             })
         },
 
         categoriesInput(){
             this.tagsList = this.tags.split(",")
         },
+
+        getCookie(name) {
+            let matches = document.cookie.match(new RegExp(
+                "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+            ));
+            return matches ? decodeURIComponent(matches[1]) : undefined;
+        },
+
+        uploadImage(){
+            let formData = new FormData();
+            formData.append("image", document.getElementById("image").files[0]);
+
+
+            axios.post('/api/article', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                }
+            })
+            .then( function (data){
+                console.log(data)
+
+            })
+        }
     }
 }
 </script>

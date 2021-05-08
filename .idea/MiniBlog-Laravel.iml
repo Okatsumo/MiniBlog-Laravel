@@ -116,6 +116,7 @@
       <excludeFolder url="file://$MODULE_DIR$/src/vendor/voku/portable-ascii" />
       <excludeFolder url="file://$MODULE_DIR$/src/vendor/webmozart/assert" />
       <excludeFolder url="file://$MODULE_DIR$/src/vendor/nowakowskir/php-jwt" />
+      <excludeFolder url="file://$MODULE_DIR$/src/vendor/intervention/image" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

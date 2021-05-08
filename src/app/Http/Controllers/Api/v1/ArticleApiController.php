@@ -5,6 +5,10 @@ namespace App\Http\Controllers\Api\v1;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
+
 
 class ArticleApiController extends Controller
 {
@@ -24,24 +28,32 @@ class ArticleApiController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function store(Request $request)
     {
-        //
+        $article = new Article();
+        $article->author_id = "1"; //НЕ ЗАБЫТЬ ПЕРЕДЕЛАТЬ!!!!!!!!!!!!!!!!!!!!!!!!!
+        $article->title = "123"; //
+        $article->content = "<p>content</p>";
+        $article->category_id = 1;
+        $article->rating = 0;
+
+        $imageType = $request->file('image')->getClientOriginalExtension();
+
+        if($imageType == "png" || $imageType == "jpeg" || $imageType == "jpg"){
+            $image = $request->file('image');
+            $article->image = mt_rand(50, 100). "." . $image->getClientOriginalName();
+
+            $image_resize = Image::make($image->getRealPath());
+            $image_resize->resize(300, 300);
+            $image_resize->save(Storage::path('public/images/articles/') .$article->image);
+
+        }
+        $article->save();
     }
 
     /**
@@ -66,7 +78,7 @@ class ArticleApiController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Article  $article
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function edit(Article $article)
     {
@@ -78,7 +90,7 @@ class ArticleApiController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Article  $article
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function update(Request $request, Article $article)
     {
@@ -89,7 +101,7 @@ class ArticleApiController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Article  $article
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function destroy(Article $article)
     {

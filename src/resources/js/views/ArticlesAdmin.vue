@@ -86,7 +86,7 @@ export default {
 
     mounted(){
         this.loadArticles();
-        this.loadCategories()
+        this.loadCategories();
     },
 
     methods: {

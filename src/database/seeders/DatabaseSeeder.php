@@ -37,7 +37,7 @@ class DatabaseSeeder extends Seeder
 
                         </div>',
                'rating'=>rand(0, 10),
-               'image'=>'default.png',
+               'image'=>'default.jpg',
                'author_id'=>1,
                'created_at'=>now(),
                'updated_at'=>now(),
@@ -490,7 +490,7 @@ Kumulos предоставляет из себя MBaaS платформу во �
 <i>Данные о стабильности взяты с сервиса <a href="https://statusgator.com/">https://statusgator.com/</a><br>
 Данные о пользовательских оценках взяты с сервиса <a href="https://www.capterra.com/">www.capterra.com</a></i></div>',
                 'rating'=>rand(0, 10),
-                'image'=>'default.png',
+                'image'=>'default.jpg',
                 'author_id'=>1,
                 'created_at'=>now(),
                 'updated_at'=>now(),

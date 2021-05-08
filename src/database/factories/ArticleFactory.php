@@ -30,7 +30,7 @@ class ArticleFactory extends Factory
 
                         </div>',
             'rating'=>rand(0, 10),
-            'image'=>'default.png',
+            'image'=>'default.jpg',
             'author_id'=>1,
             'category_id'=>rand(1, 2),
             'created_at'=>now(),
