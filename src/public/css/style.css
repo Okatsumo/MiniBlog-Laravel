@@ -8990,10 +8990,6 @@ textarea.form-control {
     color: white;
 }
 
-
-
-
-/* фикс админки */
-/*.container-content{*/
-/*    padding-left: 16rem;*/
-/*}*/
+.admin-container{
+    padding-left: 16rem;
+}

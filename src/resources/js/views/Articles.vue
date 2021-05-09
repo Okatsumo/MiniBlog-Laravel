@@ -27,7 +27,7 @@
                             <div class="col-md-6 col-lg-12">
                                 <div class="blog-entry d-lg-flex">
                                     <div class="half">
-                                        <router-link :to="{name: 'article', params: { id: article.article_id } }" class="img d-flex align-items-end" v-bind:style="{ backgroundImage: `url('storage/images/articles/${article.image}')` }">
+                                        <router-link :to="{name: 'article', params: { id: article.article_id } }" class="img d-flex align-items-end" v-bind:style="{ backgroundImage: `url('/storage/images/articles/${article.image}')`}">
                                             <div class="overlay"></div>
                                         </router-link>
                                     </div>

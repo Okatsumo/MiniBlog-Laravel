@@ -37,10 +37,9 @@ class ArticleApiController extends Controller
     {
         $article = new Article();
         $article->author_id = "1"; //НЕ ЗАБЫТЬ ПЕРЕДЕЛАТЬ!!!!!!!!!!!!!!!!!!!!!!!!!
-        $article->title = "123"; //
-        $article->content = "<p>content</p>";
-        $article->category_id = 1;
-        $article->rating = 0;
+        $article->title = $request->get("title"); //
+        $article->content = $request->get("content");;
+        $article->category_id = $request->get("categoryId");;
 
         $imageType = $request->file('image')->getClientOriginalExtension();
 

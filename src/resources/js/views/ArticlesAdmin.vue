@@ -1,7 +1,7 @@
 <template>
     <div>
         <SideBarAdmin></SideBarAdmin>
-        <div class="container container-content">
+        <div class="container container-content admin-container">
             <div class="row">
                 <div class="col-lg-3">
                     <div class="iq-card">

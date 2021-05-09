@@ -70,7 +70,7 @@
                                         <textarea v-model="message" id="message" cols="30" rows="10" class="form-control"></textarea>
                                     </div>
                                     <div class="form-group">
-                                        <input v-on:click="sendComment()" value="Отправить" class="btn py-3 px-4 btn-primary">
+                                        <span v-on:click="sendComment()" class="btn py-3 px-4 btn-primary">Отправить</span>
                                     </div>
 
                                 </form>
@@ -193,14 +193,27 @@ export default {
         },
 
         sendComment(){
-            let refreshToken = "eyJhbGciOiJIUzUxMiIsInR5cGUiOiJyZWZyZXNoIiwidHlwIjoiSldUIn0.eyJuYW1lIjoiUm9nZWxpbyBNb3JhciIsImlkIjoxLCJhdmF0YXIiOm51bGwsImV4cCI6MTYyMDQwMDcyMX0.J5bWCORH_TtQRkyQPOYQRHdiqwqjEPAtMiv63WeGnMqZuUHxXy3ctabBbb6pmbX0lC5RRFO4JosbOL9rxB3cOQ";
+            let refreshToken = window.getCookie("refresh");
 
-            axios.get(`/api/comment/create?content=${this.message}&articleId=${this.article.article_id}&refreshToken=${refreshToken}`).then()
-                .catch(error=>{
-                    console.log('Произошла ошибка при загрузке категорий');
-            })
+            if(this.message != null || this.message != ""){
+                axios.get(`/api/comment/create?content=${this.message}&articleId=${this.article.article_id}&refreshToken=${refreshToken}`).then()
+                    .catch(error=>{
+                        if(error.response.status){
+                            if(window.setRefreshToken()){
+                                this.sendComment();
+                            }
+                            else{
+                                Vue.notify({group: 'auth',title: 'Ошибка доступа',text: 'Произошла ошибка. Пожалуйста, попробуйте выйти из аккаунта и повторно авторизоваться'});
+                            }
 
-            this.message = null;
+                        }
+                    })
+
+                this.message = null;
+            }
+            else{
+                console.log("упс..")
+            }
         }
     }
 

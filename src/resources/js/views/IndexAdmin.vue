@@ -2,7 +2,7 @@
     <div>
         <SideBarAdmin></SideBarAdmin>
 
-        <div class="container container-content">
+        <div class="container container-content admin-container">
 
             <h1>Главная</h1>
 

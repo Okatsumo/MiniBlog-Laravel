@@ -1,5 +1,5 @@
 <template>
-    <modal name="login" :height="'auto'" :draggable = true :adaptive = true>
+    <modal name="login" :height="'auto'" :adaptive = true>
         <form class="form-horizontal" v-if="authForm === 'login'">
             <span class="heading">АВТОРИЗАЦИЯ</span>
             <div class="form-group">
@@ -108,8 +108,6 @@ export default {
             }).then(res=>{
                 if(res.data.status){
                     this.mes = "Вы были успешно зарегистрированы!";
-
-
                 }
                 else this.mes = res.data.error;
             })
