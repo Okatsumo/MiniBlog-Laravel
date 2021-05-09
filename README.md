@@ -61,6 +61,8 @@ Software:
 - **nginx** - `:8080`
 - **mysql** - `:3306`
 - **php** - `:9000`
+- **composer**
+- **artisan**
 
 ## Дополнительные команды для docker
 
