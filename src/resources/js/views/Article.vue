@@ -63,7 +63,7 @@
 
                             <!-- END comment-list -->
 
-                            <div class="comment-form-wrap pt-5">
+                            <div class="comment-form-wrap pt-5" v-if="authenticated || user">
                                 <form action="#" class="p-5 bg-light">
                                     <div class="form-group">
                                         <label for="message">Отправить комментарий: </label>
@@ -119,21 +119,33 @@ export default {
     name: "Article",
 
     data: ()=>({
-       article: {},
-       articleId: null,
-       author: {},
-       category: {},
-       categoriesList: {},
-       loading: true,
-       comments: [],
-       lastPage: null,
-       thisPage: null,
-       message: null
+        article: {},
+        author: {},
+        category: {},
+        categoriesList: {},
+        loading: true,
+        comments: [],
+        lastPage: null,
+        thisPage: null,
+        message: null,
+
+        authenticated: auth.check(),
+        user: auth.user
     }),
 
     mounted() {
         this.loadingArticle();
         this.loadCategories();
+
+        Event.$on('userLoggedIn', () => {
+            this.authenticated = true;
+            this.user = auth.user;
+        });
+
+        Event.$on('userLogout', ()=>{
+            this.authenticated = false;
+            this.user = null;
+        });
     },
 
     methods:{
@@ -195,19 +207,11 @@ export default {
         sendComment(){
             let refreshToken = window.getCookie("refresh");
 
-            if(this.message != null || this.message != ""){
-                axios.get(`/api/comment/create?content=${this.message}&articleId=${this.article.article_id}&refreshToken=${refreshToken}`).then()
-                    .catch(error=>{
-                        if(error.response.status){
-                            if(window.setRefreshToken()){
-                                this.sendComment();
-                            }
-                            else{
-                                Vue.notify({group: 'auth',title: 'Ошибка доступа',text: 'Произошла ошибка. Пожалуйста, попробуйте выйти из аккаунта и повторно авторизоваться'});
-                            }
-
-                        }
-                    })
+            if(this.message != null || this.message !== ""){
+                api.call('get', `/api/comment/create?content=${this.message}&articleId=${this.article.article_id}`)
+                .catch(function (){
+                    this.message = "Произошла ошибка";
+                });
 
                 this.message = null;
             }

@@ -9,6 +9,7 @@ use App\Models\Article;
 use App\Models\Comment;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\QueryException;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
@@ -36,7 +37,7 @@ class CommentController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return mixed
+     * @return array|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|JsonResponse|Response
      */
     public function create(Request $request)
     {
@@ -52,25 +53,23 @@ class CommentController extends Controller
             ];
         }
 
-
-        $user = getUserFromRefreshToken($request->refreshToken);
-
+        $user = auth()->user();
 
         try{
             $comment = new Comment();
-            $comment->author_id = $user['id'];
+            $comment->author_id = $user->user_id;
             $comment->article_id = $request->get('articleId');
             $comment->content = $request->get('content');
             $comment->save();
 
             broadcast(new loadCommentsEven($comment));
 
-            return ['status'=>'true'];
+            return response(['status'=>201], 201);
 
 
         }
         catch (QueryException $ex){
-            return ['status'=>false, 'message'=>'Произошла ошибка. Вероятно, вы ввели id несуществующей записи'];
+            return response()->json(['status'=>404, 'message'=>$ex]);
         }
     }
 

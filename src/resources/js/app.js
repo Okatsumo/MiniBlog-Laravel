@@ -3,10 +3,16 @@
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
+import Api from './api.js';
+import Auth from './auth.js';
 
 require('./bootstrap');
 require('./pusher');
 window.Vue = require('vue');
+
+window.auth = new Auth();
+window.api = new Api();
+window.Event = new Vue;
 
 /**
  * The following block of code may be used to automatically register your

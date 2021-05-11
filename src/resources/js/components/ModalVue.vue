@@ -66,7 +66,7 @@ export default {
     data: ()=>({
         email: undefined,
         password: undefined,
-        mes: undefined,
+        mes: "",
         authForm: "login",
         admin: false,
 
@@ -96,20 +96,17 @@ export default {
                 this.mes = "Поле с повтором пароля не может быть пустым";
                 return;
             }
-            if(this.passwordReg != this.passwordConfReg){
+            if(this.passwordReg !== this.passwordConfReg){
                 this.mes = "Пароли не совпадают";
                 return;
             }
 
-            axios.put('/api/auth/register',{
+            axios.post('/api/register',{
                 email: this.emailReg,
                 password: this.passwordReg,
-                name: this.nameReg
+                username: this.nameReg
             }).then(res=>{
-                if(res.data.status){
-                    this.mes = "Вы были успешно зарегистрированы!";
-                }
-                else this.mes = res.data.error;
+                this.mes = "Вы были успешно зарегистрированы!";
             })
 
 
@@ -128,41 +125,20 @@ export default {
                 return;
             }
 
-            axios.put('/api/auth/login',{
-                email: this.email,
+            axios.post('/api/login',{
+                username: this.email,
                 password: this.password
             }).then(res=>{
-                if(res.data['status']){
-                    this.$modal.hide('login');
-                    this.mes = null;
+                auth.login(res.data.token, res.data.user);
+                Vue.notify({group: 'auth',title: 'Авторизация',text: 'Вы успешно вошли в аккаунт!'})
+                this.$modal.hide('login')
 
-                    let accessToken = JSON.parse(atob(res.data['tokens']['access'].split(".")[1]));
-                    let refreshToken = JSON.parse(atob(res.data['tokens']['refresh'].split(".")[1]));
-
-                    document.cookie = `access = ${res.data['tokens']['access']}; max-age = ${accessToken['exp']}`;
-                    document.cookie = `refresh = ${res.data['tokens']['refresh']}; max-age = ${refreshToken['exp']}`;
-
-                    Vue.notify({group: 'auth',title: 'Авторизация',text: 'Вы успешно вошли в аккаунт!'})
-                    this.$root.$emit('Navbar')
-                    this.email = null;
-                    this.password = null;
-                }
-                else{
-                    this.mes = "Введен неверный логин или пароль"
-                    this.password = null;
-                }
+                this.email = null;
+                this.password = null;
             })
-        },
-
-
-        getCookie(name) {
-            let matches = document.cookie.match(new RegExp(
-                "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
-            ));
-            return matches ? decodeURIComponent(matches[1]) : undefined;
-        },
-        parse(obj) {
-
+            .catch(data =>{
+                this.mes = "Введен неверный логин или пароль"
+            })
         }
     }
 }

@@ -23,12 +23,12 @@
                     </li>
 
 
-                    <li class="nav-item" v-if="admin">
+                    <li class="nav-item" v-if="authenticated && user['admin']">
                         <router-link class="nav-link" :to="{name : 'adminPanel.index'}">Панель администратора</router-link>
                     </li>
 
 
-                    <li class="nav-item" v-if="auth">
+                    <li class="nav-item" v-if="authenticated && user">
                         <a class="nav-link" v-on:click="logOut()">Выход</a>
                     </li>
                     <li class="nav-item" v-else>
@@ -47,19 +47,26 @@
 export default {
     name: "Navbar",
 
-    data: ()=>({
-        categories: [],
-        auth:false,
-        admin: false,
-        user: []
-    }),
+    data() {
+        return {
+            categories: [],
+            authenticated: auth.check(),
+            user: auth.user
+        };
+    },
+
 
     mounted() {
-      this.loadCategories()
-      this.verifyAuth()
-      this.$root.$on('Navbar', () => {
-              this.updateLogin()
-          })
+      this.loadCategories();
+      Event.$on('userLoggedIn', () => {
+          this.authenticated = true;
+          this.user = auth.user;
+      });
+
+      Event.$on('userLogout', ()=>{
+          this.authenticated = false;
+          this.user = null;
+      });
     },
 
     methods: {
@@ -69,44 +76,11 @@ export default {
             })
         },
 
-        updateLogin(){
-//            this.auth = !this.auth;
-            if(this.auth){
-                this.admin = false;
-                this.auth = false;
-            }
-            else {
-                this.auth = true;
-                this.verifyAuth();
-            }
-        },
-
-
-        getCookie(name) {
-            let matches = document.cookie.match(new RegExp(
-                "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
-            ));
-            return matches ? decodeURIComponent(matches[1]) : undefined;
-        },
-
-        verifyAuth(){
-            if(this.getCookie('refresh')){
-                this.user = atob(this.getCookie('refresh').split(".")[1]);
-                this.auth = true;
-                this.admin = JSON.parse(atob(this.getCookie('access').split(".")[1]))['admin'];
-            }
-            else{
-                this.auth = false;
-            }
-        },
         logOut(){
             if(confirm("Вы действительно хотите выйти?")){
-                document.cookie ="refresh = '123'; max-age = 0";
-                document.cookie = "access = '123'; max-age = 0";
-                Vue.notify({group: 'auth',title: 'Авторизация',text: 'Вы успешно вышли из аккаунта!'});
-                this.auth = false;
+                auth.logout();
+                Vue.notify({group: 'auth',title: 'Выход',text: 'Вы успешно вышли из аккаунта!'})
             }
-
         }
     }
 }

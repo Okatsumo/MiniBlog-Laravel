@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Support\Facades\Route;
+use Laravel\Passport\Passport;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +17,13 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Auth::routes();
+Route::get('/', function () {
+    return view('index',
+        [
+            'categories'=>Category::all()
+        ]);
+})->name('login');
+
 
 Broadcast::routes([
     'middleware' => 'auth:api']

@@ -39,7 +39,8 @@ const routes = [
     {
         path: '/admin/',
         name: 'adminPanel.index',
-        component: AdminIndex
+        component: AdminIndex,
+        // meta: { middlewareAuth: true }
     },
 
     {
