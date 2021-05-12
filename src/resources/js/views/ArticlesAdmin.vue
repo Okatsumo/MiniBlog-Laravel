@@ -48,7 +48,7 @@
                                 <div class="iq-card-body p-0">
                                     <ul class="todo-task-lists m-0 p-0">
                                         <li class="d-flex align-items-center p-3" v-for="article in articles">
-                                            <div class="user-img img-fluid"><router-link :to="{name: 'article', params: { id: article.article_id } }"><img src="images/user/05.jpg" class="rounded-circle avatar-40"></router-link></div>
+                                            <div class="user-img img-fluid"><router-link :to="{name: 'article', params: { id: article.article_id } }"><img :src="'storage/images/articles/' + article.image" class="w-50"></router-link></div>
                                             <div class="media-support-info ml-3">
                                                 <h6 class="d-inline-block"><router-link :to="{name: 'article', params: { id: article.article_id } }">{{article.title}}</router-link></h6>
                                                 <p class="mb-0">Автор: {{article.author.name}}</p>
@@ -61,6 +61,14 @@
                     </div>
                 </div>
             </div>
+            <div class="ml-auto mr-auto">
+                <ul class="pagination">
+                    <li class="page-item"><a class="page-link" v-on:click="backPage()">Назад</a></li>
+                    <li class="page-item" v-for="page in lastPage"><a class="page-link" v-on:click="loadPageArticles(false, page); thisPage = page">{{ page }}</a></li>
+                    <li class="page-item"><a class="page-link" v-on:click="nextPage()">Вперед</a></li>
+                </ul>
+            </div>
+
         </div>
     </div>
 
@@ -80,8 +88,9 @@ export default {
     data: ()=>({
         articles: [],
         categories: [],
-        loading: true
-
+        loading: true,
+        thisPage: 1,
+        lastPage: 1
     }),
 
     mounted(){
@@ -93,14 +102,15 @@ export default {
         loadArticles(categoryId) {
             if(categoryId){
                 axios.get("/api/category/" + categoryId).then(res => {
-                    // console.log(res.data)
                     this.articles = res.data.articles.data;
+                    this.lastPage = res.data.last_page;
                     this.loading = false;
                 })
             }
             else{
                 axios.get('/api/article').then(res => {
                     this.articles = res.data.data;
+                    this.lastPage = res.data.last_page;
                     this.loading = false;
                 })
             }
@@ -109,7 +119,40 @@ export default {
             axios.get("/api/category/").then(res => {
                 this.categories = res.data;
             })
-        }
+        },
+
+
+
+        // Работа со страницами
+        nextPage(){
+            if(this.thisPage + 1 <= this.lastPage){
+                this.thisPage +=1;
+                this.loadPageArticles(false, this.thisPage)
+            }
+        },
+
+        backPage(){
+            if(this.thisPage > 1){
+                this.thisPage -=1;
+                this.loadPageArticles(false, this.thisPage)
+            }
+        },
+
+
+        loadPageArticles(categoryId, page) {
+            if(categoryId){
+                axios.get("/api/category/" + categoryId + "?page=" + page).then(res => {
+                    this.articles = res.data.articles.data;
+                    this.loading = false;
+                })
+            }
+            else{
+                axios.get('/api/article?page=' + page).then(res => {
+                    this.articles = res.data.data;
+                    this.loading = false;
+                })
+            }
+        },
     }
 }
 </script>

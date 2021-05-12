@@ -53,6 +53,8 @@
                                         <h3>{{comment.author.name}}</h3>
                                         <div class="meta">October 03, 2018 at 2:21pm</div>
                                         <p>{{comment.content}}</p>
+                                        <span v-if="comment.author.user_id === (user ? user.user_id : 0)" v-on:click="editComment(comment.content, comment.comment_id)" style="cursor: pointer;">Редактировать</span>
+                                        <span v-if="comment.author.user_id === (user ? user.user_id : 0)" v-on:click="removeComment(comment.comment_id)" style="cursor: pointer;">Удалить</span>
                                     </div>
                                 </li>
                             </ul>
@@ -66,13 +68,15 @@
                             <div class="comment-form-wrap pt-5" v-if="authenticated || user">
                                 <form action="#" class="p-5 bg-light">
                                     <div class="form-group">
-                                        <label for="message">Отправить комментарий: </label>
+                                        <label for="message" v-if="!editingComment">Отправить комментарий: </label>
+                                        <label for="message" v-else>Редактирование: </label>
                                         <textarea v-model="message" id="message" cols="30" rows="10" class="form-control"></textarea>
                                     </div>
                                     <div class="form-group">
-                                        <span v-on:click="sendComment()" class="btn py-3 px-4 btn-primary">Отправить</span>
+                                        <span v-on:click="sendComment()" class="btn py-3 px-4 btn-primary" v-if="!editingComment">Отправить</span>
+                                        <span class="btn py-3 px-4 btn-primary" v-else>Редактировать</span>
+                                        <p v-model="errorMessage" v-if="errorMessage" style="color: red;">Сообщение не может быть пустым</p>
                                     </div>
-
                                 </form>
                             </div>
                         </div>
@@ -127,10 +131,12 @@ export default {
         comments: [],
         lastPage: null,
         thisPage: null,
-        message: null,
+        message: "",
+        errorMessage: "",
+        editingComment: false,
 
         authenticated: auth.check(),
-        user: auth.user
+        user: auth.user,
     }),
 
     mounted() {
@@ -204,22 +210,42 @@ export default {
             }
         },
 
+        editComment(content, id){
+            this.message = content;
+            this.editingComment = true;
+
+            const el = document.getElementById('message');
+            el.scrollIntoView();
+            console.log(`comment id: ${id}`)
+        },
+
+        removeComment(id){
+            console.log(`comment id: ${id}`)
+            api.call('delete', `/api/comment/` + id)
+                .then(res =>{
+                    console.log(res)
+                });
+        },
+
         sendComment(){
             let refreshToken = window.getCookie("refresh");
 
-            if(this.message != null || this.message !== ""){
+            if(this.message !== "" ){
                 api.call('get', `/api/comment/create?content=${this.message}&articleId=${this.article.article_id}`)
                 .catch(function (){
-                    this.message = "Произошла ошибка";
+                    this.errorMessage = "Произошла ошибка";
                 });
 
-                this.message = null;
+                this.message = "";
+                this.errorMessag = null;
             }
             else{
-                console.log("упс..")
+                this.errorMessage = "Сообщение не может быть пустым!";
             }
         }
-    }
+    },
+
+
 
 }
 </script>

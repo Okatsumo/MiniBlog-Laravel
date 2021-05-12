@@ -130,7 +130,7 @@ export default {
                 password: this.password
             }).then(res=>{
                 auth.login(res.data.token, res.data.user);
-                Vue.notify({group: 'auth',title: 'Авторизация',text: 'Вы успешно вошли в аккаунт!'})
+                Vue.notify({group: 'auth',title: 'Авторизация',text: `Добро пожаловать, ${res.data.user.name}`})
                 this.$modal.hide('login')
 
                 this.email = null;

@@ -23,26 +23,11 @@ export default {
     },
 
     mounted() {
-        this.auth()
+
     },
 
     methods:{
-        auth(){
 
-            if(this.getCookie('refresh')){
-                let token = atob(this.getCookie('refresh').split(".")[1]);
-                console.log(token)
-            }
-            else{
-                this.$router.push("/")
-            }
-        },
-        getCookie(name) {
-            let matches = document.cookie.match(new RegExp(
-                "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
-            ));
-            return matches ? decodeURIComponent(matches[1]) : undefined;
-        }
     }
 
 }

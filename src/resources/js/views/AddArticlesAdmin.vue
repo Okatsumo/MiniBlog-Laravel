@@ -129,31 +129,40 @@ export default {
             this.tagsList = this.tags.split(",")
         },
 
-        getCookie(name) {
-            let matches = document.cookie.match(new RegExp(
-                "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
-            ));
-            return matches ? decodeURIComponent(matches[1]) : undefined;
-        },
-
         addArticle(){
-            let formData = new FormData();
-            formData.append("image", document.getElementById("image").files[0]);
-            formData.append("title", this.name);
-            formData.append("content", this.content);
-            formData.append("categoryId", this.categoryId);
+            if(!this.name){
+                Vue.notify({group: 'auth',title: 'Добавление новой записи',text: "Поле с именем не может быть пустым"})
+                return;
+            }
+            if(!this.content){
+                Vue.notify({group: 'auth',title: 'Добавление новой записи',text: "Поле с текстом не может быть пустым"})
+                return;
+            }
+            if(!this.categoryId){
+                Vue.notify({group: 'auth',title: 'Добавление новой записи',text: "Выберите категорию"})
+                return;
+            }
 
-            console.log(this.categoryId)
+            let data = new FormData();
+            data.append("image", document.getElementById("image").files[0]);
+            data.append("title", this.name);
+            data.append("content", this.content);
+            data.append("categoryId", this.categoryId);
 
-            axios.post('/api/article', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                }
-            })
-            .then( function (data){
-                console.log(data)
+            let params = {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    }
+            };
 
-            })
+            api.call("post", "/api/article", data, params)
+                .then(res=>{
+                    this.$router.push({ name: 'article', params: { id:  res.data.article.article_id}})
+                    Vue.notify({group: 'auth',title: 'Добавление новой записи',text: `Запись "${res.data.article.title}" успешно добавлена.`})
+                })
+                .catch(res =>{
+                    Vue.notify({group: 'auth',title: 'Добавление новой записи',text: 'Произошла ошибка'})
+                })
         }
     }
 }

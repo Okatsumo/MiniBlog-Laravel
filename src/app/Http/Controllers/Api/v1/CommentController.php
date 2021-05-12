@@ -116,6 +116,20 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if(!$comment = Comment::find($id)){
+            return \response(['status'=>404], 404);
+        }
+
+        if($comment->author_id != auth()->user()->user_id){
+            return \response(['status'=>403], 403);
+        }
+
+
+        if($comment->delete()){
+            return \response(['status'=>200], 200);
+        }
+        else{
+            return \response(['status'=>400], 400);
+        }
     }
 }

@@ -23,7 +23,7 @@
                     </li>
 
 
-                    <li class="nav-item" v-if="authenticated && user['admin']">
+                    <li class="nav-item" v-if="user ? user['admin'] : false">
                         <router-link class="nav-link" :to="{name : 'adminPanel.index'}">Панель администратора</router-link>
                     </li>
 
@@ -51,7 +51,7 @@ export default {
         return {
             categories: [],
             authenticated: auth.check(),
-            user: auth.user
+            user: auth.user,
         };
     },
 
@@ -61,6 +61,7 @@ export default {
       Event.$on('userLoggedIn', () => {
           this.authenticated = true;
           this.user = auth.user;
+          this.userId = auth.user.user_id;
       });
 
       Event.$on('userLogout', ()=>{

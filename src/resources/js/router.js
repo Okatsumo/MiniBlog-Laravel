@@ -40,7 +40,7 @@ const routes = [
         path: '/admin/',
         name: 'adminPanel.index',
         component: AdminIndex,
-        // meta: { middlewareAuth: true }
+        meta: { middlewareAuth: true , middlewareAdmin: true}
     },
 
     {
@@ -57,7 +57,37 @@ const routes = [
 ]
 
 
-export default new VueRouter({
-    mode: 'history',
+const router = new VueRouter({
     routes
+});
+
+router.beforeEach((to, from, next) => {
+    if (to.matched.some(record => record.meta.middlewareAuth)){
+        if (!auth.check()) {
+            next({
+                path: '/',
+                query: { redirect: to.fullPath }
+            });
+            return;
+        }
+    }
+    if (to.matched.some(record => record.meta.middlewareAdmin)){
+        if (!auth.check()) {
+            next({
+                path: '/',
+                query: { redirect: to.fullPath }
+            });
+            return;
+        }
+        if(!auth.user.admin){
+            next({
+                path: '/',
+                query: { redirect: to.fullPath }
+            });
+            return;
+        }
+    }
+    next();
 })
+
+export default router;

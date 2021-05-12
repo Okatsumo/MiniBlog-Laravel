@@ -7,6 +7,7 @@ use App\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use Intervention\Image\Facades\Image;
 
 
@@ -35,24 +36,45 @@ class ArticleApiController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'title'=>'required',
+            'content'=>'required',
+            'categoryId'=>'required',
+        ]);
+
+
+        if($validator->fails()){
+            return \response(['status'=>404, 'error'=>$validator->getMessageBag()], 404);
+        }
+
+        if(!auth()->user()->admin){
+            return \response(['status'=>403, "error"=>"admin?"], 403);
+        }
+
         $article = new Article();
-        $article->author_id = "1"; //НЕ ЗАБЫТЬ ПЕРЕДЕЛАТЬ!!!!!!!!!!!!!!!!!!!!!!!!!
-        $article->title = $request->get("title"); //
+        $article->author_id = auth()->user()->user_id;
+        $article->title = $request->get("title");
         $article->content = $request->get("content");;
         $article->category_id = $request->get("categoryId");;
 
-        $imageType = $request->file('image')->getClientOriginalExtension();
 
-        if($imageType == "png" || $imageType == "jpeg" || $imageType == "jpg"){
-            $image = $request->file('image');
-            $article->image = mt_rand(50, 100). "." . $image->getClientOriginalName();
 
-            $image_resize = Image::make($image->getRealPath());
-            $image_resize->resize(300, 300);
-            $image_resize->save(Storage::path('public/images/articles/') .$article->image);
+        if($request->file('image')){
+            $imageType = $request->file('image')->getClientOriginalExtension();
 
+            if($imageType == "png" || $imageType == "jpeg" || $imageType == "jpg"){
+                $image = $request->file('image');
+                $article->image = mt_rand(50, 100). "." . $image->getClientOriginalName();
+
+                $image_resize = Image::make($image->getRealPath());
+                $image_resize->resize(300, 300);
+                $image_resize->save(Storage::path('public/images/articles/') .$article->image);
+            }
         }
+
         $article->save();
+
+        return \response(['status'=>201, "article"=>$article], 201);
     }
 
     /**

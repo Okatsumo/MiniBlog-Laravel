@@ -26,9 +26,17 @@ Route::middleware('auth:api')->group(function () {
 });
 
 
-
-Route::resource('article', ArticleApiController::class);
 Route::resource('category', CategoryApiController::class);
+
+
+Route::resource('article', ArticleApiController::class)->only([
+    'create', 'destroy', "update", "edit", "store"
+])->middleware('auth:api');
+
+Route::resource('article', ArticleApiController::class)->only([
+    'index', 'show'
+]);
+
 
 Route::resource('comment', CommentController::class)->only([
     'create', 'destroy'
