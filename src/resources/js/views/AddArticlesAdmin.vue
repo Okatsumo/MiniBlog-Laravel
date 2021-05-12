@@ -1,5 +1,4 @@
 <template>
-
     <div>
         <SideBarAdmin></SideBarAdmin>
         <div class="container container-content admin-container">
