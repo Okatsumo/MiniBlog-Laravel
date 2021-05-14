@@ -42,11 +42,12 @@ class loadCommentsEven implements ShouldBroadcast
 
     public function broadcastAs()
     {
-        return 'loadCommentsEven';
+        return 'addCommentsEven';
     }
 
     public function broadcastWith(){
         return [
+            'method'=>'add',
             'comment'=>$this->comment,
             'author'=>$this->comment->author
         ];
