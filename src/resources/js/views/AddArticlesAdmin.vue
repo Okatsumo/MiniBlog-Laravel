@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <div class="d-flex">
         <SideBarAdmin></SideBarAdmin>
-        <div class="container container-content admin-container">
+        <div class="admin-container mt-4 mr-4 ml-4">
             <h1>Добавление записи</h1>
 
 

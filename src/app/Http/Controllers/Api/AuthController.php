@@ -5,22 +5,52 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
     /**
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
-    public function register(): \Illuminate\Http\JsonResponse
+    public function register()
     {
-        User::create([
-            'name' => request('username'),
-            'email' => request('email'),
-            'password' => bcrypt(request('password'))
+        $validator = Validator::make(request()->all(),[
+            'username'=>'required|max:255',
+            'email'=>'email|required|max:255|',
+            'password'=>'required',
         ]);
+
+        if ($validator->fails()){
+            return response()->json([
+                'status' => 422,
+                'errors' => $validator->getMessageBag()
+            ], 422);
+        }
+
+        if (User::whereEmail(request('email'))->first()) {
+            return response()->json([
+                'message' => 'user with mail already exists',
+                'status' => 422
+            ], 422);
+        }
+
+        if (User::where('name', '=', request('username'))->first()) {
+            return response()->json([
+                'message' => 'User with username already exists',
+                'status' => 422
+            ], 422);
+        }
+
+        $user = new User();
+        $user->name = request('username');
+        $user->email = request('email');
+        $user->password = bcrypt(request('password'));
+        $user->password = bcrypt(request('password'));
+        $user->save();
 
         return response()->json(['status' => 201]);
     }
@@ -79,7 +109,6 @@ class AuthController extends Controller
 
         $data = json_decode($response->getContent());
 
-        // Формируем окончательный ответ в нужном формате
         return response()->json([
             'token' => $data->access_token,
             'user' => $user,

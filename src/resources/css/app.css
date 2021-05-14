@@ -156,10 +156,10 @@
   Sidebar
 ------------------------------------*/
 .iq-sidebar {
-    position: fixed;
-    z-index: 999;
-    width: 250px;
-    height: 100%;
+    /*position: fixed;*/
+    /*z-index: 999;*/
+    width: 14rem;
+    /*height: 100%;*/
     background: #343a40;
     transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
@@ -247,3 +247,68 @@ ul.todo-task-lists li.active-task { background: var(--iq-light-primary); }
 .media-support-info p { line-height: normal; }
 .todo-task-list .sub-task { display: none; }
 .todo-task-list .sub-task.show { display: block; }
+
+
+
+
+.nav-user img {
+    height: 36px;
+    width: 36px;
+}
+
+.dropdown-menu{
+    background: #343a40;
+}
+.dropdown-menu > .dropdown-item
+{
+    color: white;
+}
+
+.dropdown-menu > .dropdown-item:hover
+{
+    background: #363c41;
+}
+
+.dropdown-menu .dropdown-menu-right > a{
+    color: white;
+}
+
+.notification-list {
+    max-height: 220px;
+    margin-left: 0;
+}
+
+.dropdown-toggle {
+    white-space: nowrap;
+}
+
+.nav-user::after{
+    display: none;
+}
+.notification-list > .dropdown-toggle::after {
+    display: none;
+}
+
+
+
+
+
+.admin-container{
+    width: calc(100% - 70px);
+}
+
+.thumb-sm {
+    height: 36px !important;
+    width: 36px !important;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.thumb-lg {
+    height: 60px;
+    width: 60px;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+

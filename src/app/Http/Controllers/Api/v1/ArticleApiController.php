@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\Controller;
 use App\Models\Article;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
@@ -28,6 +29,22 @@ class ArticleApiController extends Controller
             ->jsonSerialize();
     }
 
+    public function search(Request $request){
+        $articles = Article::where('title', 'LIKE', '%' . $request->get('text') . '%');
+        $data = $articles->with([
+            'category'=> function($query){
+                $query->select(['category_id','name']);
+            },
+            'author'=>function($query){
+                $query->select(['user_id','name', 'dec', 'avatar']);
+            }
+        ])
+            ->paginate(6)
+            ->jsonSerialize();
+
+        return response($data, 200);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -39,7 +56,9 @@ class ArticleApiController extends Controller
         $validator = Validator::make($request->all(), [
             'title'=>'required',
             'content'=>'required',
-            'categoryId'=>'required',
+            'categoryId'=>'required|integer',
+            'tags'=>'json',
+            'image'=>'mimes:jpeg,png'
         ]);
 
 
@@ -58,6 +77,9 @@ class ArticleApiController extends Controller
         $article->category_id = $request->get("categoryId");;
 
 
+        if($request->get("tags")){
+
+        }
 
         if($request->file('image')){
             $imageType = $request->file('image')->getClientOriginalExtension();
@@ -101,9 +123,27 @@ class ArticleApiController extends Controller
      * @param  \App\Models\Article  $article
      * @return Response
      */
-    public function edit(Article $article)
+    public function edit(Article $article, Request $request)
     {
-        //
+        if($request->get("title")){
+            $article->title = $request->get('title');
+        }
+
+        if($request->get("content")){
+            $article->title = $request->get('content');
+        }
+
+        if($request->get("image")){
+            $article->title = $request->get('image');
+        }
+
+        if($request->get("category_id")){
+            $article->title = $request->get('category_id');
+        }
+
+        if($article->update()){
+            return \response(['status'=>201], 201);
+        }
     }
 
     /**
@@ -124,8 +164,22 @@ class ArticleApiController extends Controller
      * @param  \App\Models\Article  $article
      * @return Response
      */
-    public function destroy(Article $article)
+    public function destroy($id)
     {
-        //
+        if(!$article = Article::find($id)){
+            return \response(['status'=>404], 404);
+        }
+
+        if($article->author_id != auth()->user()->user_id){
+            return \response(['status'=>403], 403);
+        }
+
+
+        if($article->delete()){
+            return \response(['status'=>200], 200);
+        }
+        else{
+            return \response(['status'=>400], 400);
+        }
     }
 }

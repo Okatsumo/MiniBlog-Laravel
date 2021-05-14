@@ -13,20 +13,22 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class loadCommentsEven implements ShouldBroadcast
+class CreateCommentsEven implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $comment;
+    public $method;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(Comment $comment)
+    public function __construct(Comment $comment, $method)
     {
         $this->comment = $comment;
+        $this->method = $method;
     }
 
 
@@ -42,12 +44,12 @@ class loadCommentsEven implements ShouldBroadcast
 
     public function broadcastAs()
     {
-        return 'addCommentsEven';
+        return 'CreateCommentsEven';
     }
 
     public function broadcastWith(){
         return [
-            'method'=>'add',
+            'method'=>$this->method,
             'comment'=>$this->comment,
             'author'=>$this->comment->author
         ];

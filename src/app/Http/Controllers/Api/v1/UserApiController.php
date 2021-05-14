@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserApiController extends Controller
@@ -14,18 +15,12 @@ class UserApiController extends Controller
      */
     public function index()
     {
-        //
+        $data = (new User())->paginate(6)->jsonSerialize();
+        $data["status"] = 200;
+
+        return response($data, 200);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -41,12 +36,12 @@ class UserApiController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param User $user
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        //
+        return response(['status'=>200, 'user'=>$user], 200);
     }
 
     /**

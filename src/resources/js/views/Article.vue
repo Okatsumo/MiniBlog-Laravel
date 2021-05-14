@@ -45,14 +45,14 @@
                         <div class="pt-5 mt-5">
                             <h3 class="mb-5">Комментарии</h3>
                             <ul class="comment-list">
-                                <li v-for="comment in comments" class="comment">
+                                <li v-for="comment in comments">
                                     <div class="vcard bio">
                                         <img src="/storage/images/avatars/default.png" alt="Image placeholder">
                                     </div>
                                     <div class="comment-body">
                                         <h3>{{comment.author.name}}</h3>
-                                        <div class="meta">October 03, 2018 at 2:21pm</div>
-                                        <p>{{comment.content}}</p>
+                                        <div class="meta">{{comment.created_at}}</div>
+                                        <p :id="'commentContentItem.' + comment.comment_id">{{comment.content}}</p>
                                         <span v-if="comment.author.user_id === (user ? user.user_id : 0)" v-on:click="editComment(comment.content, comment.comment_id)" style="cursor: pointer;">Редактировать</span>
                                         <span v-if="comment.author.user_id === (user ? user.user_id : 0)" v-on:click="removeComment(comment.comment_id)" style="cursor: pointer;">Удалить</span>
                                     </div>
@@ -74,7 +74,7 @@
                                     </div>
                                     <div class="form-group">
                                         <span v-on:click="sendComment()" class="btn py-3 px-4 btn-primary" v-if="!editingComment">Отправить</span>
-                                        <span class="btn py-3 px-4 btn-primary" v-else>Редактировать</span>
+                                        <span class="btn py-3 px-4 btn-primary" v-else v-on:click="sendEditComment(editingComment)">Редактировать</span>
                                         <p v-model="errorMessage" v-if="errorMessage" style="color: red;">Сообщение не может быть пустым</p>
                                     </div>
                                 </form>
@@ -86,7 +86,7 @@
                         <div class="sidebar-box">
                             <ul class="categories">
                                 <h3 class="heading mb-4">Категории</h3>
-                                <li v-for="category in categoriesList"><router-link :to="{name: 'Category', params: { id: category.category_id }}" >{{category.name}} <span>(12)</span></router-link></li>
+                                <li v-for="category in categoriesList"><router-link :to="{name: 'Category', params: { id: category.category_id }}" >{{category.name}} <span>(1)</span></router-link></li>
                             </ul>
                         </div>
 
@@ -133,7 +133,7 @@ export default {
         thisPage: null,
         message: "",
         errorMessage: "",
-        editingComment: false,
+        editingComment: null,
 
         authenticated: auth.check(),
         user: auth.user,
@@ -186,8 +186,22 @@ export default {
             })
 
             Echo.channel(`comments.${articleId}`)
-                .listen(".loadCommentsEven", (e)=> {
-                    this.comments.push(e.comment);
+                .listen(".CreateCommentsEven", (e)=> {
+                    if(e.comment.author.user_id !== (this.user ? this.user.user_id : 0)){
+                        switch (e.method){
+                            case 'remove':
+                                this.removeCommentItem(Number(e.comment.comment_id))
+                                break;
+                            case 'create':
+                                this.comments.push(e.comment);
+                                break;
+                            case 'edit':
+                                // this.comments[this.getCommentItem(articleId)].content = e.comment.content;
+                                console.log(e.comment.content)
+                                console.log(this.comments[this.getCommentItem(articleId)])
+                                break;
+                        }
+                    }
                 })
         },
 
@@ -200,31 +214,54 @@ export default {
         },
 
         loadBackComments(){
-            if(this.thisPage > 1){
                 this.thisPage -=1;
-                axios.get(`/api/comment/${this.article.article_id}?page=${this.lastPage - 1}`).then(res=>{
+                axios.get(`/api/comment/${this.article.article_id}?page=${this.thisPage}`).then(res=>{
                     const last = this.comments;
                     const back = res.data.data;
                     this.comments = back.concat(last);
                 })
-            }
         },
 
         editComment(content, id){
             this.message = content;
-            this.editingComment = true;
+            this.editingComment = id;
 
             const el = document.getElementById('message');
             el.scrollIntoView();
-            console.log(`comment id: ${id}`)
+        },
+
+        sendEditComment(id){
+            this.comments[this.getCommentItem(id)].content = this.message;
+
+            api.call('get', `/api/comment/${id}/edit?content=${this.message}`)
+            this.editingComment = null;
+            this.message = "";
+        },
+
+        removeCommentItem(id){
+            this.comments.reduce((values, item, index) =>{
+                if(item.comment_id === id){
+                    this.comments.splice(index, 1);
+                }
+            }, []);
         },
 
         removeComment(id){
-            console.log(`comment id: ${id}`)
             api.call('delete', `/api/comment/` + id)
-                .then(res =>{
-                    console.log(res)
-                });
+                .then(res=>{
+                    this.removeCommentItem(id)
+                })
+        },
+
+
+        getCommentItem(id){
+            let i = null;
+            this.comments.reduce((values, item, index) =>{
+                if(item.comment_id === id){
+                    i = index;
+                }
+            }, []);
+            return i;
         },
 
         sendComment(){
@@ -232,6 +269,10 @@ export default {
 
             if(this.message !== "" ){
                 api.call('get', `/api/comment/create?content=${this.message}&articleId=${this.article.article_id}`)
+                .then(res=>{
+                    this.comments.push(res.data[0]);
+                })
+
                 .catch(function (){
                     this.errorMessage = "Произошла ошибка";
                 });

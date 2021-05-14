@@ -10,6 +10,8 @@ import Articles from "./views/Articles";
 import AdminPanel from "./views/ArticlesAdmin";
 import AdminIndex from "./views/IndexAdmin";
 import AdminArticlesAdd from "./views/AddArticlesAdmin";
+import AdminUsersList from "./views/UsersAdmin";
+import UserProfile from "./views/UserProfile";
 
 const routes = [
     {
@@ -37,7 +39,7 @@ const routes = [
 
 
     {
-        path: '/admin/',
+        path: '/admin',
         name: 'adminPanel.index',
         component: AdminIndex,
         meta: { middlewareAuth: true , middlewareAdmin: true}
@@ -53,11 +55,23 @@ const routes = [
         path: '/admin/articles/add',
         name: 'adminPanel.articlesAdd',
         component: AdminArticlesAdd
+    },
+
+    {
+        path: '/admin/users',
+        name: 'adminPanel.users',
+        component: AdminUsersList
+    },
+    {
+        path: '/profile',
+        name: 'user.profile',
+        component: UserProfile
     }
 ]
 
 
 const router = new VueRouter({
+    mode: 'history',
     routes
 });
 

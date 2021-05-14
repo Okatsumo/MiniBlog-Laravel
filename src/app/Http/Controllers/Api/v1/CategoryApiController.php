@@ -23,9 +23,11 @@ class CategoryApiController extends Controller
         return Category::all();
 
 //        return Category::join('articles', 'categories.category_id', '=', 'category_id')
-//            ->groupBy('category_id')
+////            ->groupBy('category_id')
 //            ->get('*', DB::raw('COUNT(1)'));
+
     }
+
 
     /**
      * Show the form for creating a new resource.

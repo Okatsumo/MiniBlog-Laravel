@@ -52,6 +52,7 @@ require('../css/app.css');
 
 const app = new Vue({
     el: '#app',
+    mode: 'history',
     router: router
 });
 

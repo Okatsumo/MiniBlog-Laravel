@@ -20,7 +20,7 @@
                         <form action="#" class="search-form">
                             <div class="form-group">
                                 <span class="icon icon-search"></span>
-                                <input type="text" class="form-control" placeholder="Поиск..">
+                                <input type="text" class="form-control" placeholder="Поиск.." v-on:input="search()" v-model="searchText">
                             </div>
                         </form>
                         <div class="row" v-for="article in articles">
@@ -49,11 +49,19 @@
                         </div>
                     </div>
                 </div>
-                    <ul class="pagination">
-                        <li class="page-item"><a class="page-link" v-on:click="backPage()">Назад</a></li>
-                        <li class="page-item" v-for="page in pages"><a class="page-link" v-on:click="loadPage(page); thisPage = page">{{ page }}</a></li>
-                        <li class="page-item"><a class="page-link" v-on:click="nextPage()">Вперед</a></li>
-                    </ul>
+
+                <div class="row mt-5">
+                    <div class="col text-center">
+                        <div class="block-27">
+                            <ul>
+                                <li><a v-on:click="backPage()">&lt;</a></li>
+                                <!--                            <li class="active"><span>1</span></li>-->
+                                <li :id="'page.'+ page" v-for="page in pages"><a v-on:click="loadPage(page); thisPage = page">{{ page }}</a></li>
+                                <li><a v-on:click="nextPage()">&gt;</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </div>
@@ -88,6 +96,7 @@ export default {
         title: "",
         pages: 1,
         thisPage: 1,
+        searchText: null
     }),
     mounted(){
         this.LoadArticles()
@@ -97,7 +106,15 @@ export default {
             if(this.thisPage + 1 <= this.pages){
                 this.thisPage +=1;
                 this.loadPage(this.thisPage)
+
+
+                let btnThisPage = document.getElementById(`page.`+this.thisPage)
+                btnThisPage.classList.add("active")
+
+                let oldBtnPage = document.getElementById(`page.`+ (this.thisPage + 1))
+                oldBtnPage.classList.remove("active")
             }
+
         },
 
         backPage(){
@@ -143,13 +160,12 @@ export default {
                 this.loading = false;
             })
         }
-
-
-
-
         },
-        searchFunc(){
-            this.title = 'Поиск..';
+        search(){
+            axios.get(`/api/articles/search?text=${this.searchText}`).then(res =>{
+                this.articles = res.data.data;
+                console.log(res.data)
+            })
         }
     }
 }
