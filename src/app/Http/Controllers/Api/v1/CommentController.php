@@ -58,12 +58,19 @@ class CommentController extends Controller
 
         if ($validator->fails()){
             return response([
-                'status' => false,
+                'status' => 404,
                 'errors' => $validator->getMessageBag()
             ], 404);
         }
 
         $user = auth()->user();
+
+        if($user->banned){
+            return response([
+                'status' => 403,
+                'errors' => "The account is blocked"
+            ], 403);
+        }
 
         try{
             $comment = new Comment();

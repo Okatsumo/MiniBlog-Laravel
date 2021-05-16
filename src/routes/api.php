@@ -18,12 +18,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::resource('user', UserApiController::class)->only([
-    'create', 'destroy', "update", "edit", "store"
+    'create', 'destroy', "update", "edit"
 ])->middleware('auth:api');
 
 Route::resource('users', UserApiController::class)->only([
-    'show', 'index'
+    'index'
 ]);
+
+Route::get('/get-user/{user}', [UserApiController::class, "show"]);
 
 
 Route::post('register', [AuthController::class, "register"]);
@@ -32,22 +34,23 @@ Route::post('login', [AuthController::class, "login"]);
 Route::middleware('auth:api')->group(function () {
     Route::post('/logout', [AuthController::class, "logout"]);
     Route::get('/get-user', [AuthController::class, "getUser"]);
-    Route::get('/get-count-users', function (){
-        return response(['status'=>200, 'total'=>User::all()->count()], 200);
-    });
-    Route::get('/get-count-category', function (){
-        return response(['status'=>200, 'total'=>Category::all()->count()], 200);
-    });
+    Route::post('/user/upload-avatar/{user}', [UserApiController::class, "uploadAvatar"]);
 });
 
-Route::get('/articles/search', [ArticleApiController::class, 'search']);
+Route::get('/get-count-users', function (){
+    return response(['status'=>200, 'total'=>User::all()->count()], 200);
+});
+Route::get('/get-count-category', function (){
+    return response(['status'=>200, 'total'=>Category::all()->count()], 200);
+});
 
 Route::resource('category', CategoryApiController::class);
-
 
 Route::resource('article', ArticleApiController::class)->only([
     'create', 'destroy', "update", "edit", "store"
 ])->middleware('auth:api');
+
+Route::get('/articles/search', [ArticleApiController::class, 'search']);
 
 Route::resource('article', ArticleApiController::class)->only([
     'index', 'show'

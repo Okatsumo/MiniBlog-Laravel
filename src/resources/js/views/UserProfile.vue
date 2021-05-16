@@ -5,6 +5,7 @@
                         <img :src="'/storage/images/avatars/' + user.avatar" class="img-fluid">
                         <p class=" mb-2">{{user.name}}</p>
                         <p class="m-2" v-if="user.admin" style="color: red">Администратор</p>
+                        <p class="m-2" v-if="user.banned" style="color: red">Заблокирован</p>
                         <button class="btn btn-black">Настройки профиля</button>
                         <div class="text pt-4">
                             <p>{{user.description}}</p>
@@ -19,26 +20,23 @@
 export default {
     name: "user.profile",
 
-    data() {
+    data(){
         return {
-            authenticated: auth.check(),
-            user: auth.user,
-        };
+            user: []
+        }
     },
 
     mounted() {
-        Event.$on('userLoggedIn', () => {
-            this.authenticated = true;
-            this.user = auth.user;
-        });
+        this.loadUser();
 
-        Event.$on('userLogout', ()=>{
-            this.authenticated = false;
-            this.user = null;
-        });
     },
     methods:{
-
+        loadUser(){
+            api.call('get', '/api/get-user/' + this.$route.params.userId)
+                .then(res=>{
+                    this.user = res.data.user;
+                })
+        }
     }
 
 }

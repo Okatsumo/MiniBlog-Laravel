@@ -50,7 +50,7 @@
                                         <img src="/storage/images/avatars/default.png" alt="Image placeholder">
                                     </div>
                                     <div class="comment-body">
-                                        <h3>{{comment.author.name}}</h3>
+                                        <h3> <router-link :to="{name : 'user.profile', params: {userId: comment.author.user_id}}">{{comment.author.name}}</router-link></h3>
                                         <div class="meta">{{comment.created_at}}</div>
                                         <p :id="'commentContentItem.' + comment.comment_id">{{comment.content}}</p>
                                         <span v-if="comment.author.user_id === (user ? user.user_id : 0)" v-on:click="editComment(comment.content, comment.comment_id)" style="cursor: pointer;">Редактировать</span>
@@ -73,9 +73,9 @@
                                         <textarea v-model="message" id="message" cols="30" rows="10" class="form-control"></textarea>
                                     </div>
                                     <div class="form-group">
-                                        <span v-on:click="sendComment()" class="btn py-3 px-4 btn-primary" v-if="!editingComment">Отправить</span>
-                                        <span class="btn py-3 px-4 btn-primary" v-else v-on:click="sendEditComment(editingComment)">Редактировать</span>
-                                        <p v-model="errorMessage" v-if="errorMessage" style="color: red;">Сообщение не может быть пустым</p>
+                                        <span v-on:click="sendComment()" class="btn py-3 px-4 btn-primary" v-if="!editingComment & !user.banned">Отправить</span>
+                                        <span class="btn py-3 px-4 btn-primary" v-if="editingComment" v-on:click="sendEditComment(editingComment)">Редактировать</span>
+                                        <p v-model="errorMessage" v-if="errorMessage" style="color: red;">Комментарий не может быть пустым</p>
                                     </div>
                                 </form>
                             </div>
@@ -273,8 +273,10 @@ export default {
                     this.comments.push(res.data[0]);
                 })
 
-                .catch(function (){
-                    this.errorMessage = "Произошла ошибка";
+                .catch(res=>{
+                    if(res.status === 403){
+                        auth.check();
+                    }
                 });
 
                 this.message = "";

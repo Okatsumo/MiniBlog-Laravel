@@ -16,6 +16,7 @@
                                             <table id="datatable" class="table dataTable no-footer" role="grid" aria-describedby="datatable_info">
                                     <thead>
                                     <tr role="row">
+                                        <th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Customer Name: activate to sort column descending" style="width: 216px;">Id</th>
                                         <th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Customer Name: activate to sort column descending" style="width: 216px;">Имя пользователя</th>
                                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" style="width: 117.6px;">Email</th>
                                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" style="width: 87.6px;">Дата регистрации</th>
@@ -28,7 +29,8 @@
                                     <tbody>
 
                                     <tr role="row" v-for="user in users">
-                                        <td>{{user.name}}</td>
+                                        <td>{{user.user_id}}</td>
+                                        <td><router-link :to="{name : 'user.profile', params: {userId: user.user_id}}">{{user.name}}</router-link></td>
                                         <td>{{user.email}}</td>
                                         <td>{{user.created_at}}</td>
                                         <td v-if="user.admin">Да</td>
@@ -37,7 +39,7 @@
                                         <td v-else>Нет</td>
 
                                         <td>
-                                            <a href="#" class="mr-2">
+                                            <a v-on:click="removeUser(user.user_id)" class="mr-2">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-dash" viewBox="0 0 16 16">
                                                     <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
                                                     <path fill-rule="evenodd" d="M11 7.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5z"/>
@@ -56,6 +58,17 @@
                                     </div>
                                 </div>
                             </div>
+                            </div>
+
+                        </div>
+                        <div class="col text-center">
+                            <div class="block-27">
+                                <ul>
+                                    <li><a v-on:click="backPage()">&lt;</a></li>
+                                    <!--                            <li class="active"><span>1</span></li>-->
+                                    <li v-for="page in lastPage" v-on:click="loadArticles(page)"><a>{{ page }}</a></li>
+                                    <li><a v-on:click="nextPage()">&gt;</a></li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -79,6 +92,8 @@ export default {
     data: ()=> ({
         users: [],
         totalUsers: null,
+        lastPage: null,
+        thisPage: 1
     }),
 
     mounted() {
@@ -86,13 +101,38 @@ export default {
     },
 
     methods:{
-        loadArticles(){
-            api.call('get', '/api/users')
+        loadArticles(page = null){
+            let url = page ? "/api/users?page=" + page : "/api/users";
+
+            api.call('get', url)
                 .then(res=>{
                     this.users = res.data.data;
                     this.totalUsers = res.data.total;
-                })
+                    this.lastPage = res.data.last_page;
+                });
+
         },
+
+        // Работа со страницами
+        nextPage(){
+            if(this.thisPage + 1 <= this.lastPage){
+                this.thisPage +=1;
+                this.loadArticles(this.thisPage)
+            }
+        },
+        backPage(){
+            if(this.thisPage > 1){
+                this.thisPage -=1;
+                this.loadArticles(this.thisPage)
+            }
+        },
+
+        removeUser(userId){
+            if(confirm("Вы действительно хотите удалить пользователя?")){
+                api.call('delete', "/api/user/" + userId);
+                // this.loadArticles(this.thisPage)
+            }
+        }
     }
 
 }

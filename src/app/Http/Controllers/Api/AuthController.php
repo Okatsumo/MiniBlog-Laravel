@@ -5,8 +5,11 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -19,8 +22,15 @@ class AuthController extends Controller
     public function register()
     {
         $validator = Validator::make(request()->all(),[
-            'username'=>'required|max:255',
-            'email'=>'email|required|max:255|',
+            'username'=>[
+                'required',
+                'max:255',
+            ],
+            'email'=>[
+                'required',
+                'max:255',
+                'regex:/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/',
+            ],
             'password'=>'required',
         ]);
 
@@ -68,6 +78,13 @@ class AuthController extends Controller
                 'message' => 'Wrong email or password',
                 'status' => 422
             ], 422);
+        }
+
+        if ($user->banned) {
+            return response()->json([
+                'message' => 'The account is blocked',
+                'status' => 403
+            ], 403);
         }
 
         if (!Hash::check(request('password'), $user->password)) {
@@ -131,11 +148,17 @@ class AuthController extends Controller
     }
 
     /**
-     * @return Authenticatable|null
+     * @return Application|Response|ResponseFactory
      */
-    public function getUser(): ?Authenticatable
+    public function getUser()
     {
-        return auth()->user();
+        if (auth()->user()->banned) {
+            return response([
+                'message' => 'The account is blocked',
+                'status' => 403
+            ], 403);
+        }
+        return response(auth()->user(), 200);
     }
 
 }

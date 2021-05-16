@@ -28,7 +28,7 @@
                             <img src="/storage/images/avatars/default.png" alt="profile-user" class="rounded-circle">
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <router-link class="dropdown-item" :to="{name : 'user.profile'}"><i class="text-muted mr-2"></i> Профиль</router-link>
+                            <router-link class="dropdown-item" :to="{name : 'user.profile', params: {userId: user.user_id}}"><i class="text-muted mr-2"></i> Профиль</router-link>
                             <router-link v-if="user ? user['admin'] : false" :to="{name : 'adminPanel.index'}" class="dropdown-item"><i class="text-muted mr-2"></i> Панель администратора</router-link>
                             <div class="dropdown-divider mb-0"></div>
                             <span class="dropdown-item" v-on:click="logOut()"><i class="text-muted mr-2"></i> Выход</span>

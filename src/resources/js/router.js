@@ -63,7 +63,7 @@ const routes = [
         component: AdminUsersList
     },
     {
-        path: '/profile',
+        path: '/user/:userId',
         name: 'user.profile',
         component: UserProfile
     }

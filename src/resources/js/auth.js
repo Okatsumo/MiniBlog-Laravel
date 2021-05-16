@@ -45,7 +45,7 @@ class Auth {
                 this.user = data;
             })
             .catch(({response}) => {
-                if (response.status === 401) {
+                if (response.status === 401 || 403) {
                     this.logout();
                 }
             });

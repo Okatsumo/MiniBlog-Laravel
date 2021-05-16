@@ -10,6 +10,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Intervention\Image\Facades\Image;
+use function App\Helpers\uploadImage;
 
 
 class ArticleApiController extends Controller
@@ -78,20 +79,11 @@ class ArticleApiController extends Controller
 
 
         if($request->get("tags")){
-
+            $article->category_id = json_encode($request->get("tags"));
         }
 
         if($request->file('image')){
-            $imageType = $request->file('image')->getClientOriginalExtension();
-
-            if($imageType == "png" || $imageType == "jpeg" || $imageType == "jpg"){
-                $image = $request->file('image');
-                $article->image = mt_rand(50, 100). "." . $image->getClientOriginalName();
-
-                $image_resize = Image::make($image->getRealPath());
-                $image_resize->resize(300, 300);
-                $image_resize->save(Storage::path('public/images/articles/') .$article->image);
-            }
+            $article->image = uploadImage('public/images/articles/', $request->file('image'), 300, 300);
         }
 
         $article->save();

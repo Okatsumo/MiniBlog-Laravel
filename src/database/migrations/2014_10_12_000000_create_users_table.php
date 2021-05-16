@@ -23,7 +23,6 @@ class CreateUsersTable extends Migration
             $table->boolean('admin')->default(false);
             $table->string('password');
             $table->boolean('banned')->default(false);
-            $table->json('tags')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

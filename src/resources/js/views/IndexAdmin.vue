@@ -113,7 +113,7 @@
                                         <td>{{article.title}}</td>
                                         <td>{{article.created_at}}</td>
                                         <td> <span class="badge badge-md badge-soft-purple">{{article.rating}}</span> / 10</td>
-                                        <td>{{article.author.name}}</td>
+                                        <td><router-link :to="{name : 'user.profile', params: {userId: article.author.user_id}}">{{article.author.name}}</router-link></td>
                                         <td>{{article.category.name}}</td>
                                         <td>
                                             <a href="#" class="mr-2">
@@ -148,11 +148,9 @@
                                         <img :src="'/storage/images/avatars/default.png'" alt="avatar">
                                     </div>
                                     <div class="comment-body">
-                                        <h3>{{comment.author.name}}</h3>
+                                        <h3><router-link :to="{name : 'user.profile', params: {userId: comment.author.user_id}}">{{comment.author.name}}</router-link></h3>
                                         <div class="meta">{{comment.created_at}}</div>
-                                        <p :id="'commentContentItem.' + comment.comment_id">{{comment.content}}</p>
-                                        <span v-if="comment.author.user_id === (user ? user.user_id : 0)" v-on:click="editComment(comment.content, comment.comment_id)" style="cursor: pointer;">Редактировать</span>
-                                        <span v-if="comment.author.user_id === (user ? user.user_id : 0)" v-on:click="removeComment(comment.comment_id)" style="cursor: pointer;">Удалить</span>
+                                        <p>{{comment.content}}</p>
                                     </div>
                                 </li>
                             </ul>
