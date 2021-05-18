@@ -5,12 +5,16 @@ namespace App\Http\Controllers\Api\v1;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\Comment;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Intervention\Image\Facades\Image;
 use function App\Helpers\uploadImage;
+use function MongoDB\BSON\fromJSON;
+use function MongoDB\BSON\toJSON;
 
 
 class ArticleApiController extends Controller
@@ -59,7 +63,7 @@ class ArticleApiController extends Controller
             'content'=>'required',
             'categoryId'=>'required|integer',
             'tags'=>'json',
-            'image'=>'mimes:jpeg,png'
+            'image'=>'mimes:jpeg,bmp,png'
         ]);
 
 
@@ -79,7 +83,7 @@ class ArticleApiController extends Controller
 
 
         if($request->get("tags")){
-            $article->category_id = json_encode($request->get("tags"));
+            $article->tags = $request->get('tags');
         }
 
         if($request->file('image')){
@@ -88,14 +92,14 @@ class ArticleApiController extends Controller
 
         $article->save();
 
-        return \response(['status'=>201, "article"=>$article], 201);
+        return response(['status'=>201, "article"=>$article], 201);
     }
 
     /**
      * Display the specified resource.
      *
      * @param  \App\Models\Article  $article
-     * @return array
+     * @return Application|ResponseFactory|Response
      */
     public function show(Article $article)
     {
@@ -103,19 +107,21 @@ class ArticleApiController extends Controller
             ->getWithConnections()->first()
             ->getRelations();
 
-        return [
+        $data=  [
                 'article' =>$article->makeHidden(['category_id', 'author_id'])
             ] + $relations ;
+        return response($data, 200);
 
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Article  $article
+     * @param \App\Models\Article $article
+     * @param Request $request
      * @return Response
      */
-    public function edit(Article $article, Request $request)
+    public function edit(Article $article, Request $request): Response
     {
         if($request->get("title")){
             $article->title = $request->get('title');
@@ -134,8 +140,10 @@ class ArticleApiController extends Controller
         }
 
         if($article->update()){
-            return \response(['status'=>201], 201);
+            return \response(['status'=>201, 'article'=>$article], 201);
         }
+
+        return \response(['status'=>404], 404);
     }
 
     /**

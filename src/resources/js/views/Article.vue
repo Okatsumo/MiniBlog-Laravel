@@ -19,15 +19,12 @@
                     <div class="col-lg-8 order-lg-last ">
 
                         <div class="content">
-                            <span v-html="article.content"></span>
+                            <span v-html="article.content" style="color: black"></span>
                         </div>
 
                         <div class="tag-widget post-tag-container mb-5 mt-5">
                             <div class="tagcloud">
-                                <a href="#" class="tag-cloud-link">Бэкенд</a>
-                                <a href="#" class="tag-cloud-link">Веб</a>
-                                <a href="#" class="tag-cloud-link">Web</a>
-                                <a href="#" class="tag-cloud-link">Backend</a>
+                                <a v-for="tag in tags" href="#" class="tag-cloud-link">{{tag}}</a>
                             </div>
                         </div>
 
@@ -93,7 +90,7 @@
                         <div class="sidebar-box ">
                             <h3 class="heading mb-4">Другие записи</h3>
                             <div class="block-21 mb-4 d-flex">
-                                <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
+<!--                                <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>-->
                                 <div class="text">
                                     <h3><a href="#">Название записи</a></h3>
                                     <div class="meta">
@@ -134,6 +131,7 @@ export default {
         message: "",
         errorMessage: "",
         editingComment: null,
+        tags: {},
 
         authenticated: auth.check(),
         user: auth.user,
@@ -160,6 +158,9 @@ export default {
                 this.article = res.data.article;
                 this.author = res.data.author;
                 this.category = res.data.category;
+                if(res.data.article.tags){
+                    this.tags = JSON.parse(res.data.article.tags)['tags'];
+                }
                 this.loading = false;
 
                 this.webSocketComment(res.data.article.article_id);

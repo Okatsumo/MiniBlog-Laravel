@@ -5,12 +5,23 @@ use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
 
-function uploadImage(string $path, $image, int $with, int $height): string
+/**
+ * @param string $path
+ * @param $image
+ * @param int|null $with
+ * @param int|null $height
+ * @return string
+ */
+function uploadImage(string $path, $image, int $with = null, int $height = null): string
 {
-    $name = mt_rand(50, 100). "." . $image->getClientOriginalName();
+    $name = rand(50, 1000). "." . str_replace(" ", "-",  $image->getClientOriginalName());
+
 
     $image_resize = Image::make($image->getRealPath());
-    $image_resize->resize($with, $height);
+
+    if($with and $height){
+        $image_resize->resize($with, $height);
+    }
     $image_resize->save(Storage::path($path) .$name);
 
     return $name;

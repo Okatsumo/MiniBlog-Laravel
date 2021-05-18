@@ -1,8 +1,8 @@
 <template>
     <div class="d-flex">
-        <div class="iq-sidebar">
+        <div class="iq-sidebar" v-bind:style="{ width: sideBarWidth }">
             <div id="sidebar-scrollbar">
-                <nav class="iq-sidebar-menu">
+                <nav class="iq-sidebar-menu" v-bind:style="{ display: sideBarMenuDisplay }" >
                     <ul id="iq-sidebar-toggle" class="iq-menu">
                         <li>
                             <router-link :to = "{name: 'adminPanel.index'}" class="iq-waves-effect">
@@ -39,14 +39,55 @@
                         </li>
                     </ul>
                 </nav>
+                <div>
+                    <button v-on:click="hideSideBar()" id="sideBarHidden">{{hiddenBtnText}}</button>
+                </div>
             </div>
         </div>
+<!--        <button class="btn btn-primary btn-block" v-on:click="hideSideBar()">Скрыть</button>-->
     </div>
 </template>
 
 <script>
 export default {
-    name: "SidebarAdmin"
+    name: "SidebarAdmin",
+
+    data(){
+        return {
+            sideBarWidth: "14rem",
+            sideBarMenuDisplay: "block",
+            hiddenBtnText: "<",
+        }
+    },
+
+    mounted() {
+      this.load();
+    },
+
+    methods: {
+        load(){
+            if(document.documentElement.clientWidth <= 900){
+                this.sideBarWidth = "0rem"
+                this.sideBarMenuDisplay = "none"
+                this.hiddenBtnText = ">"
+            }
+        },
+
+        hideSideBar(){
+            if(this.sideBarWidth === "14rem"){
+                this.sideBarWidth = "0rem"
+                this.sideBarMenuDisplay = "none"
+                this.hiddenBtnText = ">"
+            }
+            else{
+                this.sideBarWidth = "14rem"
+                this.sideBarMenuDisplay = "block"
+                this.hiddenBtnText = "<"
+            }
+
+        }
+    }
+
 }
 </script>
 

@@ -1,8 +1,3 @@
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
 import Api from './api.js';
 import Auth from './auth.js';
 
@@ -14,35 +9,29 @@ window.auth = new Auth();
 window.api = new Api();
 window.Event = new Vue;
 
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/HeaderComponent.vue -> <example-component></example-component>
- */
-
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-
-import MediumEditor from 'vuejs-medium-editor'
 
 
+// текстовый редактор
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
+import { quillEditor } from 'vue-quill-editor'
 
+
+// import Quill from 'quill'
+// import ImageUploader from "quill-image-uploader";
+// Quill.register(ImageUploader)
+
+
+
+//Компоненты
 Vue.component('modalLogin', require('./components/ModalVue').default);
+Vue.component('modalEditorProfile', require('./components/ModalEditorProfile').default);
 Vue.component('navbar', require('./components/Navbar').default);
 Vue.component('spinner', require('./components/Spinner').default);
-Vue.component('medium-editor', MediumEditor)
-
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+Vue.component('quillEditor', quillEditor)
 
 
-require ('medium-editor/dist/css/medium-editor.css');
-require ('vuejs-medium-editor/src/themes/default.css');
 
 import router from "./router";
 import notifications from "./notifications";

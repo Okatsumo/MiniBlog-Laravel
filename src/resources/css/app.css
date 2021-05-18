@@ -172,6 +172,22 @@
     box-shadow: 0px 0px 20px 0px rgba(44, 101, 144, 0.1);
 }
 
+@media (max-width: 990px) {
+    .iq-sidebar {
+        width: 0;
+    }
+}
+
+#sideBarHidden{
+    background: aquamarine;
+    position: fixed;
+    top: 92%;
+    width: 2rem;
+    height: 2rem;
+    z-index: 1;
+}
+
+
 /*---------------------------------------------------------------------
                              Sidebar Menu
 -----------------------------------------------------------------------*/
@@ -309,6 +325,12 @@ ul.todo-task-lists li.active-task { background: var(--iq-light-primary); }
     width: 60px;
     font-size: 20px;
     font-weight: 700;
+}
+
+
+img{
+    max-width: 100%;
+    height: auto;
 }
 
 

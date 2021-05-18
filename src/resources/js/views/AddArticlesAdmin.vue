@@ -2,7 +2,7 @@
     <div class="d-flex">
         <SideBarAdmin></SideBarAdmin>
         <div class="admin-container mt-4 mr-4 ml-4">
-            <h1>Добавление записи</h1>
+            <h1>{{title}}</h1>
 
 
             <form>
@@ -13,13 +13,12 @@
 
                 <div class="form-group">
                     <label for="image">Загрузить изображение</label>
-                    <input class="form-control" id="image" type="file">
+                    <input class="form-control" id="image" type="file" v-on:change="showImage()">
+                    <canvas id="canvas" width="640" height="360" class="img-fluid"></canvas>
                 </div>
 
                 <div class="form-group">
-                    <label>Текст</label>
-                    <medium-editor :content='content' :options='optionsEditor' style="background: #fcfcfc" v-model ="content"/>
-
+                    <quillEditor :content="content" v-model="content" :options="editorOptions"></quillEditor>
                 </div>
 
                 <div class="form-group">
@@ -54,6 +53,11 @@
 <script>
 import SideBarAdmin from "../components/SidebarAdmin";
 
+import Quill from 'quill'
+import ImageUploader from "quill-image-uploader";
+Quill.register("modules/imageUploader", ImageUploader)
+
+
 export default {
     name: "AddArticlesAdmin",
     components:{
@@ -62,62 +66,93 @@ export default {
 
     data: ()=>({
         image: null,
+        title: "",
+        editorOptions: {
+            placeholder:"начните вводить текст ...",
+
+            modules: {
+                imageUploader: {
+                    toolbar: {
+                        container: [
+                            [{ header: [1, 2, 3, false] }],
+                            ["bold", "italic"],
+                            ["clean"],
+                            ["image"],
+                        ],
+                    },
+                    upload: (file) => {
+                        return new Promise((resolve, reject) => {
+                            let data = new FormData();
+                            data.append('image', file)
+
+                            api.call('post', '/api/upload-image/', data)
+                                .then(res=>{
+                                    resolve(
+                                        res.data.path
+                                    );
+                                })
+                        });
+                    },
+                },
+            }
+        },
 
         categories: [],
         name: null,
         categoryId: null,
         content: "",
-        optionsEditor: {
-            toggleEnabled: false,
-            placeholder: false,
-            toolbar: {
-                buttons: [
-                    'bold',
-                    {
-                      name: 'italic',
-                      aria: 'пропись',
-                    },
-                    {
-                        name: 'h1',
-                        action: 'append-h2',
-                        aria: 'header type 1',
-                        tagNames: ['h1'],
-                        contentDefault: '<b>H1</b>',
-                        // classList: ['custom-class-h1'],
-                        attrs: {
-                            'data-custom-attr': 'attr-value-h1'
-                        }
-                    },
-                    {
-                        name: 'h2',
-                        action: 'append-h3',
-                        aria: 'header type 2',
-                        tagNames: ['h2'],
-                        contentDefault: '<b>H2</b>',
-                        // classList: ['custom-class-h2'],
-                        attrs: {
-                            'data-custom-attr': 'attr-value-h2'
-                        }
-                    },
-                    {
-                        name: 'justifyCenter',
-                        aria: 'поместить текст по центру',
-                    },
-                    'quote',
-                    'anchor'
-                ]
-            },
-        },
         tags: null,
         tagsList: [],
     }),
 
 
     mounted() {
+      this.loadComponent();
       this.loadCategories();
     },
 
     methods: {
+        showImage(){
+            let canvas = document.getElementById('canvas').getContext("2d");
+            let file = document.getElementById("image").files[0];
+
+            let url = URL.createObjectURL(file)
+            const image = new Image();
+            image.src = url;
+
+            canvas.width = innerWidth;
+            canvas.height = innerHeight;
+
+
+            image.onload = function(){
+                canvas.drawImage(image,0,0,640,360);
+            }
+
+        },
+
+        loadComponent(){
+            if(this.$route.params.articleId){
+                this.title = "Редактирование записи"
+
+                // let data = new FormData();
+                // data.append('title', this.name);
+
+
+                api.call('get', '/api/article/' + this.$route.params.articleId)
+                    .then(res=>{
+                        this.name = res.data.article.title;
+                        this.content = res.data.article.content;
+                        this.content = res.data.article.content;
+                        // this.image = res.article.image;
+
+
+                    })
+            }
+            else{
+                this.title = "Добавление новой записи"
+            }
+        },
+
         loadCategories(){
             axios.get('/api/category').then(res => {
                 this.categories = res.data;
@@ -143,10 +178,23 @@ export default {
             }
 
             let data = new FormData();
-            data.append("image", document.getElementById("image").files[0]);
             data.append("title", this.name);
             data.append("content", this.content);
             data.append("categoryId", this.categoryId);
+
+
+            if(document.getElementById("image").files[0]){
+                data.append("image", document.getElementById("image").files[0]);
+            }
+
+            if(this.tags){
+                let tags = {
+                    'tags': this.tagsList
+                }
+                data.append("tags", JSON.stringify(tags));
+                console.log(tags)
+            }
+
 
             let params = {
                     headers: {

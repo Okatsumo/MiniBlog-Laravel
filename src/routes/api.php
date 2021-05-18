@@ -10,6 +10,7 @@ use App\Models\Category;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use function App\Helpers\uploadImage;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +36,13 @@ Route::middleware('auth:api')->group(function () {
     Route::post('/logout', [AuthController::class, "logout"]);
     Route::get('/get-user', [AuthController::class, "getUser"]);
     Route::post('/user/upload-avatar/{user}', [UserApiController::class, "uploadAvatar"]);
+    Route::post('/upload-image', function (Request $request){
+        if($request->file('image')){
+            $image = uploadImage('public/images/upload/', $request->file('image'));
+            return response(['status'=>201,'path'=> '/storage/images/upload/' . $image], 201);
+        }
+
+    });
 });
 
 Route::get('/get-count-users', function (){

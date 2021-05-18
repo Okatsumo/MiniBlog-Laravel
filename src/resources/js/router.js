@@ -58,10 +58,17 @@ const routes = [
     },
 
     {
+        path: '/admin/article/edit/:articleId',
+        name: 'adminPanel.editArticle',
+        component: AdminArticlesAdd
+    },
+
+    {
         path: '/admin/users',
         name: 'adminPanel.users',
         component: AdminUsersList
     },
+
     {
         path: '/user/:userId',
         name: 'user.profile',

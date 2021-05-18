@@ -1,24 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="5b0a19f5-8089-418c-95bd-227219e29c25" name="Default Changelist" comment="Добавил блокировку пользователя, добавил удаление пользователя, добавил переключение страниц с пользователями в админке, немного переделал главную страницу (просто накидал то, что нужно будет в будущем доделать)">
+      <change afterPath="$PROJECT_DIR$/src/resources/js/components/ModalEditorProfile.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/resources/js/textEditor.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/MiniBlog-Laravel.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/MiniBlog-Laravel.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/39b1ccb4-dced-4a24-b7dd-963c03627c82.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/39b1ccb4-dced-4a24-b7dd-963c03627c82.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Http/Controllers/Api/AuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Http/Controllers/Api/AuthController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nginx/default.conf" beforeDir="false" afterPath="$PROJECT_DIR$/nginx/default.conf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nginx/nginx.conf" beforeDir="false" afterPath="$PROJECT_DIR$/nginx/nginx.conf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php.dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/php.dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/www.conf" beforeDir="false" afterPath="$PROJECT_DIR$/php/www.conf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/Http/Controllers/Api/v1/ArticleApiController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Http/Controllers/Api/v1/ArticleApiController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Http/Controllers/Api/v1/CommentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Http/Controllers/Api/v1/CommentController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Http/Controllers/Api/v1/UserApiController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Http/Controllers/Api/v1/UserApiController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/Models/Article.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Models/Article.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/helpers.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/helpers.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/database/migrations/2014_10_12_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/migrations/2014_10_12_000000_create_users_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/database/migrations/2020_12_08_174239_create_articles_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/migrations/2020_12_08_174239_create_articles_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/src/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/public/css/app.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/auth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/components/Navbar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/components/Navbar.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/css/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/components/SidebarAdmin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/components/SidebarAdmin.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/resources/js/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/router.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/views/AddArticlesAdmin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/views/AddArticlesAdmin.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/resources/js/views/Article.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/views/Article.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/views/IndexAdmin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/views/IndexAdmin.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/views/ArticlesAdmin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/views/ArticlesAdmin.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/resources/js/views/UserProfile.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/views/UserProfile.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/views/UsersAdmin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/views/UsersAdmin.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/views/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/views/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/views/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/views/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/api.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -191,6 +205,10 @@
       <path value="$PROJECT_DIR$/src/vendor/nyholm/psr7" />
       <path value="$PROJECT_DIR$/src/vendor/php-http/message-factory" />
       <path value="$PROJECT_DIR$/src/vendor/firebase/php-jwt" />
+      <path value="$PROJECT_DIR$/src/vendor/doctrine/dbal" />
+      <path value="$PROJECT_DIR$/src/vendor/doctrine/cache" />
+      <path value="$PROJECT_DIR$/src/vendor/doctrine/deprecations" />
+      <path value="$PROJECT_DIR$/src/vendor/doctrine/event-manager" />
     </include_path>
   </component>
   <component name="ProjectId" id="1lNnXz22x8eWpzVmWAWQKCpeMJB" />
@@ -206,7 +224,8 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="zd.zero.waifu-motivator-plugin" />
+    <property name="settings.editor.selected.configurable" value="io.unthrottled.amii.config.ui.PluginSettingsUI" />
+    <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -261,7 +280,9 @@
       <workItem from="1620900608180" duration="19609000" />
       <workItem from="1620985344863" duration="21250000" />
       <workItem from="1621159114352" duration="10646000" />
-      <workItem from="1621169827828" duration="6342000" />
+      <workItem from="1621169827828" duration="6461000" />
+      <workItem from="1621259567605" duration="29880000" />
+      <workItem from="1621339122581" duration="16982000" />
     </task>
     <task id="LOCAL-00001" summary="Полностью сменил логику авторизации/регистрации/выдачи токена. Переделал как фронтенд, так и бэкенд">
       <created>1620774956270</created>
@@ -291,7 +312,14 @@
       <option name="project" value="LOCAL" />
       <updated>1621007215335</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Добавил блокировку пользователя, добавил удаление пользователя, добавил переключение страниц с пользователями в админке, немного переделал главную страницу (просто накидал то, что нужно будет в будущем доделать)">
+      <created>1621176184725</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1621176184725</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
