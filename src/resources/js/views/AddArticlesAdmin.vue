@@ -70,16 +70,10 @@ export default {
         editorOptions: {
             placeholder:"начните вводить текст ...",
 
+
+
             modules: {
                 imageUploader: {
-                    toolbar: {
-                        container: [
-                            [{ header: [1, 2, 3, false] }],
-                            ["bold", "italic"],
-                            ["clean"],
-                            ["image"],
-                        ],
-                    },
                     upload: (file) => {
                         return new Promise((resolve, reject) => {
                             let data = new FormData();
@@ -93,6 +87,27 @@ export default {
                                 })
                         });
                     },
+                },
+                toolbar: {
+                    container: [
+                        ['bold', 'italic', 'underline', 'strike'],
+                        ['blockquote', 'code-block'],
+
+                        [{ 'header': 1 }, { 'header': 2 }],
+                        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                        [{ 'script': 'sub'}, { 'script': 'super' }],
+                        [{ 'indent': '-1'}, { 'indent': '+1' }],
+                        [{ 'direction': 'rtl' }],
+
+                        [{ 'size': ['small', false, 'large', 'huge'] }],
+                        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+
+                        [{ 'color': [] }, { 'background': [] }],
+                        [{ 'font': [] }],
+                        [{ 'align': [] }],
+                        ["clean"],
+                        ["image"]
+                    ],
                 },
             }
         },
@@ -134,17 +149,25 @@ export default {
             if(this.$route.params.articleId){
                 this.title = "Редактирование записи"
 
-                // let data = new FormData();
-                // data.append('title', this.name);
-
-
                 api.call('get', '/api/article/' + this.$route.params.articleId)
                     .then(res=>{
                         this.name = res.data.article.title;
                         this.content = res.data.article.content;
                         this.content = res.data.article.content;
-                        // this.image = res.article.image;
+                        this.categoryId = res.data.category.category_id;
 
+
+                        let canvas = document.getElementById('canvas').getContext("2d");
+                        canvas.width = innerWidth;
+                        canvas.height = innerHeight;
+
+                        const image = new Image();
+                        image.src = "/storage/images/articles/" + res.data.article.image;
+
+
+                        image.onload = function(){
+                            canvas.drawImage(image,0,0,640,360);
+                        }
 
                     })
             }

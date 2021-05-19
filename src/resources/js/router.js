@@ -48,25 +48,29 @@ const routes = [
     {
         path: '/admin/articles',
         name: 'adminPanel.articles',
-        component: AdminPanel
+        component: AdminPanel,
+        meta: { middlewareAuth: true , middlewareAdmin: true}
     },
 
     {
         path: '/admin/articles/add',
         name: 'adminPanel.articlesAdd',
-        component: AdminArticlesAdd
+        component: AdminArticlesAdd,
+        meta: { middlewareAuth: true , middlewareAdmin: true}
     },
 
     {
         path: '/admin/article/edit/:articleId',
         name: 'adminPanel.editArticle',
-        component: AdminArticlesAdd
+        component: AdminArticlesAdd,
+        meta: { middlewareAuth: true , middlewareAdmin: true}
     },
 
     {
         path: '/admin/users',
         name: 'adminPanel.users',
-        component: AdminUsersList
+        component: AdminUsersList,
+        meta: { middlewareAuth: true , middlewareAdmin: true}
     },
 
     {

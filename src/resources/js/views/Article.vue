@@ -197,9 +197,7 @@ export default {
                                 this.comments.push(e.comment);
                                 break;
                             case 'edit':
-                                // this.comments[this.getCommentItem(articleId)].content = e.comment.content;
-                                console.log(e.comment.content)
-                                console.log(this.comments[this.getCommentItem(articleId)])
+                                this.comments[this.getCommentItem(e.comment.comment_id)].content = e.comment.content;
                                 break;
                         }
                     }

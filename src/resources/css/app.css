@@ -179,12 +179,13 @@
 }
 
 #sideBarHidden{
-    background: aquamarine;
+    background: white;
     position: fixed;
     top: 92%;
     width: 2rem;
     height: 2rem;
     z-index: 1;
+    border: 2px solid black;
 }
 
 
