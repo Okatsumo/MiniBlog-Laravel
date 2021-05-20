@@ -31,7 +31,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="avatar">Обновить аватар (150x1050)</label>
+                                <label for="avatar">Обновить аватар (150x150, только jpeg, png)</label>
                                 <input class="form-control" id="avatar" type="file">
                             </div>
 
@@ -81,8 +81,20 @@ export default {
         updateProfile(){
             api.call('get', `/api/user/${this.authUser.user_id}/edit?description=${this.userDescription}`)
                 .then(res=>{
-                    this.user.dec = res.user.dec;
+
                 })
+
+
+            if(document.getElementById("avatar").files[0]){
+                let data = new FormData();
+                data.append('avatar', document.getElementById("avatar").files[0]);
+
+                api.call('post', '/api/user/upload-avatar/' + this.authUser.user_id)
+                    .catch(res =>{
+                        console.log('Произошла ошибка')
+                        console.log(res)
+                    })
+            }
         },
 
         loadUser(){

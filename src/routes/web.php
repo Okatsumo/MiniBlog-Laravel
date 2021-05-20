@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Category;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Broadcast;
@@ -17,6 +18,14 @@ use Laravel\Passport\Passport;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+//Подтверждение почты
+Route::get('/email/verify/{id}/{hash}', function () {
+    return view('auth.confirmEmail');
+});
+
+
+//Роут перенаправляющий всё на vue
 Route::get('/', function () {
     return view('index',
         [
@@ -38,5 +47,4 @@ Route::get('{any}', function () {
 })->where('any', '.*');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
 

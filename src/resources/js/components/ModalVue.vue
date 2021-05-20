@@ -117,12 +117,16 @@ export default {
                 username: this.nameReg
             })
             .then(res=>{
-                this.mes = "Вы были успешно зарегистрированы!";
                 this.passwordReg = null;
                 this.emailReg = null;
                 this.nameReg = null;
                 this.passwordConfReg = null;
                 this.btnActive = true;
+
+                auth.login(res.data.token, res.data.user);
+                Vue.notify({group: 'auth',title: 'Регистрация',text: `${res.data.user.name}, подтвердите свою почту`})
+                this.$modal.hide('login')
+
             })
             .catch(({response}) => {
                 if (response.status === 422) {

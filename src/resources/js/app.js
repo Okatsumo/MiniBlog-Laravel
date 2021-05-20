@@ -1,5 +1,6 @@
 import Api from './api.js';
 import Auth from './auth.js';
+import UserApi from './apiUser';
 
 require('./bootstrap');
 require('./pusher');
@@ -8,6 +9,12 @@ window.Vue = require('vue');
 window.auth = new Auth();
 window.api = new Api();
 window.Event = new Vue;
+
+
+
+// Модели из БД
+window.apiUser = apiUser;
+
 
 
 
@@ -36,6 +43,7 @@ Vue.component('quillEditor', quillEditor)
 import router from "./router";
 import notifications from "./notifications";
 import VModal from "./modal";
+import apiUser from "./apiUser";
 
 require('../css/app.css');
 

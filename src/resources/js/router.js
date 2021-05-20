@@ -12,6 +12,7 @@ import AdminIndex from "./views/IndexAdmin";
 import AdminArticlesAdd from "./views/AddArticlesAdmin";
 import AdminUsersList from "./views/UsersAdmin";
 import UserProfile from "./views/UserProfile";
+import EditUserAdmin from "./views/EditUserAdmin";
 
 const routes = [
     {
@@ -71,6 +72,12 @@ const routes = [
         name: 'adminPanel.users',
         component: AdminUsersList,
         meta: { middlewareAuth: true , middlewareAdmin: true}
+    },
+
+    {
+        path: '/admin/user/:userId/edit',
+        name: 'adminPanel.editUser',
+        component: EditUserAdmin
     },
 
     {

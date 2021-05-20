@@ -47,7 +47,7 @@ class CommentController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return array|Application|ResponseFactory|JsonResponse|ResponseAlias
+     * @return Application|JsonResponse|ResponseAlias|ResponseFactory
      */
     public function create(Request $request)
     {

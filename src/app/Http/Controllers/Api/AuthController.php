@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Routing\ResponseFactory;
@@ -62,7 +63,36 @@ class AuthController extends Controller
         $user->password = bcrypt(request('password'));
         $user->save();
 
-        return response()->json(['status' => 201]);
+        event(new Registered($user));
+
+        $client = DB::table('oauth_clients')
+            ->where('password_client', true)
+            ->first();
+
+        if (!$client) {
+            return response()->json([
+                'message' => 'Laravel Passport is not setup properly.',
+                'status' => 500
+            ], 500);
+        }
+
+        $data = [
+            'grant_type' => 'password',
+            'client_id' => $client->id,
+            'client_secret' => $client->secret,
+            'username' => request('email'),
+            'password' => request('password'),
+        ];
+
+        $request = Request::create('/oauth/token', 'POST', $data);
+        $oauth = app()->handle($request);
+        $data = json_decode($oauth->getContent());
+
+        return response()->json([
+            'status' => 201,
+            'token' => $data->access_token,
+            'user' => $user,
+        ]);
     }
 
     /**

@@ -5,10 +5,13 @@ use App\Http\Controllers\Api\v1\CategoryApiController;
 use App\Http\Controllers\Api\v1\CommentController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\v1\UserApiController;
+use App\Http\Controllers\Auth\VerificationController;
 use App\Models\Article;
 use App\Models\Category;
 use App\Models\User;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use function App\Helpers\uploadImage;
 
@@ -41,7 +44,6 @@ Route::middleware('auth:api')->group(function () {
             $image = uploadImage('public/images/upload/', $request->file('image'));
             return response(['status'=>201,'path'=> '/storage/images/upload/' . $image], 201);
         }
-
     });
 });
 
@@ -73,3 +75,13 @@ Route::resource('comment', CommentController::class)->only([
     'show', 'index'
 ]);
 
+
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->middleware('auth')->name('verification.notice');
+
+//Подтверждение почты
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+    return redirect('/');
+})->middleware(['auth:api','signed'])->name('verification.verify');

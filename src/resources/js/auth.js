@@ -7,7 +7,6 @@ class Auth {
 
         if (this.token) {
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.token;
-
             this.getUser();
         }
     }
