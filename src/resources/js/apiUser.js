@@ -1,10 +1,7 @@
+'use strict';
 class ApiUser{
     constructor(userId) {
         this.id = userId;
-        this.name = null;
-        this.email = null;
-        this.emailVerifiedAt = null;
-        this.avatar = null;
 
         axios('/api/get-user/' + this.id)
             .then(res=>{

@@ -55,11 +55,11 @@
 
                                                         <tr role="row" v-for="article in articles">
                                                             <td>{{article.article_id}}</td>
-                                                            <td>{{article.title}}</td>
+                                                            <td><router-link :to = "{name: 'article', params: { id: article.article_id}}">{{article.title}}</router-link></td>
                                                             <td>{{article.created_at}}</td>
                                                             <td>{{ article.rating }}</td>
                                                             <td>{{ article.author.name }}</td>
-                                                            <td>{{ article.category.name }}</td>
+                                                            <td><router-link :to = "{name: 'Category', params: { id: article.category.category_id}}">{{article.category.name}}</router-link></td>
 
                                                             <td>
                                                                 <a v-on:click="removeArticle(article.article_id)" class="mr-2">

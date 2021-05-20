@@ -4,7 +4,6 @@
         <div class="admin-container mt-4 mr-4 ml-4">
             <h1>{{title}}</h1>
 
-
             <form>
                 <div class="form-group">
                     <label for="nameInput">Название</label>
@@ -70,8 +69,6 @@ export default {
         editorOptions: {
             placeholder:"начните вводить текст ...",
 
-
-
             modules: {
                 imageUploader: {
                     upload: (file) => {
@@ -92,16 +89,13 @@ export default {
                     container: [
                         ['bold', 'italic', 'underline', 'strike'],
                         ['blockquote', 'code-block'],
-
                         [{ 'header': 1 }, { 'header': 2 }],
                         [{ 'list': 'ordered'}, { 'list': 'bullet' }],
                         [{ 'script': 'sub'}, { 'script': 'super' }],
                         [{ 'indent': '-1'}, { 'indent': '+1' }],
                         [{ 'direction': 'rtl' }],
-
                         [{ 'size': ['small', false, 'large', 'huge'] }],
                         [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-
                         [{ 'color': [] }, { 'background': [] }],
                         [{ 'font': [] }],
                         [{ 'align': [] }],
@@ -120,7 +114,6 @@ export default {
         tagsList: [],
     }),
 
-
     mounted() {
       this.loadComponent();
       this.loadCategories();
@@ -134,15 +127,12 @@ export default {
             let url = URL.createObjectURL(file)
             const image = new Image();
             image.src = url;
-
             canvas.width = innerWidth;
             canvas.height = innerHeight;
-
 
             image.onload = function(){
                 canvas.drawImage(image,0,0,640,360);
             }
-
         },
 
         loadComponent(){
@@ -156,19 +146,15 @@ export default {
                         this.content = res.data.article.content;
                         this.categoryId = res.data.category.category_id;
 
-
                         let canvas = document.getElementById('canvas').getContext("2d");
                         canvas.width = innerWidth;
                         canvas.height = innerHeight;
-
                         const image = new Image();
                         image.src = "/storage/images/articles/" + res.data.article.image;
-
 
                         image.onload = function(){
                             canvas.drawImage(image,0,0,640,360);
                         }
-
                     })
             }
             else{
@@ -205,7 +191,6 @@ export default {
             data.append("content", this.content);
             data.append("categoryId", this.categoryId);
 
-
             if(document.getElementById("image").files[0]){
                 data.append("image", document.getElementById("image").files[0]);
             }
@@ -215,9 +200,7 @@ export default {
                     'tags': this.tagsList
                 }
                 data.append("tags", JSON.stringify(tags));
-                console.log(tags)
             }
-
 
             let params = {
                     headers: {

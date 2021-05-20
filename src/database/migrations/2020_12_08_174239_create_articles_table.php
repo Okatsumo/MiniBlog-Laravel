@@ -27,7 +27,6 @@ class CreateArticlesTable extends Migration
             $table->foreign('category_id')->on('categories')->references('category_id')->onDelete('cascade');
 
             $table->json('tags')->nullable();
-
             $table->timestamps();
         });
     }

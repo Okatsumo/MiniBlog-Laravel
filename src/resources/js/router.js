@@ -13,6 +13,7 @@ import AdminArticlesAdd from "./views/AddArticlesAdmin";
 import AdminUsersList from "./views/UsersAdmin";
 import UserProfile from "./views/UserProfile";
 import EditUserAdmin from "./views/EditUserAdmin";
+import CategoriesAdmin from "./views/CategoriesAdmin";
 
 const routes = [
     {
@@ -57,6 +58,13 @@ const routes = [
         path: '/admin/articles/add',
         name: 'adminPanel.articlesAdd',
         component: AdminArticlesAdd,
+        meta: { middlewareAuth: true , middlewareAdmin: true}
+    },
+
+    {
+        path: '/admin/categories',
+        name: 'adminPanel.categories',
+        component: CategoriesAdmin,
         meta: { middlewareAuth: true , middlewareAdmin: true}
     },
 

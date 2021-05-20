@@ -34,13 +34,13 @@
                 <div class="form-group">
                     <label for="image">Аватар</label>
                     <input class="form-control" id="image" type="file">
-                    <canvas id="canvas" width="640" height="360" class="img-fluid"></canvas>
+                    <canvas id="canvas" width="150" height="150" class="img-fluid"></canvas>
                 </div>
 
                 <p>Дата создания профиля: {{createdAt}}</p>
                 <p>Дата последнего обновления профиля: {{updatedAt}}</p>
 
-                <span class="btn btn-primary float-left">Обновить профиль</span>
+                <span class="btn btn-primary float-left" v-on:click="updateDataUser()">Обновить профиль</span>
                 <router-link class="btn btn-primary float-right" :to = "{name: 'adminPanel.users'}">Назад</router-link>
             </form>
 
@@ -74,28 +74,38 @@ export default {
 
     methods: {
         loadComponent(){
-            let user = new apiUser(1);
-            console.log(user)
+            api.call('get', `/api/get-user/${this.$route.params.userId}`)
+                .then(res=>{
+                    this.name = res.data.user.name
+                    this.email = res.data.user.email
+                    this.email = res.data.user.email
+                    this.description = res.data.user.dec
+                    this.banned = res.data.user.banned
+                    this.admin = res.data.user.admin
+                    this.createdAt = res.data.user.created_at
+                    this.updatedAt = res.data.user.created_at
 
+                    let canvas = document.getElementById('canvas').getContext("2d");
+                    canvas.width = innerWidth;
+                    canvas.height = innerHeight;
+                    const image = new Image();
+                    image.src = "/storage/images/avatars/" + res.data.user.avatar;
 
-            // this.name = user.name
-            // this.email = user.email
-            // this.email = user.email
-            // this.description = user.description
-            // this.banned = user.banned
-            // this.admin = user.admin
-            // this.createdAt = user.createdAt
-            // this.updatedAt = user.updatedAt
-
+                    image.onload = function(){
+                        canvas.drawImage(image,0,0,150,150);
+                    }
+                })
         },
 
-        sendUser(){
-            let data = new FormData();
+        updateDataUser(){
+            let data = {
+                name: this.name
+            }
 
-          api.call('post', `/api/user/${this.$route.params.userId}/edit`)
-            .then(res=>{
-
-            })
+            api.call('get', `/api/user/${this.$route.params.userId}/edit?name=${this.name}&email=${this.email}&dec=${this.description}&admin=${Number(this.admin)}&banned=${Number(this.banned)}`)
+                .then(res=>{
+                    console.log(res.data)
+                })
         }
     }
 }

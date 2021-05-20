@@ -7,7 +7,8 @@
                         <p class="m-2" v-if="user.admin" style="color: red">Администратор</p>
                         <p class="m-2" v-if="user.banned" style="color: red">Заблокирован</p>
                         <div class="text pt-4">
-                            <p>{{user.dec}}</p>
+                            <p v-if="!userDescription">{{user.dec}}</p>
+                            <p v-else>{{userDescription}}</p>
                         </div>
                     </div>
                     <div class="sidebar-box p-4 about text-center ftco-animate" v-else>
@@ -15,13 +16,11 @@
                     </div>
                 </div>
 
-
                 <div v-if="authUser  && user.user_id && authUser.user_id === user.user_id" class="container">
                     <div class="list-inline text-center">
                         <button class="list-inline-item btn" v-bind:class="{ 'btn-primary': editProfile }">настройки профиля</button>
                         <button class="list-inline-item btn">настройки учетной записи</button>
                     </div>
-
 
                     <div class="pt-5">
                         <form>
@@ -42,8 +41,6 @@
                 </div>
 
             </div>
-
-
 </template>
 
 <script>
@@ -83,7 +80,6 @@ export default {
                 .then(res=>{
 
                 })
-
 
             if(document.getElementById("avatar").files[0]){
                 let data = new FormData();
