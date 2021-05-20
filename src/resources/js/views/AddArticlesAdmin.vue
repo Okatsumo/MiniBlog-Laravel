@@ -39,7 +39,8 @@
 
                 </div>
 
-                <span class="btn btn-primary float-left" v-on:click="addArticle()">Добавить</span>
+                <span class="btn btn-primary float-left" v-on:click="addArticle()" v-if="!id">Добавить</span>
+                <span class="btn btn-primary float-left" v-on:click="addArticle(true)" v-else>Редактировать</span>
                 <router-link class="btn btn-primary float-right" :to = "{name: 'adminPanel.articles'}">Назад</router-link>
             </form>
 
@@ -64,6 +65,7 @@ export default {
     },
 
     data: ()=>({
+        id: null,
         image: null,
         title: "",
         editorOptions: {
@@ -141,10 +143,13 @@ export default {
 
                 api.call('get', '/api/article/' + this.$route.params.articleId)
                     .then(res=>{
+                        this.id = res.data.article.article_id;
                         this.name = res.data.article.title;
                         this.content = res.data.article.content;
                         this.content = res.data.article.content;
                         this.categoryId = res.data.category.category_id;
+                        this.tagsList = JSON.parse(res.data.article.tags)['tags'];
+                        this.tags = JSON.parse(res.data.article.tags)['tags'];
 
                         let canvas = document.getElementById('canvas').getContext("2d");
                         canvas.width = innerWidth;
@@ -172,7 +177,7 @@ export default {
             this.tagsList = this.tags.split(",")
         },
 
-        addArticle(){
+        addArticle(edit = false){
             if(!this.name){
                 Vue.notify({group: 'auth',title: 'Добавление новой записи',text: "Поле с именем не может быть пустым"})
                 return;
@@ -208,14 +213,28 @@ export default {
                     }
             };
 
-            api.call("post", "/api/article", data, params)
-                .then(res=>{
-                    this.$router.push({ name: 'article', params: { id:  res.data.article.article_id}})
-                    Vue.notify({group: 'auth',title: 'Добавление новой записи',text: `Запись "${res.data.article.title}" успешно добавлена.`})
-                })
-                .catch(res =>{
-                    Vue.notify({group: 'auth',title: 'Добавление новой записи',text: 'Произошла ошибка'})
-                })
+
+            if(edit){
+                api.call("post", `/api/article/${this.id}/edit`, data, params)
+                    .then(res=>{
+                        Vue.notify({group: 'auth',title: 'Редактирование',text: `Запись "${res.data.article.title}" успешно отредактирована.`})
+                    })
+                    .catch(res =>{
+                        console.log(res)
+                        Vue.notify({group: 'auth',title: 'Редактирование',text: 'Произошла ошибка'})
+                    })
+            }
+            else{
+                api.call("get", "/api/article", data, params)
+                    .then(res=>{
+                        this.$router.push({ name: 'article', params: { id:  res.data.article.article_id}})
+                        Vue.notify({group: 'auth',title: 'Создание новой записи',text: `Запись "${res.data.article.title}" успешно добавлена.`})
+                    })
+                    .catch(res =>{
+                        Vue.notify({group: 'auth',title: 'Создание новой записи',text: 'Произошла ошибка'})
+                    })
+            }
+
         }
     }
 }

@@ -128,22 +128,26 @@ class ArticleApiController extends Controller
         }
 
         if($request->get("content")){
-            $article->title = $request->get('content');
+            $article->content = $request->get('content');
         }
 
-        if($request->get("image")){
-            $article->title = $request->get('image');
+//        if($request->get("image")){
+//            $article->title = $request->get('image');
+//        }
+
+        if($request->get("tags")){
+            $article->tags = $request->get('tags');
         }
 
-        if($request->get("category_id")){
-            $article->title = $request->get('category_id');
+        if($request->get("categoryId")){
+            $article->category_id = $request->get('categoryId');
         }
 
         if($article->update()){
-            return \response(['status'=>201, 'article'=>$article], 201);
+            return response(['status'=>201, 'article'=>$article], 201);
         }
 
-        return \response(['status'=>404], 404);
+        return response(['status'=>404], 404);
     }
 
     /**

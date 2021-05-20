@@ -29,11 +29,11 @@ Route::resource('users', UserApiController::class)->only([
     'index'
 ]);
 
-Route::get('/get-user/{user}', [UserApiController::class, "show"]);
-
+Route::post('/article/{article}/edit', [ArticleApiController::class, 'edit'])->middleware('auth:api');
 
 Route::post('register', [AuthController::class, "register"]);
 Route::post('login', [AuthController::class, "login"]);
+Route::get('/get-user/{user}', [UserApiController::class, "show"]);
 
 Route::middleware('auth:api')->group(function () {
     Route::post('/logout', [AuthController::class, "logout"]);
