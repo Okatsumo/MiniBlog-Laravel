@@ -4,11 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5b0a19f5-8089-418c-95bd-227219e29c25" name="Default Changelist" comment="Добавил просмотр категорий и поправил главную страницу(не полностью)">
+    <list default="true" id="5b0a19f5-8089-418c-95bd-227219e29c25" name="Default Changelist" comment="Поправил редактирование записей">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Http/Controllers/Api/v1/ArticleApiController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Http/Controllers/Api/v1/ArticleApiController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/views/AddArticlesAdmin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/views/AddArticlesAdmin.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/apiUser.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/apiUser.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/views/EditUserAdmin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/views/EditUserAdmin.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/views/UserProfile.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/views/UserProfile.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/views/UsersAdmin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/views/UsersAdmin.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/api.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -264,7 +266,8 @@
       <workItem from="1621459108986" duration="88000" />
       <workItem from="1621459204756" duration="9047000" />
       <workItem from="1621505691682" duration="31783000" />
-      <workItem from="1621538511769" duration="12101000" />
+      <workItem from="1621538511769" duration="12534000" />
+      <workItem from="1621599919749" duration="10836000" />
     </task>
     <task id="LOCAL-00001" summary="Полностью сменил логику авторизации/регистрации/выдачи токена. Переделал как фронтенд, так и бэкенд">
       <created>1620774956270</created>
@@ -322,7 +325,14 @@
       <option name="project" value="LOCAL" />
       <updated>1621548603330</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Поправил редактирование записей">
+      <created>1621551828847</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1621551828847</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -349,7 +359,8 @@
     <MESSAGE value="Поправил прослушивание канала с комментариями (теперь работает редактирование), поправил текстовый редактор в добавлении записей, добавил в гит конфиги с php для разработки и для продакшена" />
     <MESSAGE value="Добавил подтверждение почты" />
     <MESSAGE value="Добавил просмотр категорий и поправил главную страницу(не полностью)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Добавил просмотр категорий и поправил главную страницу(не полностью)" />
+    <MESSAGE value="Поправил редактирование записей" />
+    <option name="LAST_COMMIT_MESSAGE" value="Поправил редактирование записей" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -100,30 +100,31 @@ export default {
     },
 
     methods:{
+        nextPage(){
+            if(this.thisPage < this.lastPage){
+                this.loadArticles(this.thisPage += 1)
+            }
+
+        },
+
+        backPage(){
+            if(this.thisPage > 1){
+                this.loadArticles(this.thisPage -= 1)
+            }
+        },
+
+
         loadArticles(page = null){
             let url = page ? "/api/users?page=" + page : "/api/users";
 
-            api.call('get', url)
-                .then(res=>{
-                    this.users = res.data.data;
-                    this.totalUsers = res.data.total;
-                    this.lastPage = res.data.last_page;
-                });
+            let user = new apiUser();
+            user.getList(page).then(res=>{
+                this.users = res.data;
+                this.totalUsers = res.total;
+                this.lastPage = res.last_page;
+                this.thisPage = res.current_page;
+            })
 
-        },
-
-        // Работа со страницами
-        nextPage(){
-            if(this.thisPage + 1 <= this.lastPage){
-                this.thisPage +=1;
-                this.loadArticles(this.thisPage)
-            }
-        },
-        backPage(){
-            if(this.thisPage > 1){
-                this.thisPage -=1;
-                this.loadArticles(this.thisPage)
-            }
         },
 
         removeUser(userId){

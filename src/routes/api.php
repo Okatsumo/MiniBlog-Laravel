@@ -29,7 +29,6 @@ Route::resource('users', UserApiController::class)->only([
     'index'
 ]);
 
-Route::post('/article/{article}/edit', [ArticleApiController::class, 'edit'])->middleware('auth:api');
 
 Route::post('register', [AuthController::class, "register"]);
 Route::post('login', [AuthController::class, "login"]);
@@ -45,6 +44,9 @@ Route::middleware('auth:api')->group(function () {
             return response(['status'=>201,'path'=> '/storage/images/upload/' . $image], 201);
         }
     });
+
+    Route::post('/user/{user}/edit', [UserApiController::class, 'edit']);
+    Route::post('/article/{article}/edit', [ArticleApiController::class, 'edit']);
 });
 
 Route::get('/get-count-users', function (){

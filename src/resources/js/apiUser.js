@@ -1,59 +1,121 @@
-'use strict';
 class ApiUser{
-    constructor(userId) {
-        this.id = userId;
-
-        axios('/api/get-user/' + this.id)
-            .then(res=>{
-                this.name = res.data.user.name;
-                this.email = res.data.user.email;
-                this.emailVerifiedAt = res.data.user.email_verified_at;
-                this.avatar = res.data.user.avatar;
-                this.description = res.data.user.dec;
-                this.admin = res.data.user.admin;
-                this.banned = res.data.user.banned;
-                this.createdAt = res.data.user.created_at;
-                this.updatedAt = res.data.user.updated_at;
-            })
-            .catch(res=>{
-                throw new this.exception("userId is not defined");
-            })
+    constructor() {
+        this.id = null;
+        this.name = null;
+        this.email = null;
+        this.emailVerifiedAt = null;
+        this.avatar = null;
+        this.description = null;
+        this.admin =  null;
+        this.banned = null;
+        this.createdAt = null;
+        this.updatedAt = null;
     }
 
-    exception(message) {
-        this.message = message;
-        this.name = "api.user.error";
+    get(userId) {
+        return new Promise((resolve, reject) => {
+            api.call('get','/api/get-user/' + userId)
+                .then(response => {
+                    this.id = response.data.user.user_id;
+                    this.name = response.data.user.name;
+                    this.email = response.data.user.email;
+                    this.emailVerifiedAt = response.data.user.email_verified_at;
+                    this.avatar = response.data.user.avatar;
+                    this.description = response.data.user.dec;
+                    this.admin = response.data.user.admin;
+                    this.banned = response.data.user.banned;
+                    this.createdAt = response.data.user.created_at;
+                    this.updatedAt = response.data.user.updated_at;
+                })
+                .finally(()=>{
+                    resolve(true);
+                })
+                .catch(({response}) => {
+                    reject(response);
+                });
+        });
     }
 
 
-    update(){
-        let data = {
-            name: this.name,
-            email: this.email,
-            email_verified_at: this.emailVerifiedAt,
-            avatar: this.avatar,
-            dec: this.description,
-            admin: this.admin,
-            banned: this.banned,
-            created_at: this.createdAt,
-            updated_at: this.updatedAt,
-        }
+    create(){
+        return new Promise((resolve, reject) => {
+            api.call('get','/api/user/')
+                .then(response => {
 
-        axios.get('/api/user/1/edit', {
-            params: data
-        })
-            .then(res=>{
-                console.log(res)
-            })
-            .catch(({res}) => {
-                console.log(res)
-            if (res.status === 401) {
+                })
+                .finally(()=>{
+                    resolve(true);
+                })
+                .catch(({response}) => {
+                    reject(response);
+                });
+        });
+    }
 
+    update(userId){
+        return new Promise((resolve, reject) => {
+            let data = new FormData();
+
+            if(this.name){
+                data.append('name', this.name)
             }
-        })
+            if(this.email){
+                data.append('email', this.email)
+            }
+
+            if(this.description){
+                data.append('description', this.description)
+            }
+            if(this.admin){
+                data.append('admin', this.admin)
+            }
+            if(this.banned){
+                data.append('banned', this.banned)
+            }
+
+
+            axios.post(`/api/user/${userId}/edit`, data)
+                .then(response => {
+                    this.id = response.data.user.user_id;
+                    this.name = response.data.user.name;
+                    this.email = response.data.user.email;
+                    this.emailVerifiedAt = response.data.user.email_verified_at;
+                    this.avatar = response.data.user.avatar;
+                    this.description = response.data.user.dec;
+                    this.admin = response.data.user.admin;
+                    this.banned = response.data.user.banned;
+                    this.createdAt = response.data.user.created_at;
+                    this.updatedAt = response.data.user.updated_at;
+
+                    Vue.notify({group: 'auth',title: 'Обновление информации о пользователе',text: 'Профиль успешно обновлен'})
+                })
+                .finally(()=>{
+                    resolve(true);
+                })
+                .catch(({response}) => {
+                    Vue.notify({group: 'auth',title: 'Обновление информации о пользователе',text: 'Произошла ошибка!'})
+                    reject(response);
+                });
+        });
+
     }
 
+    getList(page = null){
+        let url = page ? '/api/users?page=' + page : '/api/users/';
 
+        return new Promise((resolve, reject) => {
+            api.call('get', url)
+                .then(response => {
+                    resolve(response.data);
+                })
+                .finally(()=>{
+                    resolve(true);
+                })
+                .catch(({response}) => {
+                    reject(response);
+                });
+        });
+    }
 }
 
 export default ApiUser;

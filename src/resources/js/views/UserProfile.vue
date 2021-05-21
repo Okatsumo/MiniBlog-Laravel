@@ -1,14 +1,14 @@
 <template>
             <div>
                 <div class="sidebar-wrap">
-                    <div class="sidebar-box p-4 about text-center ftco-animate" v-if="user.user_id">
-                        <img :src="'/storage/images/avatars/' + user.avatar" class="img-fluid">
-                        <p class=" mb-2">{{user.name}}</p>
-                        <p class="m-2" v-if="user.admin" style="color: red">Администратор</p>
-                        <p class="m-2" v-if="user.banned" style="color: red">Заблокирован</p>
+                    <div class="sidebar-box p-4 about text-center ftco-animate" v-if="userId">
+                        <img :src="'/storage/images/avatars/' + avatar" class="img-fluid">
+                        <p class=" mb-2">{{name}}</p>
+                        <p class="m-2" v-if="admin" style="color: red">Администратор</p>
+                        <p class="m-2" v-if="banned" style="color: red">Заблокирован</p>
                         <div class="text pt-4">
-                            <p v-if="!userDescription">{{user.dec}}</p>
-                            <p v-else>{{userDescription}}</p>
+                            <p v-if="!description">{{description}}</p>
+                            <p v-else>{{description}}</p>
                         </div>
                     </div>
                     <div class="sidebar-box p-4 about text-center ftco-animate" v-else>
@@ -16,7 +16,7 @@
                     </div>
                 </div>
 
-                <div v-if="authUser  && user.user_id && authUser.user_id === user.user_id" class="container">
+                <div v-if="authUser  && userId && authUser.user_id === userId" class="container">
                     <div class="list-inline text-center">
                         <button class="list-inline-item btn" v-bind:class="{ 'btn-primary': editProfile }">настройки профиля</button>
                         <button class="list-inline-item btn">настройки учетной записи</button>
@@ -26,7 +26,7 @@
                         <form>
                             <div class="form-group">
                                 <label for="statusInput">Статус</label>
-                                <input type="text" class="form-control" id="statusInput" v-model="userDescription">
+                                <input type="text" class="form-control" id="statusInput" v-model="description">
                             </div>
 
                             <div class="form-group">
@@ -51,10 +51,19 @@ export default {
 
     data(){
         return {
-            user: [],
-            userDescription: null,
+            userId: null,
+            name: null,
+            description: null,
+            banned: null,
+            admin: null,
+            createdAt: null,
+            updatedAt: null,
+            avatar: null,
+
+
             editProfile: true,
             editText: false,
+
 
 
             authenticated: auth.check(),
@@ -76,10 +85,11 @@ export default {
     },
     methods:{
         updateProfile(){
-            api.call('get', `/api/user/${this.authUser.user_id}/edit?description=${this.userDescription}`)
-                .then(res=>{
+           let user = new window.apiUser();
+           user.name = this.name;
+           user.description = this.description;
+           user.update(1)
 
-                })
 
             if(document.getElementById("avatar").files[0]){
                 let data = new FormData();
@@ -94,11 +104,17 @@ export default {
         },
 
         loadUser(){
-            api.call('get', '/api/get-user/' + this.$route.params.userId)
-                .then(res=>{
-                    this.user = res.data.user;
-                    this.userDescription = res.data.user.dec;
-                })
+            let user = new window.apiUser();
+            user.get(this.$route.params.userId).then(()=>{
+                this.userId = user.id;
+                this.name = user.name
+                this.description = user.description
+                this.avatar = user.avatar
+                this.banned = user.banned
+                this.admin = user.admin
+                this.createdAt = user.createdAt
+                this.updatedAt = user.updatedAt
+            })
         }
     }
 

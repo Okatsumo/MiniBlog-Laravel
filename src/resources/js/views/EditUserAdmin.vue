@@ -74,38 +74,36 @@ export default {
 
     methods: {
         loadComponent(){
-            api.call('get', `/api/get-user/${this.$route.params.userId}`)
-                .then(res=>{
-                    this.name = res.data.user.name
-                    this.email = res.data.user.email
-                    this.email = res.data.user.email
-                    this.description = res.data.user.dec
-                    this.banned = res.data.user.banned
-                    this.admin = res.data.user.admin
-                    this.createdAt = res.data.user.created_at
-                    this.updatedAt = res.data.user.created_at
+            let user = new window.apiUser();
+            user.get(this.$route.params.userId).then(()=>{
+                this.name = user.name
+                this.email = user.email
+                this.description = user.description
+                this.banned = user.banned
+                this.admin = user.admin
+                this.createdAt = user.created_at
+                this.updatedAt = user.created_at
 
-                    let canvas = document.getElementById('canvas').getContext("2d");
-                    canvas.width = innerWidth;
-                    canvas.height = innerHeight;
-                    const image = new Image();
-                    image.src = "/storage/images/avatars/" + res.data.user.avatar;
+                let canvas = document.getElementById('canvas').getContext("2d");
+                canvas.width = innerWidth;
+                canvas.height = innerHeight;
+                const image = new Image();
+                image.src = "/storage/images/avatars/" + user.avatar;
 
-                    image.onload = function(){
-                        canvas.drawImage(image,0,0,150,150);
-                    }
-                })
+                image.onload = function(){
+                    canvas.drawImage(image,0,0,150,150);
+                }
+            })
         },
 
         updateDataUser(){
-            let data = {
-                name: this.name
-            }
-
-            api.call('get', `/api/user/${this.$route.params.userId}/edit?name=${this.name}&email=${this.email}&dec=${this.description}&admin=${Number(this.admin)}&banned=${Number(this.banned)}`)
-                .then(res=>{
-                    console.log(res.data)
-                })
+            let user = new window.apiUser();
+            user.name = this.name;
+            user.description = this.description;
+            user.email = this.email;
+            user.banned = this.banned;
+            user.admin = this.admin;
+            user.update(this.$route.params.userId)
         }
     }
 }
