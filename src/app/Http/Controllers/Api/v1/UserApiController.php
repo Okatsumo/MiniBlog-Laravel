@@ -40,7 +40,7 @@ class UserApiController extends Controller
         $user->avatar = uploadImage('public/images/avatars/', $request->file('avatar'), 140, 140);
         $user->save();
 
-        return response(['status'=>200], 200);
+        return response(['status'=>200, 'avatar'=>['name'=>$user->avatar, 'path'=>'public/images/avatars/']], 200);
     }
 
     /**
@@ -82,11 +82,11 @@ class UserApiController extends Controller
         }
 
         if($request->get('admin') and auth()->user()->admin){
-            $user->admin = $request->get('admin');
+            $user->admin = boolval($request->get('admin'));
         }
 
         if($request->get('banned') and auth()->user()->admin){
-            $user->banned = $request->get('banned');
+            $user->banned = boolval($request->get('banned'));
         }
 
         $user->save();

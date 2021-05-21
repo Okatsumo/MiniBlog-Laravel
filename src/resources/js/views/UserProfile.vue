@@ -88,17 +88,14 @@ export default {
            let user = new window.apiUser();
            user.name = this.name;
            user.description = this.description;
-           user.update(1)
+           user.update(1);
 
+           let avatar = document.getElementById("avatar").files[0];
 
-            if(document.getElementById("avatar").files[0]){
-                let data = new FormData();
-                data.append('avatar', document.getElementById("avatar").files[0]);
-
-                api.call('post', '/api/user/upload-avatar/' + this.authUser.user_id)
-                    .catch(res =>{
-                        console.log('Произошла ошибка')
-                        console.log(res)
+            if(avatar){
+                user.uploadAvatar(this.userId, avatar)
+                    .then(()=>{
+                        this.avatar = user.avatar
                     })
             }
         },

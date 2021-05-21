@@ -32,8 +32,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="image">Аватар</label>
-                    <input class="form-control" id="image" type="file">
+                    <label for="avatar">Аватар</label>
+                    <input class="form-control" id="avatar" type="file">
                     <canvas id="canvas" width="150" height="150" class="img-fluid"></canvas>
                 </div>
 
@@ -81,8 +81,8 @@ export default {
                 this.description = user.description
                 this.banned = user.banned
                 this.admin = user.admin
-                this.createdAt = user.created_at
-                this.updatedAt = user.created_at
+                this.createdAt = user.createdAt
+                this.updatedAt = user.createdAt
 
                 let canvas = document.getElementById('canvas').getContext("2d");
                 canvas.width = innerWidth;
@@ -104,6 +104,16 @@ export default {
             user.banned = this.banned;
             user.admin = this.admin;
             user.update(this.$route.params.userId)
+
+            let avatar = document.getElementById("avatar").files[0];
+
+            if(avatar){
+                user.uploadAvatar(this.$route.params.userId, avatar)
+                    .then(()=>{
+                        this.avatar = user.avatar
+                    })
+            }
+
         }
     }
 }

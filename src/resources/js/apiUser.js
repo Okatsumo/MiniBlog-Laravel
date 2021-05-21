@@ -12,6 +12,13 @@ class ApiUser{
         this.updatedAt = null;
     }
 
+
+    /**
+     * Метод отвечающий за получение информации о пользователе из API
+     * @param userId id пользователя
+     * @return resolve при удачном запросе
+     * @return reject при ошибке
+     */
     get(userId) {
         return new Promise((resolve, reject) => {
             api.call('get','/api/get-user/' + userId)
@@ -38,20 +45,41 @@ class ApiUser{
 
 
     create(){
-        return new Promise((resolve, reject) => {
-            api.call('get','/api/user/')
-                .then(response => {
+        //
+    }
 
+    /**
+     * Загрузка аватара пользователя через API
+     * @param userId id пользователя
+     * @param avatar files
+     */
+    uploadAvatar(userId, avatar){
+        let data = new FormData();
+        data.append('avatar', avatar);
+
+        return new Promise((resolve, reject) => {
+            api.call('post', '/api/user/upload-avatar/' + userId, data)
+                .then(res => {
+                    this.avatar = res.data.avatar.name;
+                    Vue.notify({group: 'auth', title: 'Обновление аватара', text: 'Изображения успешно загружено'});
                 })
-                .finally(()=>{
+                .finally(() => {
                     resolve(true);
                 })
                 .catch(({response}) => {
-                    reject(response);
+                    if (response.status !== 200) {
+                        Vue.notify({group: 'auth', title: 'Обновление аватара', text: 'Произошла ошибка'});
+                    }
                 });
-        });
+        })
     }
 
+    /**
+     * Метод отвечающий за обновление информации о пользователе через API
+     * @param userId id пользователя
+     * @return resolve при удачном запросе
+     * @return reject при ошибке
+     */
     update(userId){
         return new Promise((resolve, reject) => {
             let data = new FormData();
@@ -72,6 +100,8 @@ class ApiUser{
             if(this.banned){
                 data.append('banned', this.banned)
             }
+
+            console.log(this.admin)
 
 
             axios.post(`/api/user/${userId}/edit`, data)
@@ -97,9 +127,15 @@ class ApiUser{
                     reject(response);
                 });
         });
-
     }
 
+    /**
+     * Метод отвечающий за получение списка пользователей из API
+     * все данные хранятся в then(res)
+     * @param page страница с записями из API
+     * @return resolve при удачном запросе
+     * @return reject при ошибке
+     */
     getList(page = null){
         let url = page ? '/api/users?page=' + page : '/api/users/';
 
