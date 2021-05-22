@@ -129,7 +129,12 @@ export default {
 
         removeUser(userId){
             if(confirm("Вы действительно хотите удалить пользователя?")){
-                api.call('delete', "/api/user/" + userId);
+                apiUser.remove(userId);
+                this.users.reduce((values, item, index) =>{
+                    if(item.user_id === userId){
+                        this.users.splice(index, 1);
+                    }
+                }, []);
             }
         }
     }

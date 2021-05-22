@@ -16,7 +16,6 @@ use Illuminate\Support\Facades\Validator;
 
 class CommentController extends Controller
 {
-
     public function index()
     {
         $comment = new Comment;
@@ -24,7 +23,7 @@ class CommentController extends Controller
             'author'=> function($query){
                 $query->select(['user_id','name']);
             }
-        ])->take(4)->get()->reverse();
+        ])->orderBy('comment_id', 'desc')->take(4)->get();
         return response(['status'=>200,'comments'=>$comments], 200);
     }
 

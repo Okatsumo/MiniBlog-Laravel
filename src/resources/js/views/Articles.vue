@@ -16,7 +16,7 @@
             <spin v-if="loading"></spin>
             <div class="container" v-if="!loading">
                 <div class="row">
-                    <div class="col-lg-9">
+                    <div class="col-lg-12">
                         <form action="#" class="search-form">
                             <div class="form-group">
                                 <span class="icon icon-search"></span>
@@ -31,9 +31,9 @@
                                             <div class="overlay"></div>
                                         </router-link>
                                     </div>
-                                    <div class="text px-md-4 px-lg-5 half pt-3">
+                                    <div class="text px-md-4 px-lg-5 half">
                                         <h3><router-link :to="{name: 'article', params: { id: article.article_id } }">{{article.title}}</router-link></h3>
-                                        <div class="size" v-html="article.content"></div>
+                                        <div class="size" v-if="article.shortDescription"> {{article.shortDescription}}</div>
                                         <p class="mb-0"><router-link :to="{name: 'article', params: { id: article.article_id } }" class="btn btn-primary">Подробнее <span class="icon-arrow_forward ml-4"></span></router-link></p>
                                     </div>
                                 </div>
@@ -41,13 +41,14 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-3">
-                        <div class="sidebar-wrap">
-                            <div class="sidebar-box categories text-center">
-                                <h2 class="heading mb-4">Реклама</h2>
-                            </div>
-                        </div>
-                    </div>
+<!--                    <div class="col-lg-3">-->
+<!--                        <div class="sidebar-wrap">-->
+<!--                            <div class="sidebar-box categories text-center">-->
+<!--                                <h2 class="heading mb-4">Реклама</h2>-->
+
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
                 </div>
 
                 <div class="row mt-5">
@@ -139,7 +140,6 @@ export default {
                     console.log(`page: ${this.thisPage}`)
                 })
             }
-
             window.scrollBy(0, -3000);
         },
 

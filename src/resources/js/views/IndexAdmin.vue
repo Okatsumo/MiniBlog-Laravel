@@ -30,7 +30,7 @@
                                         </div>
                                         <div class="col-8 align-self-center text-right">
                                             <div class="ml-2">
-                                                <p class="mb-1 text-muted">Всего пользователей</p>
+                                                <p class="mb-1 text-muted">Пользователей</p>
                                                 <h4 v-if="!totalUsers">Загрузка ...</h4>
                                                 <h4 v-else class="mt-0 mb-1 text-warning font-22">{{totalUsers}}</h4>
                                             </div>
@@ -103,7 +103,7 @@
                                         <th>Рейтинг</th>
                                         <th>Автор</th>
                                         <th>Категория</th>
-                                        <th>Просмотр</th>
+                                        <th>Редактор</th>
                                     </tr>
                                     </thead>
 
@@ -169,8 +169,8 @@ export default {
     data: ()=> ({
         articles: null,
         totalArticles: null,
-        totalUsers: null,
         totalCategory: null,
+        totalUsers: null,
         newComments: null
 
     }),
@@ -184,10 +184,10 @@ export default {
 
     methods:{
         loadArticles(){
-            api.call('get', '/api/article')
+            api.call('get', '/api/article?sort=descending')
                 .then(res=>{
-                    this.articles = res.data.data;
-                    this.totalArticles = res.data.total;
+                    this.articles = res.data.articles;
+                    this.totalArticles = res.data.count;
                 })
         },
         loadTotalUsers(){

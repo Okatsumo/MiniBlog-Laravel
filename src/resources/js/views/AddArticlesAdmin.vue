@@ -148,8 +148,11 @@ export default {
                         this.content = res.data.article.content;
                         this.content = res.data.article.content;
                         this.categoryId = res.data.category.category_id;
-                        this.tagsList = JSON.parse(res.data.article.tags)['tags'];
-                        this.tags = JSON.parse(res.data.article.tags)['tags'];
+
+                        if(res.data.article.tags){
+                            this.tagsList = JSON.parse(res.data.article.tags)['tags'];
+                            this.tags = JSON.parse(res.data.article.tags)['tags'];
+                        }
 
                         let canvas = document.getElementById('canvas').getContext("2d");
                         canvas.width = innerWidth;
@@ -215,7 +218,7 @@ export default {
 
 
             if(edit){
-                api.call("post", `/api/article/${this.id}/edit`, data, params)
+                api.call("post", `/api/article/${this.$route.params.articleId}/edit`, data, params)
                     .then(res=>{
                         Vue.notify({group: 'auth',title: 'Редактирование',text: `Запись "${res.data.article.title}" успешно отредактирована.`})
                     })
@@ -225,7 +228,7 @@ export default {
                     })
             }
             else{
-                api.call("get", "/api/article", data, params)
+                api.call("post", "/api/article", data, params)
                     .then(res=>{
                         this.$router.push({ name: 'article', params: { id:  res.data.article.article_id}})
                         Vue.notify({group: 'auth',title: 'Создание новой записи',text: `Запись "${res.data.article.title}" успешно добавлена.`})

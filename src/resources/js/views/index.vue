@@ -19,12 +19,15 @@
         </section>
 
         <section class="ftco-section container-content mr-2">
-                <h3 class="text-center">Последние записи</h3>
+            <div class="container">
                 <div class="row">
                     <div class="col-lg-9">
-                        <div class="col-md-6 col-lg-12" v-for="article in articles">
+                        <div class="card mb-4">
+                            <h3 class="text-center">Последние записи</h3>
+                        </div>
+                        <div class="col-lg-12" v-for="article in articles">
                             <div class="blog-entry d-lg-flex">
-                                <div class="half">
+                                <div v-bind:class="{half: !loading}">
                                     <router-link :to="{name: 'article', params: { id: 1 } }" class="img d-flex align-items-end" style="background-image: url(https://i.pinimg.com/originals/ab/d3/91/abd391cf3428d8d3cb03c7993342ce91.jpg);">
                                         <div class="overlay"></div>
                                     </router-link>
@@ -37,27 +40,34 @@
                         </div>
                     </div>
                     <div class="col-lg-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="header-title mt-0 mb-3">Последние комментарии</h4>
-                                <h4 v-if="!newComments">загрузка ...</h4>
+                        <div class="row">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="header-title mt-0 mb-3">Последние комментарии</h4>
+                                    <h4 v-if="!comments">загрузка ...</h4>
 
-                                <ul class="comment-list">
-                                    <li v-for="comment in newComments">
-                                        <div class="vcard bio">
-                                            <img :src="'/storage/images/avatars/default.png'" alt="avatar">
-                                        </div>
-                                        <div class="comment-body">
-                                            <h3>{{comment.author.name}}</h3>
-                                            <div class="meta">{{comment.created_at}}</div>
-                                            <p>{{comment.content}}</p>
-                                        </div>
-                                    </li>
-                                </ul>
+                                    <ul class="comment-list">
+                                        <li v-for="comment in comments">
+                                            <div class="vcard bio">
+                                                <img :src="'/storage/images/avatars/default.png'" alt="avatar">
+                                            </div>
+                                            <div class="comment-body">
+                                                <h3>{{comment.author.name}}</h3>
+                                                <div class="meta">{{comment.created_at}}</div>
+                                                <p>{{comment.content}}</p>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
+                        <div class="row">
+
+                        </div>
+
                     </div>
                 </div>
+            </div>
         </section>
 
     </div>
@@ -70,27 +80,29 @@ export default {
 
     data: ()=> ({
         articles: null,
-        newComments: {},
+        comments: null,
+
+        loading: true
     }),
 
     mounted() {
         this.loadArticles()
+        this.loadNewComments()
     },
 
     methods: {
         loadArticles(){
             api.call('get', '/api/article')
                 .then(res=>{
-                    console.log(res.data.data)
                     this.articles = res.data.data;
-                    // this.totalArticles = res.data.total;
+                     this.loading = false;
                 })
         },
 
         loadNewComments(){
             api.call('get', '/api/comment')
                 .then(res=>{
-                    this.newComments = res.data.comments;
+                    this.comments = res.data.comments;
                 })
         }
     }

@@ -17,13 +17,16 @@
                 </div>
 
                 <div v-if="authUser  && userId && authUser.user_id === userId" class="container">
-                    <div class="list-inline text-center">
-                        <button class="list-inline-item btn" v-bind:class="{ 'btn-primary': editProfile }">настройки профиля</button>
-                        <button class="list-inline-item btn">настройки учетной записи</button>
-                    </div>
-
-                    <div class="pt-5">
-                        <form>
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Настройки профиля</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Настройки учетной записи</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                             <div class="form-group">
                                 <label for="statusInput">Статус</label>
                                 <input type="text" class="form-control" id="statusInput" v-model="description">
@@ -33,10 +36,17 @@
                                 <label for="avatar">Обновить аватар (150x150, только jpeg, png)</label>
                                 <input class="form-control" id="avatar" type="file">
                             </div>
-
                             <span class="btn btn-primary btn-block" v-on:click="updateProfile()">Обновить</span>
-                        </form>
+
+                        </div>
+                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                            <div class="form-group">
+                                <label for="emailInput">Email</label>
+                                <input type="text" class="form-control" id="emailInput" v-model="email">
+                            </div>
+                        </div>
                     </div>
+
 
                 </div>
 
@@ -59,12 +69,7 @@ export default {
             createdAt: null,
             updatedAt: null,
             avatar: null,
-
-
-            editProfile: true,
-            editText: false,
-
-
+            email:null,
 
             authenticated: auth.check(),
             authUser: auth.user,
@@ -105,6 +110,7 @@ export default {
             user.get(this.$route.params.userId).then(()=>{
                 this.userId = user.id;
                 this.name = user.name
+                this.email = user.email
                 this.description = user.description
                 this.avatar = user.avatar
                 this.banned = user.banned

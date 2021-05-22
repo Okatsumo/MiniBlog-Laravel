@@ -7,6 +7,7 @@ use App\Models\Article;
 use App\Models\Comment;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
@@ -28,10 +29,18 @@ class ArticleApiController extends Controller
     {
         $article = new Article();
 
-        return $article->makeHidden(['category_id', 'author_id'])
-            ->getWithConnections()
-            ->paginate(6)
-            ->jsonSerialize();
+        if(\request()->get('sort') == "descending"){
+            return [
+                'articles'=>$article->getWithConnections()->orderBy('article_id', 'desc')->take(4)->get(),
+                'count'=>$article->count()
+            ];
+        }
+        else{
+            return $article->makeHidden(['category_id', 'author_id'])
+                ->getWithConnections()
+                ->paginate(6)
+                ->jsonSerialize();
+        }
     }
 
     public function search(Request $request){
@@ -131,9 +140,9 @@ class ArticleApiController extends Controller
             $article->content = $request->get('content');
         }
 
-//        if($request->get("image")){
-//            $article->title = $request->get('image');
-//        }
+        if($request->get("image")){
+            $article->image = uploadImage('public/images/articles/', $request->file('image'), 300, 300);
+        }
 
         if($request->get("tags")){
             $article->tags = $request->get('tags');

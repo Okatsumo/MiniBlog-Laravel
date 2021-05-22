@@ -17,6 +17,7 @@ class CreateArticlesTable extends Migration
             $table->id('article_id');
             $table->string('title');
             $table->text('content');
+            $table->text('shortDescription')->nullable(true);
             $table->integer('rating')->default(0);
             $table->string('image')->default("default.jpg");
 
