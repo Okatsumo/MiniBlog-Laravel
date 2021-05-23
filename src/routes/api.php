@@ -5,14 +5,16 @@ use App\Http\Controllers\Api\v1\CategoryApiController;
 use App\Http\Controllers\Api\v1\CommentController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\v1\UserApiController;
-use App\Http\Controllers\Auth\VerificationController;
-use App\Models\Article;
 use App\Models\Category;
 use App\Models\User;
+use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 use function App\Helpers\uploadImage;
 
 /*
@@ -87,3 +89,13 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
     $request->fulfill();
     return redirect('/');
 })->middleware(['auth:api','signed'])->name('verification.verify');
+
+
+
+Route::post('/forgot-password', [AuthController::class, 'forgotPassword'])
+    ->middleware('guest')
+    ->name('password.email');
+
+
+Route::post('/reset-password', [AuthController::class, 'resetPassword'])->middleware('guest')->name('password.update');
+

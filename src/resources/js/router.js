@@ -14,11 +14,17 @@ import AdminUsersList from "./views/UsersAdmin";
 import UserProfile from "./views/UserProfile";
 import EditUserAdmin from "./views/EditUserAdmin";
 import CategoriesAdmin from "./views/CategoriesAdmin";
+import resetPassword from "./views/resetPassword";
 
 const routes = [
     {
         path: '/',
         component: index
+    },
+
+    {
+        path: '/reset-password/:token',
+        component: resetPassword
     },
 
     {

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Foundation\Application;
@@ -13,7 +14,9 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -32,7 +35,7 @@ class AuthController extends Controller
                 'max:255',
                 'regex:/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/',
             ],
-            'password'=>'required',
+            'password'=>'required|min:8',
         ]);
 
         if ($validator->fails()){
@@ -189,6 +192,55 @@ class AuthController extends Controller
             ], 403);
         }
         return response(auth()->user(), 200);
+    }
+
+
+    function forgotPassword(Request $request){
+        $validator = Validator::make($request->all(), [
+            'email'=>'required|email'
+        ]);
+
+        if($validator->fails()){
+            return response(['status'=>422, 'error'=>$validator->getMessageBag()], 422);
+        }
+
+
+        $status = Password::sendResetLink(
+            $request->only('email')
+        );
+
+
+    return $status === Password::RESET_LINK_SENT
+        ? response([['status'=>404, 'message' => 'link to reset your password has been sent to your email']], 201)
+        : response()->json(['status'=>422 ,'message' => 'user with mail already exists'], 422);
+    }
+
+    function resetPassword(Request $request){
+        $validate = Validator::make($request->all(),[
+            'token' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|min:8|confirmed',
+        ]);
+
+        if($validate->fails()){
+            return response(['status'=>422, 'error'=>$validate->getMessageBag()], 422);
+        }
+
+        $status = Password::reset(
+            $request->only('email', 'password', 'password_confirmation', 'token'),
+            function ($user, $password) use ($request) {
+                $user->forceFill([
+                    'password' => Hash::make($password)
+                ])->setRememberToken(Str::random(60));
+                $user->save();
+
+                event(new PasswordReset($user));
+            }
+        );
+
+        return $status == Password::PASSWORD_RESET
+            ? response([['status'=>201, 'message' => 'password recovered successfully']], 201)
+            : response(['status'=>404 ,'message' => 'link is not valid'], 404);
     }
 
 }

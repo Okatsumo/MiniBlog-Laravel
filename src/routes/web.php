@@ -24,6 +24,10 @@ Route::get('/email/verify/{id}/{hash}', function () {
     return view('auth.confirmEmail');
 });
 
+Route::get('/reset-password/{token}', function ($token) {
+    return view('index');
+})->middleware('guest')->name('password.reset');
+
 
 //Роут перенаправляющий всё на vue
 Route::get('/', function () {
@@ -31,7 +35,7 @@ Route::get('/', function () {
         [
             'categories'=>Category::all()
         ]);
-})->name('login');
+});
 
 
 Broadcast::routes([

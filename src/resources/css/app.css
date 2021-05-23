@@ -335,3 +335,44 @@ img{
 }
 
 
+#btn-input-register{
+    position: absolute;
+    z-index: 1;
+    top: 0.7rem;
+    right: 4rem;
+}
+
+
+
+
+
+
+
+/* Editor styles */
+.ql-align-center{
+    text-align: center;
+}
+.ql-align-right{
+    text-align: right;
+}
+.ql-align-justify {
+    text-align: justify;
+}
+.ql-font-serif {
+    font-family: Georgia, Times New Roman, serif;
+}
+.ql-syntax{
+    background-color: #23241f;
+    color: #f8f8f2;
+    overflow: visible;
+}
+.ql-size-large{
+    font-size: 1.5em;
+}
+blockquote {
+    border-left: 4px solid #ccc;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    padding-left: 16px;
+}
+

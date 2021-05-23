@@ -8,6 +8,7 @@
             </div>
             <div class="form-group help">
                 <input type="password" class="form-control" placeholder="Пароль" v-model="password">
+                <a v-on:click="authForm ='reset'" id="btn-input-register">Не помню пароль</a>
                 <i class="fa fa-lock"></i>
                 <a href="#" class="fa fa-question-circle"></a>
             </div>
@@ -58,6 +59,28 @@
             </div>
             <p v-text="mes" style="color: #ffffff"></p>
         </form>
+
+        <form class="form-horizontal" v-if="authForm === 'reset'">
+            <span class="heading">ВОССТАНОВЛЕНИЕ ПАРОЛЯ</span>
+
+            <div class="form-group help">
+                <input type="email" class="form-control" placeholder="Введите свой email" v-model="email">
+                <i class="fa fa-lock"></i>
+                <a href="#" class="fa fa-question-circle"></a>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col">
+                        <span class="btn btn-primary float-left" v-if="btnActive" v-on:click="resetPassword()">Восстановить пароль</span>
+                        <span class="btn btn-primary float-left" v-else>...</span>
+                        <span class="btn btn-primary float-right" v-on:click="authForm = 'login' ">Авторизация</span>
+                    </div>
+                </div>
+            </div>
+            <p v-text="mes" style="color: #ffffff"></p>
+        </form>
+
     </modal>
 </template>
 
@@ -80,12 +103,42 @@ export default {
     }),
 
     methods: {
+
+        resetPassword(){
+            if (!this.email)
+            {
+                this.mes = "Поле с email-ом не может быть пустым";
+                return;
+            }
+
+            if(!this.validEmail(this.email)){
+                this.mes = "Вы допустили ошибку при вводе Email-а";
+                return;
+            }
+            let data = new FormData();
+            data.append('email', this.email);
+
+            api.call('post', '/api/forgot-password?email=den4ic2001@gmail.com', data)
+                .then(()=>{
+                    this.mes = 'Ссылка на восстановление пароля была отправлена на вашу почту'
+                })
+                .catch(res=>{
+                    if(res.status === 422){
+                        this.mes = 'Пользователя с таким email-ом не существует'
+                    }
+                    else{
+                        this.mes = 'Произошла непредвиденная ошибка на сервере'
+                    }
+                })
+        },
+
         // Метод отвечающий за регистрацию
         register(){
             if(!this.nameReg){
                 this.mes = "Поле с логином не может быть пустым";
                 return;
             }
+
             if (!this.emailReg)
             {
                 this.mes = "Поле с email-ом не может быть пустым";
@@ -101,6 +154,12 @@ export default {
                 this.mes = "Поле с паролем не может быть пустым";
                 return;
             }
+
+            if(this.passwordReg.length < 8){
+                this.mes = "Минимальная длинна пароля 8 символов"
+                return
+            }
+
             if(!this.passwordConfReg){
                 this.mes = "Поле с повтором пароля не может быть пустым";
                 return;

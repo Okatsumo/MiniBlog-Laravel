@@ -4,25 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5b0a19f5-8089-418c-95bd-227219e29c25" name="Default Changelist" comment="Переделал загрузку изображений">
-      <change afterPath="$PROJECT_DIR$/src/resources/js/api/apiArticle.js" afterDir="false" />
+    <list default="true" id="5b0a19f5-8089-418c-95bd-227219e29c25" name="Default Changelist" comment="Micro fixes">
+      <change afterPath="$PROJECT_DIR$/src/resources/js/views/resetPassword.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/39b1ccb4-dced-4a24-b7dd-963c03627c82.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/39b1ccb4-dced-4a24-b7dd-963c03627c82.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Http/Controllers/Api/v1/ArticleApiController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Http/Controllers/Api/v1/ArticleApiController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Http/Controllers/Api/v1/CommentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Http/Controllers/Api/v1/CommentController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/helpers.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/helpers.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/database/migrations/2020_12_08_174239_create_articles_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/migrations/2020_12_08_174239_create_articles_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/database/seeders/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/seeders/DatabaseSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/Http/Controllers/Api/AuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Http/Controllers/Api/AuthController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/apiUser.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/api/apiUser.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/views/AddArticlesAdmin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/views/AddArticlesAdmin.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/views/Articles.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/views/Articles.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/views/IndexAdmin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/views/IndexAdmin.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/views/UserProfile.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/views/UserProfile.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/views/UsersAdmin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/views/UsersAdmin.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/views/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/views/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/css/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/components/ModalVue.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/components/ModalVue.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/router.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/views/Article.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/views/Article.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/views/auth/login.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/views/auth/passwords/confirm.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/views/auth/passwords/email.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/views/auth/passwords/reset.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/views/auth/reset.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/views/auth/register.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/views/auth/verify.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/views/home.blade.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/resources/views/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/views/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/views/layouts/app.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/views/welcome.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -222,11 +225,11 @@
       <recent name="$PROJECT_DIR$/src/storage/app" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/resources/views/auth" />
       <recent name="$PROJECT_DIR$/src/resources/js/api" />
       <recent name="$PROJECT_DIR$/src/app/Http/Controllers/Auth" />
       <recent name="$PROJECT_DIR$/php" />
       <recent name="$PROJECT_DIR$/src/storage/app/public" />
-      <recent name="$PROJECT_DIR$/src/resources/js/views" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -279,7 +282,8 @@
       <workItem from="1621505691682" duration="31783000" />
       <workItem from="1621538511769" duration="12534000" />
       <workItem from="1621599919749" duration="16728000" />
-      <workItem from="1621684564284" duration="17032000" />
+      <workItem from="1621684564284" duration="17109000" />
+      <workItem from="1621768182500" duration="13560000" />
     </task>
     <task id="LOCAL-00001" summary="Полностью сменил логику авторизации/регистрации/выдачи токена. Переделал как фронтенд, так и бэкенд">
       <created>1620774956270</created>
@@ -358,7 +362,14 @@
       <option name="project" value="LOCAL" />
       <updated>1621616825577</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Micro fixes">
+      <created>1621706461876</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1621706461876</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -388,7 +399,8 @@
     <MESSAGE value="Поправил редактирование записей" />
     <MESSAGE value="Вывел всю работу с пользователями в отдельный класс" />
     <MESSAGE value="Переделал загрузку изображений" />
-    <option name="LAST_COMMIT_MESSAGE" value="Переделал загрузку изображений" />
+    <MESSAGE value="Micro fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Micro fixes" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
