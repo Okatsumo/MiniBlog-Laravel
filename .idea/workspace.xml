@@ -4,28 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5b0a19f5-8089-418c-95bd-227219e29c25" name="Default Changelist" comment="Micro fixes">
-      <change afterPath="$PROJECT_DIR$/src/resources/js/views/resetPassword.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/39b1ccb4-dced-4a24-b7dd-963c03627c82.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/39b1ccb4-dced-4a24-b7dd-963c03627c82.xml" afterDir="false" />
+    <list default="true" id="5b0a19f5-8089-418c-95bd-227219e29c25" name="Default Changelist" comment="Добавил восстановление пароля как на бэкенд, так и не фронтенд. Поправил стили редактора текста">
+      <change afterPath="$PROJECT_DIR$/src/resources/js/api/categoryApi.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/resources/js/views/CreateCategory.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Http/Controllers/Api/AuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Http/Controllers/Api/AuthController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/Http/Controllers/Api/v1/ArticleApiController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Http/Controllers/Api/v1/ArticleApiController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/Http/Controllers/Api/v1/CategoryApiController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Http/Controllers/Api/v1/CategoryApiController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/Http/Controllers/Api/v1/CommentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Http/Controllers/Api/v1/CommentController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/css/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/components/ModalVue.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/components/ModalVue.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/router.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/resources/js/views/Article.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/views/Article.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/views/auth/login.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/views/auth/passwords/confirm.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/views/auth/passwords/email.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/views/auth/passwords/reset.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/views/auth/reset.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/views/auth/register.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/views/auth/verify.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/views/home.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/views/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/views/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/views/layouts/app.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/views/welcome.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/views/CategoriesAdmin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/views/CategoriesAdmin.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/api.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -283,7 +273,7 @@
       <workItem from="1621538511769" duration="12534000" />
       <workItem from="1621599919749" duration="16728000" />
       <workItem from="1621684564284" duration="17109000" />
-      <workItem from="1621768182500" duration="13560000" />
+      <workItem from="1621768182500" duration="18505000" />
     </task>
     <task id="LOCAL-00001" summary="Полностью сменил логику авторизации/регистрации/выдачи токена. Переделал как фронтенд, так и бэкенд">
       <created>1620774956270</created>
@@ -369,7 +359,14 @@
       <option name="project" value="LOCAL" />
       <updated>1621706461876</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Добавил восстановление пароля как на бэкенд, так и не фронтенд. Поправил стили редактора текста">
+      <created>1621781778262</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1621781778262</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -400,7 +397,8 @@
     <MESSAGE value="Вывел всю работу с пользователями в отдельный класс" />
     <MESSAGE value="Переделал загрузку изображений" />
     <MESSAGE value="Micro fixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Micro fixes" />
+    <MESSAGE value="Добавил восстановление пароля как на бэкенд, так и не фронтенд. Поправил стили редактора текста" />
+    <option name="LAST_COMMIT_MESSAGE" value="Добавил восстановление пароля как на бэкенд, так и не фронтенд. Поправил стили редактора текста" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

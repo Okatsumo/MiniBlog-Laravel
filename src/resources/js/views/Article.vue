@@ -44,7 +44,7 @@
                             <ul class="comment-list">
                                 <li v-for="comment in comments">
                                     <div class="vcard bio">
-                                        <img src="/storage/images/avatars/default.png" alt="Image placeholder">
+                                        <img :src="'/storage/images/avatars/' + comment.author.avatar" alt="Image placeholder">
                                     </div>
                                     <div class="comment-body">
                                         <h3> <router-link :to="{name : 'user.profile', params: {userId: comment.author.user_id}}">{{comment.author.name}}</router-link></h3>

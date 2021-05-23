@@ -174,25 +174,25 @@ class ArticleApiController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Article  $article
+     * @param $id
      * @return Response
      */
     public function destroy($id)
     {
         if(!$article = Article::find($id)){
-            return \response(['status'=>404], 404);
+            return response(['status'=>404], 404);
         }
 
-        if($article->author_id != auth()->user()->user_id){
-            return \response(['status'=>403], 403);
+        if(!auth()->user()->admin){
+            return response(['status'=>403], 403);
         }
-
 
         if($article->delete()){
-            return \response(['status'=>200], 200);
+            return response(['status'=>200], 200);
         }
+
         else{
-            return \response(['status'=>400], 400);
+            return response(['status'=>400], 400);
         }
     }
 }

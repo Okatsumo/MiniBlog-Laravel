@@ -5,11 +5,9 @@ namespace App\Http\Controllers\Api\v1;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\Category;
-use http\Env\Response;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use function GuzzleHttp\Promise\all;
-use function MongoDB\BSON\toJSON;
+use Illuminate\Support\Facades\Validator;
+
 
 class CategoryApiController extends Controller
 {
@@ -21,11 +19,6 @@ class CategoryApiController extends Controller
     public function index()
     {
         return Category::all();
-
-//        return Category::join('articles', 'categories.category_id', '=', 'category_id')
-////            ->groupBy('category_id')
-//            ->get('*', DB::raw('COUNT(1)'));
-
     }
 
 
@@ -36,7 +29,23 @@ class CategoryApiController extends Controller
      */
     public function create()
     {
-        //
+        if(!auth()->user()->admin){
+            return response(['status'=>403], 403);
+        }
+
+        $validator = Validator::make(request()->all(), [
+           'name'=>'required|string'
+        ]);
+
+        if($validator->fails()){
+            return response(['status'=>422, 'error'=>$validator->getMessageBag()], 422);
+        }
+
+        $category = new Category();
+        $category->name = request()->get('name');
+        $category->save();
+
+        return response(['status'=>201, 'message'=>'created', 'category'=>$category], 201);
     }
 
     /**
@@ -53,7 +62,7 @@ class CategoryApiController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\Models\Category $category
+     * @param Category $category
      * @return array
      */
     public function show(Category $category)
@@ -78,7 +87,7 @@ class CategoryApiController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Category  $category
+     * @param Category $category
      * @return \Illuminate\Http\Response
      */
     public function edit(Category $category)
@@ -90,7 +99,7 @@ class CategoryApiController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Category  $category
+     * @param Category $category
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Category $category)
@@ -101,11 +110,16 @@ class CategoryApiController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Category  $category
+     * @param Category $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy(Category $category): \Illuminate\Http\Response
     {
-        //
+        if(!auth()->user()->admin){
+            return response(['status'=>403], 403);
+        }
+
+        $category->delete();
+        return response(['status'=>200, 'message'=>'category deleted'], 200);
     }
 }

@@ -33,7 +33,7 @@ Route::resource('users', UserApiController::class)->only([
 
 
 Route::post('register', [AuthController::class, "register"]);
-Route::post('login', [AuthController::class, "login"]);
+Route::post('login', [AuthController::class, "login"])->name('login');
 Route::get('/get-user/{user}', [UserApiController::class, "show"]);
 
 Route::middleware('auth:api')->group(function () {
@@ -58,7 +58,8 @@ Route::get('/get-count-category', function (){
     return response(['status'=>200, 'total'=>Category::all()->count()], 200);
 });
 
-Route::resource('category', CategoryApiController::class);
+Route::resource('category', CategoryApiController::class)->only('index');
+Route::resource('category', CategoryApiController::class)->only(['destroy', 'create'])->middleware('auth:api');
 
 Route::resource('article', ArticleApiController::class)->only([
     'create', 'destroy', "update", "edit", "store"

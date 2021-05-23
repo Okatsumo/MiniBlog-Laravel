@@ -2,6 +2,7 @@ import Api from './api.js';
 import Auth from './auth.js';
 import UserApi from './api/apiUser';
 import apiArticle from './api/apiArticle';
+import apiCategory from './api/categoryApi';
 
 require('./bootstrap');
 require('./pusher');
@@ -11,12 +12,10 @@ window.auth = new Auth();
 window.api = new Api();
 window.Event = new Vue;
 
-
 // Модели из БД
 window.apiUser = apiUser;
 window.apiArticle = apiArticle;
-
-
+window.apiCategory = apiCategory;
 
 // текстовый редактор
 import 'quill/dist/quill.core.css'

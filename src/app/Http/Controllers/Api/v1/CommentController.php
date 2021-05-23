@@ -21,7 +21,7 @@ class CommentController extends Controller
         $comment = new Comment;
         $comments = $comment->with([
             'author'=> function($query){
-                $query->select(['user_id','name']);
+                $query->select(['user_id','name', 'avatar']);
             }
         ])->orderBy('comment_id', 'desc')->take(4)->get();
         return response(['status'=>200,'comments'=>$comments], 200);
@@ -36,7 +36,7 @@ class CommentController extends Controller
             ->where('article_id', '=', $articleId)
             ->with([
                 'author'=> function($query){
-                    $query->select(['user_id','name']);
+                    $query->select(['user_id','name', 'avatar']);
                 }
             ])
             ->paginate(4)
