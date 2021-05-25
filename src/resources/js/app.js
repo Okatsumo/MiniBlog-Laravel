@@ -3,6 +3,8 @@ import Auth from './auth.js';
 import UserApi from './api/apiUser';
 import apiArticle from './api/apiArticle';
 import apiCategory from './api/categoryApi';
+import lazyLoad from "./directives/lazyload";
+import lazyLoadBackground from "./directives/lazyLoadBackground";
 
 require('./bootstrap');
 require('./pusher');
@@ -30,6 +32,8 @@ Vue.component('modalEditorProfile', require('./components/ModalEditorProfile').d
 Vue.component('navbar', require('./components/Navbar').default);
 Vue.component('spinner', require('./components/Spinner').default);
 Vue.component('quillEditor', quillEditor);
+Vue.directive('lazyLoad', lazyLoad)
+Vue.directive('lazyLoadBackground', lazyLoadBackground)
 
 
 
@@ -38,11 +42,12 @@ import notifications from "./notifications";
 import VModal from "./modal";
 import apiUser from "./api/apiUser";
 
+
 require('../css/app.css');
 
 const app = new Vue({
     el: '#app',
     mode: 'history',
-    router: router
+    router: router,
 });
 

@@ -55,8 +55,7 @@ Software:
 - `php artisan migrate: fresh`
 
 
-## Контейнеры: 
-
+## Контейнеры:
 
 - **nginx** - `:8080`
 - **mysql** - `:3306`

@@ -29,16 +29,22 @@ class ArticleApiController extends Controller
     {
         $article = new Article();
 
-        if(\request()->get('sort') == "descending"){
+        if(request()->get('sort') == "descending"){
             return [
-                'articles'=>$article->getWithConnections()->orderBy('article_id', 'desc')->take(4)->get(),
+                'articles'=>$article
+                ->getWithConnections()
+                ->orderBy('article_id', 'desc')
+                ->take(4)
+                ->get(['title', 'article_id', 'shortDescription', 'rating', 'image', 'author_id', 'category_id', 'tags']),
                 'count'=>$article->count()
             ];
         }
         else{
-            return $article->makeHidden(['category_id', 'author_id'])
+            return $article
                 ->getWithConnections()
+                ->select(['title', 'article_id', 'shortDescription', 'rating', 'image', 'author_id', 'category_id', 'tags'])
                 ->paginate(6)
+//                ->makeHidden(['category_id', 'author_id'])
                 ->jsonSerialize();
         }
     }
@@ -53,6 +59,7 @@ class ArticleApiController extends Controller
                 $query->select(['user_id','name', 'dec', 'avatar']);
             }
         ])
+            ->select(['title', 'article_id', 'shortDescription', 'rating', 'image', 'author_id', 'category_id', 'tags'])
             ->paginate(6)
             ->jsonSerialize();
 
@@ -68,8 +75,9 @@ class ArticleApiController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'title'=>'required',
-            'content'=>'required',
+            'title'=>'required|string|max:80|min:4',
+            'content'=>'required|string',
+            'shortDescription'=>'string|min:0|max:140',
             'categoryId'=>'required|integer',
             'tags'=>'json',
             'image'=>'mimes:jpeg,bmp,png'
@@ -77,7 +85,7 @@ class ArticleApiController extends Controller
 
 
         if($validator->fails()){
-            return \response(['status'=>404, 'error'=>$validator->getMessageBag()], 404);
+            return \response(['status'=>422, 'error'=>$validator->getMessageBag()], 422);
         }
 
         if(!auth()->user()->admin){
@@ -88,8 +96,11 @@ class ArticleApiController extends Controller
         $article->author_id = auth()->user()->user_id;
         $article->title = $request->get("title");
         $article->content = $request->get("content");;
-        $article->category_id = $request->get("categoryId");;
+        $article->category_id = $request->get("categoryId");
 
+        if($request->get("shortDescription")){
+            $article->shortDescription = $request->get('shortDescription');
+        }
 
         if($request->get("tags")){
             $article->tags = $request->get('tags');
@@ -132,15 +143,32 @@ class ArticleApiController extends Controller
      */
     public function edit(Article $article, Request $request): Response
     {
+        $validator = Validator::make($request->all(), [
+            'title'=>'string|max:80|min:4',
+            'shortDescription'=>'string|min:0|max:140',
+            'content'=>'string',
+            'categoryId'=>'integer',
+            'tags'=>'json',
+            'image'=>'mimes:jpeg,bmp,png'
+        ]);
+
+        if($validator->fails()){
+            return \response(['status'=>422, 'error'=>$validator->getMessageBag()], 422);
+        }
+
         if($request->get("title")){
             $article->title = $request->get('title');
+        }
+
+        if($request->get("shortDescription")){
+            $article->shortDescription = $request->get('shortDescription');
         }
 
         if($request->get("content")){
             $article->content = $request->get('content');
         }
 
-        if($request->get("image")){
+        if($request->file('image')){
             $article->image = uploadImage('public/images/articles/', $request->file('image'), 300, 300);
         }
 

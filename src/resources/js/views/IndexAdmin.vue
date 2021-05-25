@@ -2,8 +2,8 @@
     <div class="d-flex">
         <SideBarAdmin></SideBarAdmin>
 
-        <div class="admin-container mt-4 mr-4 ml-4">
-            <div class="row">
+        <div class="admin-container ml-auto mr-auto mt-4">
+            <div class="row ml-lg-4 mr-lg-4">
                 <div class="col-lg-4">
                     <div class="card">
                         <div class="card-body profile-card">
@@ -88,7 +88,7 @@
 
             </div>
 
-            <div class="row mt-4">
+            <div class="row mt-4 ml-lg-4 mr-lg-4">
                 <div class="col-lg-8">
                     <div class="card">
                         <div class="card-body">

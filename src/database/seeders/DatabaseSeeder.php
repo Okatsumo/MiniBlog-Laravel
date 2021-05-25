@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Article;
 use App\Models\Category;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -15,7 +16,20 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\User::factory(50)->create();
+        \App\Models\User::factory(3)->create();
+
+        User::insert([
+           [
+               'name'=>'Admin',
+               'email'=>'den4ic2001@gmail.com',
+               'email_verified_at'=>now(),
+               'admin'=>true,
+               'password'=>'$2y$10$NEjznMOgtgbyN1yiytYUI.RXsfmAAp1w19j8YNoJnSHIUD1uwNSmm',
+               'banned'=>0,
+               'created_at'=>now(),
+               'updated_at'=>now(),
+           ]
+        ]);
 
         Category::insert([
             [
@@ -44,7 +58,7 @@ class DatabaseSeeder extends Seeder
                'shortDescription'=>'Здесь должно находиться краткое описание'
 
            ],
-            [
+           [
                 "title"=>"Обзор облачных сервисов для разработки бэкенда мобильных приложений",
                 'shortDescription'=>'Здесь должно находиться краткое описание',
                 'category_id'=>1,
@@ -504,6 +518,6 @@ Kumulos предоставляет из себя MBaaS платформу во �
 
 
 //        \App\Models\Category::factory(2)->create();
-        \App\Models\Article::factory(50)->create();
+//        \App\Models\Article::factory(50)->create();
     }
 }

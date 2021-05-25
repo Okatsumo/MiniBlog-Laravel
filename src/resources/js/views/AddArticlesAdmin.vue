@@ -1,13 +1,13 @@
 <template>
     <div class="d-flex">
         <SideBarAdmin></SideBarAdmin>
-        <div class="admin-container mt-4 mr-4 ml-4">
+        <div class="admin-container mt-4 ml-lg-4 mr-lg-4">
             <h1>{{title}}</h1>
 
             <form>
                 <div class="form-group">
                     <label for="nameInput">Название</label>
-                    <input type="text" class="form-control" id="nameInput" v-model="name">
+                    <input type="text" class="form-control" id="nameInput" v-model="name" placeholder="макс. 80 символов">
                 </div>
 
                 <div class="form-group">
@@ -17,6 +17,12 @@
                 </div>
 
                 <div class="form-group">
+                    <label>Краткое описание</label>
+                    <input type="text" v-model="shortDescription" class="form-control" placeholder="макс. 140 символов">
+                </div>
+
+                <div class="form-group">
+                    <label>Текст</label>
                     <quillEditor :content="content" v-model="content" :options="editorOptions"></quillEditor>
                 </div>
 
@@ -111,6 +117,7 @@ export default {
         categories: [],
         name: null,
         categoryId: null,
+        shortDescription: "",
         content: "",
         tags: null,
         tagsList: [],
@@ -148,6 +155,7 @@ export default {
                         this.content = res.data.article.content;
                         this.content = res.data.article.content;
                         this.categoryId = res.data.category.category_id;
+                        this.shortDescription = res.data.article.shortDescription;
 
                         if(res.data.article.tags){
                             this.tagsList = JSON.parse(res.data.article.tags)['tags'];
@@ -193,11 +201,23 @@ export default {
                 Vue.notify({group: 'auth',title: 'Добавление новой записи',text: "Выберите категорию"})
                 return;
             }
+            if(!this.title.length > 80){
+                Vue.notify({group: 'auth',title: 'Вы допустили ошибку',text: "Длинна названия не может быть длиннее 80 символов"})
+                return;
+            }
+            if(!this.title.shortDescription > 80){
+                Vue.notify({group: 'auth',title: 'Вы допустили ошибку',text: "Краткое описание не может быть длиннее 140 символов"})
+                return;
+            }
 
             let data = new FormData();
             data.append("title", this.name);
             data.append("content", this.content);
             data.append("categoryId", this.categoryId);
+
+            if(this.shortDescription){
+                data.append("shortDescription", this.shortDescription);
+            }
 
             if(document.getElementById("image").files[0]){
                 data.append("image", document.getElementById("image").files[0]);

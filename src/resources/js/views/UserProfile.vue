@@ -6,9 +6,9 @@
                         <p class=" mb-2">{{name}}</p>
                         <p class="m-2" v-if="admin" style="color: red">Администратор</p>
                         <p class="m-2" v-if="banned" style="color: red">Заблокирован</p>
-                        <div class="text pt-4">
+                        <div class="pt-4">
                             <p v-if="!description">{{description}}</p>
-                            <p v-else>{{description}}</p>
+                            <p class="text" v-else>{{description}}</p>
                         </div>
                     </div>
                     <div class="sidebar-box p-4 about text-center ftco-animate" v-else>

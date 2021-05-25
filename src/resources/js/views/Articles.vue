@@ -24,16 +24,16 @@
                             </div>
                         </form>
                         <div class="row" v-for="article in articles">
-                            <div class="col-md-6 col-lg-12">
+                            <div class="col-lg-12">
                                 <div class="blog-entry d-lg-flex">
                                     <div class="half">
-                                        <router-link :to="{name: 'article', params: { id: article.article_id } }" class="img d-flex align-items-end" v-bind:style="{ backgroundImage: `url('/storage/images/articles/${article.image}')`}">
+                                        <router-link :to="{name: 'article', params: { id: article.article_id } }" class="img d-flex align-items-end" v-lazy-load-background :data-src="'/storage/images/articles/' +article.image">
                                             <div class="overlay"></div>
                                         </router-link>
                                     </div>
                                     <div class="text px-md-4 px-lg-5 half">
                                         <h3><router-link :to="{name: 'article', params: { id: article.article_id } }">{{article.title}}</router-link></h3>
-                                        <div class="size" v-if="article.shortDescription"> {{article.shortDescription}}</div>
+                                        <p class="size" v-if="article.shortDescription"> {{article.shortDescription}}</p>
                                         <p class="mb-0"><router-link :to="{name: 'article', params: { id: article.article_id } }" class="btn btn-primary">Подробнее <span class="icon-arrow_forward ml-4"></span></router-link></p>
                                     </div>
                                 </div>

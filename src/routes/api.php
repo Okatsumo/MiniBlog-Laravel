@@ -58,7 +58,7 @@ Route::get('/get-count-category', function (){
     return response(['status'=>200, 'total'=>Category::all()->count()], 200);
 });
 
-Route::resource('category', CategoryApiController::class)->only('index');
+Route::resource('category', CategoryApiController::class)->only(['index', 'show']);
 Route::resource('category', CategoryApiController::class)->only(['destroy', 'create'])->middleware('auth:api');
 
 Route::resource('article', ArticleApiController::class)->only([

@@ -18,7 +18,7 @@
                 <div class="row">
                     <div class="col-lg-8 order-lg-last ">
 
-                        <div class="content">
+                        <div class="content" style="line-height: 1.42">
                             <span v-html="article.content" style="color: black"></span>
                         </div>
 
@@ -49,7 +49,7 @@
                                     <div class="comment-body">
                                         <h3> <router-link :to="{name : 'user.profile', params: {userId: comment.author.user_id}}">{{comment.author.name}}</router-link></h3>
                                         <div class="meta">{{comment.created_at}}</div>
-                                        <p :id="'commentContentItem.' + comment.comment_id">{{comment.content}}</p>
+                                        <p>{{comment.content}}</p>
                                         <span v-if="comment.author.user_id === (user ? user.user_id : 0)" v-on:click="editComment(comment.content, comment.comment_id)" style="cursor: pointer;">Редактировать</span>
                                         <span v-if="comment.author.user_id === (user ? user.user_id : 0)" v-on:click="removeComment(comment.comment_id)" style="cursor: pointer;">Удалить</span>
                                     </div>

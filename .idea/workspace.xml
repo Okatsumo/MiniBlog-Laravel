@@ -4,17 +4,123 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5b0a19f5-8089-418c-95bd-227219e29c25" name="Default Changelist" comment="Добавил восстановление пароля как на бэкенд, так и не фронтенд. Поправил стили редактора текста">
-      <change afterPath="$PROJECT_DIR$/src/resources/js/api/categoryApi.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/resources/js/views/CreateCategory.vue" afterDir="false" />
+    <list default="true" id="5b0a19f5-8089-418c-95bd-227219e29c25" name="Default Changelist" comment="Уменьшил размер bootstrap-а, поправил адаптивность для маленьких экранов, добавил в редактирование записей краткое описание">
+      <change afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sshConfigs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/webServers.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/resources/js/directives/lazyLoadBackground.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/Http/Controllers/Api/v1/ArticleApiController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Http/Controllers/Api/v1/ArticleApiController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/Http/Controllers/Api/v1/CategoryApiController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Http/Controllers/Api/v1/CategoryApiController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Http/Controllers/Api/v1/CommentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Http/Controllers/Api/v1/CommentController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/Http/Controllers/Api/v1/UserApiController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Http/Controllers/Api/v1/UserApiController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/artisan" beforeDir="false" afterPath="$PROJECT_DIR$/src/artisan" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config/broadcasting.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/broadcasting.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/database/seeders/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/seeders/DatabaseSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/public/css/app.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/public/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/public/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/public/unsupported reparse point" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/css/app.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_alert.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_alert.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_badge.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_badge.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_breadcrumb.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_breadcrumb.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_button-group.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_button-group.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_buttons.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_buttons.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_card.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_card.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_carousel.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_carousel.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_close.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_close.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_code.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_code.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_custom-forms.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_custom-forms.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_dropdown.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_dropdown.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_forms.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_forms.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_functions.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_functions.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_grid.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_grid.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_images.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_images.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_input-group.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_input-group.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_jumbotron.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_jumbotron.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_list-group.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_list-group.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_media.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_media.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_mixins.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_mixins.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_modal.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_modal.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_nav.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_nav.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_navbar.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_navbar.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_pagination.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_pagination.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_popover.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_popover.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_print.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_print.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_progress.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_progress.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_reboot.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_reboot.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_root.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_root.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_spinners.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_spinners.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_tables.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_tables.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_toasts.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_toasts.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_tooltip.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_tooltip.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_transitions.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_transitions.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_type.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_type.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_utilities.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_utilities.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_variables.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_variables.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/bootstrap-grid.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/bootstrap-grid.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/bootstrap-reboot.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/bootstrap-reboot.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/bootstrap.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/bootstrap.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_alert.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_alert.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_background-variant.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_background-variant.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_badge.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_badge.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_border-radius.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_border-radius.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_box-shadow.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_box-shadow.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_breakpoints.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_breakpoints.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_buttons.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_buttons.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_caret.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_caret.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_clearfix.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_clearfix.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_float.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_float.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_forms.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_forms.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_gradients.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_gradients.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_grid-framework.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_grid-framework.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_grid.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_grid.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_hover.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_hover.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_image.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_image.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_list-group.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_list-group.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_lists.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_lists.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_nav-divider.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_nav-divider.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_pagination.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_pagination.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_reset-text.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_reset-text.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_resize.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_resize.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_screen-reader.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_screen-reader.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_size.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_size.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_table-row.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_table-row.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_text-emphasis.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_text-emphasis.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_text-hide.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_text-hide.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_text-truncate.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_text-truncate.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_transition.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_transition.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_visibility.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_visibility.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_align.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_align.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_background.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_background.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_borders.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_borders.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_clearfix.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_clearfix.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_display.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_display.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_embed.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_embed.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_flex.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_flex.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_float.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_float.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_overflow.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_overflow.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_position.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_position.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_screenreaders.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_screenreaders.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_shadows.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_shadows.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_sizing.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_sizing.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_spacing.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_spacing.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_text.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_text.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_visibility.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_visibility.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/style.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/textEditor.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/directives/lazyload.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/views/AddArticlesAdmin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/views/AddArticlesAdmin.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/resources/js/views/Article.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/views/Article.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/views/Articles.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/views/Articles.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/views/ArticlesAdmin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/views/ArticlesAdmin.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/resources/js/views/CategoriesAdmin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/views/CategoriesAdmin.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/views/EditUserAdmin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/views/EditUserAdmin.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/views/IndexAdmin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/views/IndexAdmin.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/views/UserProfile.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/views/UserProfile.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/views/UsersAdmin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/views/UsersAdmin.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/views/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/views/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/views/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/views/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/api.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -195,6 +301,9 @@
   </component>
   <component name="ProjectId" id="1lNnXz22x8eWpzVmWAWQKCpeMJB" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectReloadState">
+    <option name="STATE" value="1" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -206,7 +315,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -223,6 +332,9 @@
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration>C:\Users\M9snikFeed\AppData\Roaming\Subversion</configuration>
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="5b0a19f5-8089-418c-95bd-227219e29c25" name="Default Changelist" comment="" />
@@ -273,7 +385,12 @@
       <workItem from="1621538511769" duration="12534000" />
       <workItem from="1621599919749" duration="16728000" />
       <workItem from="1621684564284" duration="17109000" />
-      <workItem from="1621768182500" duration="18505000" />
+      <workItem from="1621768182500" duration="18820000" />
+      <workItem from="1621865472011" duration="5195000" />
+      <workItem from="1621872105552" duration="10946000" />
+      <workItem from="1621890407678" duration="9720000" />
+      <workItem from="1621942646972" duration="5000" />
+      <workItem from="1621942663333" duration="2776000" />
     </task>
     <task id="LOCAL-00001" summary="Полностью сменил логику авторизации/регистрации/выдачи токена. Переделал как фронтенд, так и бэкенд">
       <created>1620774956270</created>
@@ -366,7 +483,14 @@
       <option name="project" value="LOCAL" />
       <updated>1621781778262</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Добавил удаление и создание категорий на бэкенд и удаление на фронтенде в админке">
+      <created>1621792980396</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1621792980396</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -398,7 +522,9 @@
     <MESSAGE value="Переделал загрузку изображений" />
     <MESSAGE value="Micro fixes" />
     <MESSAGE value="Добавил восстановление пароля как на бэкенд, так и не фронтенд. Поправил стили редактора текста" />
-    <option name="LAST_COMMIT_MESSAGE" value="Добавил восстановление пароля как на бэкенд, так и не фронтенд. Поправил стили редактора текста" />
+    <MESSAGE value="Добавил удаление и создание категорий на бэкенд и удаление на фронтенде в админке" />
+    <MESSAGE value="Уменьшил размер bootstrap-а, поправил адаптивность для маленьких экранов, добавил в редактирование записей краткое описание" />
+    <option name="LAST_COMMIT_MESSAGE" value="Уменьшил размер bootstrap-а, поправил адаптивность для маленьких экранов, добавил в редактирование записей краткое описание" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -25,15 +25,13 @@ class UserApiController extends Controller
         return response($data, 200);
     }
 
-
-
     public function uploadAvatar(User $user, Request $request){
 
         $validator = Validator::make($request->all(), [
             'avatar'=>'mimes:jpeg,png',
         ]);
 
-        if(auth()->user()->user_id != $user->user_id and !auth()->user->admin){
+        if(auth()->user()->user_id != $user->user_id and !auth()->user()->admin){
             return response(['status'=>404, 'errors'=>'You don`t have enough rights'], 404);
         }
 
@@ -90,9 +88,7 @@ class UserApiController extends Controller
         }
 
         $user->save();
-
         return response(['status'=>200, 'user'=>$user], 200);
-
     }
 
     /**
@@ -104,18 +100,6 @@ class UserApiController extends Controller
     public function show(User $user): Response
     {
         return response(['status'=>200, 'user'=>$user], 200);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param Request $request
-     * @param  int  $id
-     * @return Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
     }
 
     /**

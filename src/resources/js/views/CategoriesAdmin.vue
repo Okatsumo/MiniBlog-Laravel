@@ -1,7 +1,7 @@
 <template>
     <div class="d-flex">
         <SideBarAdmin></SideBarAdmin>
-        <div class="admin-container">
+        <div class="admin-container ml-auto mr-auto mt-4 ml-lg-4 mr-lg-4">
             <div class="row">
                 <div class="col-12">
                     <div class="card">
