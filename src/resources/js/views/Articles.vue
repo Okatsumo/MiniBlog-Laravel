@@ -23,22 +23,7 @@
                                 <input type="text" class="form-control" placeholder="Поиск.." v-on:input="search()" v-model="searchText">
                             </div>
                         </form>
-                        <div class="row" v-for="article in articles">
-                            <div class="col-lg-12">
-                                <div class="blog-entry d-lg-flex">
-                                    <div class="half">
-                                        <router-link :to="{name: 'article', params: { id: article.article_id } }" class="img d-flex align-items-end" v-lazy-load-background :data-src="'/storage/images/articles/' +article.image">
-                                            <div class="overlay"></div>
-                                        </router-link>
-                                    </div>
-                                    <div class="text px-md-4 px-lg-5 half">
-                                        <h3><router-link :to="{name: 'article', params: { id: article.article_id } }">{{article.title}}</router-link></h3>
-                                        <p class="size" v-if="article.shortDescription"> {{article.shortDescription}}</p>
-                                        <p class="mb-0"><router-link :to="{name: 'article', params: { id: article.article_id } }" class="btn btn-primary">Подробнее <span class="icon-arrow_forward ml-4"></span></router-link></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <articleItem v-for="article in articles" v-bind:key="article.article_id" :title="article.title" :articleId="article.article_id" :shortDescription="article.shortDescription" :image="article.image" ></articleItem>
                     </div>
 
 <!--                    <div class="col-lg-3">-->
@@ -76,13 +61,14 @@
 
 import Axios from 'axios'
 import spin from '../components/Spinner'
-
+import articleItem from '../components/ArticleItem'
 
 export default {
     name: "Category",
 
     components: {
         spin,
+        articleItem,
     },
 
     watch: {
@@ -115,7 +101,6 @@ export default {
                 let oldBtnPage = document.getElementById(`page.`+ (this.thisPage + 1))
                 oldBtnPage.classList.remove("active")
             }
-
         },
 
         backPage(){
@@ -130,14 +115,12 @@ export default {
                 axios.get(`/api/category/${this.$route.params.id}?page=${page}`).then(res =>{
                     this.articles = res.data.articles.data;
                     this.title = "Все записи"
-                    console.log(`page: ${this.thisPage}`)
                 })
             }
             else{
                 axios.get('/api/article/?page=' + page).then(res =>{
                     this.articles = res.data.data;
                     this.title = "Все записи"
-                    console.log(`page: ${this.thisPage}`)
                 })
             }
             window.scrollBy(0, -3000);
@@ -164,7 +147,6 @@ export default {
         search(){
             axios.get(`/api/articles/search?text=${this.searchText}`).then(res =>{
                 this.articles = res.data.data;
-                console.log(res.data)
             })
         }
     }

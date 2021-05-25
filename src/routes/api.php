@@ -24,7 +24,7 @@ use function App\Helpers\uploadImage;
 */
 
 Route::resource('user', UserApiController::class)->only([
-    'create', 'destroy', "update", "edit"
+     'destroy', "update", "edit"
 ])->middleware('auth:api');
 
 Route::resource('users', UserApiController::class)->only([
@@ -59,7 +59,9 @@ Route::get('/get-count-category', function (){
 });
 
 Route::resource('category', CategoryApiController::class)->only(['index', 'show']);
-Route::resource('category', CategoryApiController::class)->only(['destroy', 'create'])->middleware('auth:api');
+Route::resource('category', CategoryApiController::class)->only(['destroy'])->middleware('auth:api');
+Route::post('category', [CategoryApiController::class, 'create'])->middleware('auth:api');
+
 
 Route::resource('article', ArticleApiController::class)->only([
     'create', 'destroy', "update", "edit", "store"

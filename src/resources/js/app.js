@@ -27,10 +27,12 @@ import { quillEditor } from 'vue-quill-editor'
 
 
 //Компоненты
-Vue.component('modalLogin', require('./components/ModalVue').default);
-Vue.component('modalEditorProfile', require('./components/ModalEditorProfile').default);
-Vue.component('navbar', require('./components/Navbar').default);
-Vue.component('spinner', require('./components/Spinner').default);
+// Vue.component('modalLogin', require('./components/ModalVue').default);
+Vue.component('modalLogin', () => import('./components/ModalVue'));
+// Vue.component('navbar', require('./components/Navbar').default);
+Vue.component('navbar', () => import('./components/Navbar'));
+// Vue.component('spinner', require('./components/Spinner').default);
+Vue.component('spinner', () => import('./components/Spinner'));
 Vue.component('quillEditor', quillEditor);
 Vue.directive('lazyLoad', lazyLoad)
 Vue.directive('lazyLoadBackground', lazyLoadBackground)

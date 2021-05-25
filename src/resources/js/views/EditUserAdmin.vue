@@ -23,7 +23,7 @@
 
                 <div class="form-group">
                     <label for="descInput">Заблокирован</label>
-                    <input type="checkbox" class="form-check" >
+                    <input type="checkbox" class="form-check" v-model="banned">
                 </div>
 
                 <div class="form-group">
@@ -33,7 +33,7 @@
 
                 <div class="form-group">
                     <label for="avatar">Аватар</label>
-                    <input class="form-control" id="avatar" type="file">
+                    <input class="form-control" id="avatar" type="file" v-on:change="showImage()">
                     <canvas id="canvas" width="150" height="150" class="img-fluid"></canvas>
                 </div>
 
@@ -114,7 +114,22 @@ export default {
                     })
             }
 
-        }
+        },
+
+        showImage(){
+            let canvas = document.getElementById('canvas').getContext("2d");
+            let file = document.getElementById("avatar").files[0];
+
+            let url = URL.createObjectURL(file)
+            const image = new Image();
+            image.src = url;
+            canvas.width = innerWidth;
+            canvas.height = innerHeight;
+
+            image.onload = function(){
+                canvas.drawImage(image,0,0,150,150);
+            }
+        },
     }
 }
 </script>

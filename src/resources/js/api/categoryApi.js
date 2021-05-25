@@ -5,7 +5,24 @@ class CategoryApi{
     }
 
     create(){
-        //
+        let data = new FormData();
+        data.append('name', this.name);
+
+        return new Promise((resolve, reject) => {
+            api.call('post','/api/category', data)
+                .then(()=>{
+                    Vue.notify({group: 'auth',title: 'Добавление новой категории',text: "Категория успешно создана"})
+                })
+                .finally(()=>{
+                    resolve(true);
+                })
+                .catch(({response}) => {
+                    if(response.status === 422){
+                        Vue.notify({group: 'auth',title: 'Добавление новой категории',text: "Категория с таким названием уже существует"})
+                    }
+                    reject(response);
+                });
+        });
     }
 
     /**

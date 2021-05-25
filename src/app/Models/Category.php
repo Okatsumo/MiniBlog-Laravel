@@ -19,8 +19,8 @@ class Category extends Model
         parent::__construct($attributes);
 
         $this->leftJoin('articles', 'categories.category_id', '=', 'category_id')
-            ->groupBy('category_id')
+            ->groupBy('category_id');
 //            ->get('*', DB::raw('COUNT(1)'))
-        ;
+
     }
 }

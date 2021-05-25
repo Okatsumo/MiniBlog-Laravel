@@ -14,6 +14,7 @@ import AdminUsersList from "./views/UsersAdmin";
 import UserProfile from "./views/UserProfile";
 import EditUserAdmin from "./views/EditUserAdmin";
 import CategoriesAdmin from "./views/CategoriesAdmin";
+import CreateCategory from "./views/CreateCategory";
 import resetPassword from "./views/resetPassword";
 
 const routes = [
@@ -71,6 +72,13 @@ const routes = [
         path: '/admin/categories',
         name: 'adminPanel.categories',
         component: CategoriesAdmin,
+        meta: { middlewareAuth: true , middlewareAdmin: true}
+    },
+
+    {
+        path: '/admin/categories/create',
+        name: 'adminPanel.createCategory',
+        component: CreateCategory,
         meta: { middlewareAuth: true , middlewareAdmin: true}
     },
 

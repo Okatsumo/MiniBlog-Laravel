@@ -6,7 +6,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <router-link class="btn btn-gradient-primary px-4 btn-rounded float-right mt-0 mb-3" :to = "{name: 'adminPanel.articlesAdd'}">Добавить новую запись</router-link>
+                            <router-link class="btn btn-gradient-primary px-4 btn-rounded float-right mt-0 mb-3" :to = "{name: 'adminPanel.createCategory'}">Добавить новую категорию</router-link>
                             <div class="table-responsive dash-social">
                                 <div id="datatable_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
                                     <div class="row">

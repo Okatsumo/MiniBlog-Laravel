@@ -46,8 +46,6 @@
                             </div>
                         </div>
                     </div>
-
-
                 </div>
 
             </div>
@@ -64,8 +62,8 @@ export default {
             userId: null,
             name: null,
             description: null,
-            banned: null,
-            admin: null,
+            banned: 0,
+            admin: 0,
             createdAt: null,
             updatedAt: null,
             avatar: null,

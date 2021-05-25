@@ -79,11 +79,11 @@ class UserApiController extends Controller
             $user->dec = $request->get('description');
         }
 
-        if($request->get('admin') and auth()->user()->admin){
+        if($request->get('admin') == "0" || "1" and auth()->user()->admin){
             $user->admin = boolval($request->get('admin'));
         }
 
-        if($request->get('banned') and auth()->user()->admin){
+        if($request->get('banned') == "0" || "1" and auth()->user()->admin){
             $user->banned = boolval($request->get('banned'));
         }
 

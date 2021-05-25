@@ -41,6 +41,13 @@ class CategoryApiController extends Controller
             return response(['status'=>422, 'error'=>$validator->getMessageBag()], 422);
         }
 
+        if(Category::where('name', '=', request('name'))->first()){
+            return response([
+                'message' => 'this category already exists',
+                'status' => 422
+            ], 422);
+        }
+
         $category = new Category();
         $category->name = request()->get('name');
         $category->save();

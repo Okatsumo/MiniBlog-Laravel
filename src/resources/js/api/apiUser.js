@@ -43,11 +43,6 @@ class ApiUser{
         });
     }
 
-
-    create(){
-        //
-    }
-
     static remove(userId){
         return new Promise((resolve, reject) => {
             api.call('delete', '/api/user/' + userId)
@@ -113,11 +108,19 @@ class ApiUser{
                 data.append('description', this.description)
             }
             if(this.admin){
-                data.append('admin', this.admin)
+                data.append('admin', '1')
+            }
+            if(!this.admin){
+                data.append('admin', '0')
             }
             if(this.banned){
-                data.append('banned', this.banned)
+                data.append('banned', '1')
             }
+            if(!this.banned){
+                data.append('banned', '0')
+            }
+
+            console.log(this.admin)
 
             axios.post(`/api/user/${userId}/edit`, data)
                 .then(response => {
