@@ -34,7 +34,7 @@
                             </div>
                             <div class="desc">
                                 <h3>{{author.name}}</h3>
-                                <p>{{author.dec}}</p>
+                                <p class="text-break">{{author.dec}}</p>
                             </div>
                         </div>
 
@@ -49,7 +49,7 @@
                                     <div class="comment-body">
                                         <h3> <router-link :to="{name : 'user.profile', params: {userId: comment.author.user_id}}">{{comment.author.name}}</router-link></h3>
                                         <div class="meta">{{comment.created_at}}</div>
-                                        <p>{{comment.content}}</p>
+                                        <p class="text-break">{{comment.content}}</p>
                                         <span v-if="comment.author.user_id === (user ? user.user_id : 0)" v-on:click="editComment(comment.content, comment.comment_id)" style="cursor: pointer;">Редактировать</span>
                                         <span v-if="comment.author.user_id === (user ? user.user_id : 0)" v-on:click="removeComment(comment.comment_id)" style="cursor: pointer;">Удалить</span>
                                     </div>

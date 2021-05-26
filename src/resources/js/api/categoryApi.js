@@ -16,12 +16,11 @@ class CategoryApi{
                 .finally(()=>{
                     resolve(true);
                 })
-                .catch(({response}) => {
+                .catch(response=>{
                     if(response.status === 422){
                         Vue.notify({group: 'auth',title: 'Добавление новой категории',text: "Категория с таким названием уже существует"})
                     }
-                    reject(response);
-                });
+                })
         });
     }
 

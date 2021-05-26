@@ -15,7 +15,6 @@ class Api {
                     if (response.status === 401) {
                         auth.logout();
                     }
-
                     reject(response);
                 });
         });

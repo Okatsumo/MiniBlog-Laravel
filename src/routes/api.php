@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\v1\CategoryApiController;
 use App\Http\Controllers\Api\v1\CommentController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\v1\UserApiController;
+use App\Models\Article;
 use App\Models\Category;
 use App\Models\User;
 use Illuminate\Auth\Events\PasswordReset;
@@ -47,9 +48,11 @@ Route::middleware('auth:api')->group(function () {
         }
     });
 
+    Route::get('/user/test', [AuthController::class, 'changeEmail']);
     Route::post('/user/{user}/edit', [UserApiController::class, 'edit']);
     Route::post('/article/{article}/edit', [ArticleApiController::class, 'edit']);
 });
+
 
 Route::get('/get-count-users', function (){
     return response(['status'=>200, 'total'=>User::all()->count()], 200);

@@ -5,6 +5,7 @@ import apiArticle from './api/apiArticle';
 import apiCategory from './api/categoryApi';
 import lazyLoad from "./directives/lazyload";
 import lazyLoadBackground from "./directives/lazyLoadBackground";
+import AvatarCropper from "vue-avatar-cropper";
 
 require('./bootstrap');
 require('./pusher');
@@ -33,6 +34,7 @@ Vue.component('modalLogin', () => import('./components/ModalVue'));
 Vue.component('navbar', () => import('./components/Navbar'));
 // Vue.component('spinner', require('./components/Spinner').default);
 Vue.component('spinner', () => import('./components/Spinner'));
+Vue.component('AvatarCropper', AvatarCropper);
 Vue.component('quillEditor', quillEditor);
 Vue.directive('lazyLoad', lazyLoad)
 Vue.directive('lazyLoadBackground', lazyLoadBackground)

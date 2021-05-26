@@ -3,12 +3,25 @@
                 <div class="sidebar-wrap">
                     <div class="sidebar-box p-4 about text-center ftco-animate" v-if="userId">
                         <img :src="'/storage/images/avatars/' + avatar" class="img-fluid">
+
+                        <avatar-cropper
+                            trigger="#uploadAvatar"
+                            :upload-url="'/api/user/upload-avatar/' + userId"
+                            upload-form-name="avatar"
+                            :labels = labels
+                            :uploadHeaders = uploadHeaders
+                            :output-options = outputOptions
+                            :cropper-options = cropperOptions
+                            @uploading="handleUploading"
+                            @uploaded="handleUploaded"
+                            @completed="handleCompleted"
+                            @error="handlerError"
+                        ></avatar-cropper>
                         <p class=" mb-2">{{name}}</p>
                         <p class="m-2" v-if="admin" style="color: red">Администратор</p>
                         <p class="m-2" v-if="banned" style="color: red">Заблокирован</p>
                         <div class="pt-4">
-                            <p v-if="!description">{{description}}</p>
-                            <p class="text" v-else>{{description}}</p>
+                            <p v-if="description" class="text-break">{{description}}</p>
                         </div>
                     </div>
                     <div class="sidebar-box p-4 about text-center ftco-animate" v-else>
@@ -33,9 +46,16 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="avatar">Обновить аватар (150x150, только jpeg, png)</label>
-                                <input class="form-control" id="avatar" type="file">
+                                <label for="uploadAvatar">Аватар</label>
+                                <p>{{imageUploadMes}}</p>
+                                <button class="btn btn-primary btn-block" id="uploadAvatar">Загрузить новый аватар</button>
                             </div>
+
+<!--                            <div class="form-group">-->
+<!--                                <label for="uploadAvatar">Обновить аватар (150x150, только jpeg, png)</label>-->
+<!--&lt;!&ndash;                                <input class="form-control" id="avatar" type="file">&ndash;&gt;-->
+<!--                                <p>{{imageUploadMes}}</p>-->
+<!--                            </div>-->
                             <span class="btn btn-primary btn-block" v-on:click="updateProfile()">Обновить</span>
 
                         </div>
@@ -52,7 +72,6 @@
 </template>
 
 <script>
-
 
 export default {
     name: "user.profile",
@@ -71,6 +90,32 @@ export default {
 
             authenticated: auth.check(),
             authUser: auth.user,
+
+
+            labels: {
+                submit: "загрузить",
+                cancel: "отмена"
+            },
+
+            uploadHeaders: {
+                Authorization: "Bearer " + auth.token
+            },
+
+            outputOptions:{
+                // width: 150,
+                // height: 150,
+            },
+            cropperOptions:{
+                maxWidth: 150,
+                maxHeight: 150,
+                aspectRatio: 1,
+                autoCropArea: 1,
+                viewMode: 1,
+                movable: true,
+                zoomable: false
+            },
+
+            imageUploadMes: ""
         }
     },
 
@@ -84,6 +129,7 @@ export default {
         Event.$on('userLogout', ()=>{
             this.authenticated = false;
             this.user = null;
+
         });
     },
     methods:{
@@ -92,15 +138,6 @@ export default {
            user.name = this.name;
            user.description = this.description;
            user.update(1);
-
-           let avatar = document.getElementById("avatar").files[0];
-
-            if(avatar){
-                user.uploadAvatar(this.userId, avatar)
-                    .then(()=>{
-                        this.avatar = user.avatar
-                    })
-            }
         },
 
         loadUser(){
@@ -116,12 +153,31 @@ export default {
                 this.createdAt = user.createdAt
                 this.updatedAt = user.updatedAt
             })
+        },
+
+        handleUploading(form, xhr) {
+            this.imageUploadMes = "Идет загрузка..."
+        },
+        handleUploaded(response, form, xhr) {
+            this.avatar = response.avatar.name;
+            this.imageUploadMes = ""
+        },
+        handleCompleted(response, form, xhr) {
+
+        },
+        handlerError(message, type, xhr) {
+            this.imageUploadMes = "Произошла ошибка при загрузке изображения"
         }
+
+
+
+
     }
 
 }
 </script>
 
 <style scoped>
+
 
 </style>

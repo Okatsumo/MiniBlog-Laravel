@@ -4,20 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5b0a19f5-8089-418c-95bd-227219e29c25" name="Default Changelist" comment="Уменьшил размер bootstrap-а, поправил адаптивность для маленьких экранов, добавил в редактирование записей краткое описание">
-      <change afterPath="$PROJECT_DIR$/src/resources/js/components/ArticleItem.vue" afterDir="false" />
+    <list default="true" id="5b0a19f5-8089-418c-95bd-227219e29c25" name="Default Changelist" comment="Поправил названия изображений при загрузке, поправил отображение изображений статей, реализовал добавление категорий">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Http/Controllers/Api/v1/CategoryApiController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Http/Controllers/Api/v1/CategoryApiController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Http/Controllers/Api/v1/UserApiController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Http/Controllers/Api/v1/UserApiController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Models/Category.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Models/Category.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/helpers.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/helpers.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/public/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/public/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/api/apiUser.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/api/apiUser.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/Http/Controllers/Api/AuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Http/Controllers/Api/AuthController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/api.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/resources/js/api/categoryApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/api/categoryApi.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/directives/lazyLoadBackground.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/directives/lazyLoadBackground.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/router.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_grid.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_grid.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_images.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_images.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_input-group.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_input-group.scss" afterDir="false" />
@@ -25,13 +17,12 @@
       <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_grid.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_grid.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_image.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_image.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_float.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_float.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/views/Articles.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/views/Articles.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/views/Article.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/views/Article.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/views/ArticlesAdmin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/views/ArticlesAdmin.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/resources/js/views/CategoriesAdmin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/views/CategoriesAdmin.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/views/CreateCategory.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/views/CreateCategory.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/views/EditUserAdmin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/views/EditUserAdmin.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/resources/js/views/UserProfile.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/views/UserProfile.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/views/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/views/index.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/api.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/webpack.mix.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/webpack.mix.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -223,7 +214,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/app/Http/Resources" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
@@ -231,6 +222,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Documents\web-pojects\MiniBlog-Laravel\src\app\Http\Resources" />
       <recent name="$PROJECT_DIR$/src/storage/app" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -300,7 +292,10 @@
       <workItem from="1621872105552" duration="10946000" />
       <workItem from="1621890407678" duration="9720000" />
       <workItem from="1621942646972" duration="5000" />
-      <workItem from="1621942663333" duration="25862000" />
+      <workItem from="1621942663333" duration="26123000" />
+      <workItem from="1621969812913" duration="97000" />
+      <workItem from="1621996667331" duration="9498000" />
+      <workItem from="1622014755508" duration="1966000" />
     </task>
     <task id="LOCAL-00001" summary="Полностью сменил логику авторизации/регистрации/выдачи токена. Переделал как фронтенд, так и бэкенд">
       <created>1620774956270</created>
@@ -407,7 +402,14 @@
       <option name="project" value="LOCAL" />
       <updated>1621945508074</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Поправил названия изображений при загрузке, поправил отображение изображений статей, реализовал добавление категорий">
+      <created>1621969752630</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1621969752630</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -441,7 +443,8 @@
     <MESSAGE value="Добавил восстановление пароля как на бэкенд, так и не фронтенд. Поправил стили редактора текста" />
     <MESSAGE value="Добавил удаление и создание категорий на бэкенд и удаление на фронтенде в админке" />
     <MESSAGE value="Уменьшил размер bootstrap-а, поправил адаптивность для маленьких экранов, добавил в редактирование записей краткое описание" />
-    <option name="LAST_COMMIT_MESSAGE" value="Уменьшил размер bootstrap-а, поправил адаптивность для маленьких экранов, добавил в редактирование записей краткое описание" />
+    <MESSAGE value="Поправил названия изображений при загрузке, поправил отображение изображений статей, реализовал добавление категорий" />
+    <option name="LAST_COMMIT_MESSAGE" value="Поправил названия изображений при загрузке, поправил отображение изображений статей, реализовал добавление категорий" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -4,14 +4,17 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Exception;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
@@ -22,8 +25,9 @@ class AuthController extends Controller
 {
     /**
      * @return JsonResponse
+     * @throws Exception
      */
-    public function register()
+    public function register(): JsonResponse
     {
         $validator = Validator::make(request()->all(),[
             'username'=>[
@@ -100,7 +104,7 @@ class AuthController extends Controller
 
     /**
      * @return \Symfony\Component\HttpFoundation\Response
-     * @throws \Exception
+     * @throws Exception
      */
     public function login(): \Symfony\Component\HttpFoundation\Response
     {
@@ -174,7 +178,6 @@ class AuthController extends Controller
             ->update([
                 'revoked' => true
             ]);
-
         $accessToken->revoke();
 
         return response()->json(['status' => 200]);
@@ -204,11 +207,9 @@ class AuthController extends Controller
             return response(['status'=>422, 'error'=>$validator->getMessageBag()], 422);
         }
 
-
         $status = Password::sendResetLink(
             $request->only('email')
         );
-
 
     return $status === Password::RESET_LINK_SENT
         ? response([['status'=>404, 'message' => 'link to reset your password has been sent to your email']], 201)
@@ -233,7 +234,6 @@ class AuthController extends Controller
                     'password' => Hash::make($password)
                 ])->setRememberToken(Str::random(60));
                 $user->save();
-
                 event(new PasswordReset($user));
             }
         );
