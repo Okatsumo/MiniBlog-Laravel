@@ -35,7 +35,6 @@ class Auth {
         this.token = null;
 
         Event.$emit('userLogout');
-
     }
 
     getUser() {

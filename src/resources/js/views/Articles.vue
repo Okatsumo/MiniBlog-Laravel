@@ -3,7 +3,14 @@
         <section class="hero-wrap hero-wrap-2" style="background-image: url('https://i.pinimg.com/originals/ab/d3/91/abd391cf3428d8d3cb03c7993342ce91.jpg');">
             <div class="overlay"></div>
             <div class="container">
-                <div class="row no-gutters slider-text align-items-end justify-content-center">
+                <div class="row no-gutters slider-text align-items-end justify-content-center" v-if="loading">
+                    <div class="col-md-9 ftco-animate pb-5 text-center">
+                        <spin></spin>
+                        <p class="breadcrumbs">загрузка...</p>
+                    </div>
+                </div>
+
+                <div class="row no-gutters slider-text align-items-end justify-content-center" v-else>
                     <div class="col-md-9 ftco-animate pb-5 text-center">
                         <h1 class="mb-3 bread">{{title}}</h1>
                         <p class="breadcrumbs"><span class="mr-2"><router-link to="/">Главная </router-link> </span> <span>{{title}} <i class="ion-ios-arrow-forward"></i></span></p>
@@ -73,6 +80,7 @@ export default {
 
     watch: {
         $route(to, from) {
+            this.loading = true;
             this.LoadArticles()
         }
     },
@@ -128,7 +136,7 @@ export default {
 
         LoadArticles(){
         if(this.$route.params.id){
-            axios.get(`/api/category/${this.$route.params.id}`).then(res =>{
+            axios.get(`/api/v1/category/${this.$route.params.id}`).then(res =>{
                 this.articles = res.data.articles.data;
                 this.pages = res.data.articles.last_page;
                 this.title = res.data.category.name;

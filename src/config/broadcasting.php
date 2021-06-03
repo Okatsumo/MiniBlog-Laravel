@@ -38,7 +38,7 @@ return [
             'options' => [
                 'cluster' => env('PUSHER_APP_CLUSTER'),
                 'encrypted' => false,
-                'host' => '185.219.41.31',
+                'host' => 'laravelblog.ddns.net',
                 'port' => 6001,
                 'scheme' => 'http',
                 'useTLS' => false

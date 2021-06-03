@@ -19,13 +19,13 @@
 
 
                     <li class="nav-item" v-for="category in categories">
-                        <router-link :to="{name: 'Category', params: { id: category.category_id }}" class="nav-link">{{category.name}}</router-link>
+                        <router-link :to="{name: 'Category', params: { id: category.categoryId }}" class="nav-link">{{category.name}}</router-link>
                     </li>
 
 
                     <li class="dropdown" v-if="authenticated && user">
                         <a class="nav-link dropdown-toggle nav-user" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                            <img src="/storage/images/avatars/default.png" alt="profile-user" class="rounded-circle">
+                            <img :src="'/storage/images/avatars/' + user.avatar" alt="profile-user" class="rounded-circle">
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
                             <router-link class="dropdown-item" :to="{name : 'user.profile', params: {userId: user.user_id}}"><i class="text-muted mr-2"></i> Профиль</router-link>
@@ -126,8 +126,8 @@ export default {
 
     methods: {
         loadCategories(){
-            axios.get("/api/category/").then(res => {
-                this.categories = res.data;
+            axios.get("/api/v1/category/").then(res => {
+                this.categories = res.data.data;
             })
         },
 

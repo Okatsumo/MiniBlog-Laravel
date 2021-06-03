@@ -29,7 +29,7 @@
                 <div class="form-group">
                     <label for="categoryInput">Категория</label>
                     <select class="form-control" id="categoryInput" v-model="categoryId">
-                        <option v-for="category in categories" :value="category.category_id">{{category.name}}</option>
+                        <option v-for="category in categories" :value="category.categoryId">{{category.name}}</option>
                     </select>
                 </div>
 
@@ -179,8 +179,8 @@ export default {
         },
 
         loadCategories(){
-            axios.get('/api/category').then(res => {
-                this.categories = res.data;
+            axios.get('/api/v1/category').then(res => {
+                this.categories = res.data.data;
             })
         },
 

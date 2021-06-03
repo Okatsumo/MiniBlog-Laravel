@@ -83,28 +83,27 @@
                         <div class="sidebar-box">
                             <ul class="categories">
                                 <h3 class="heading mb-4">Категории</h3>
-                                <li v-for="category in categoriesList"><router-link :to="{name: 'Category', params: { id: category.category_id }}" >{{category.name}} <span>(1)</span></router-link></li>
+                                <li v-for="category in categoriesList"><router-link :to="{name: 'Category', params: { id: category.categoryId }}" >{{category.name}}</router-link></li>
                             </ul>
                         </div>
 
                         <div class="sidebar-box ">
                             <h3 class="heading mb-4">Другие записи</h3>
-                            <div class="block-21 mb-4 d-flex">
-<!--                                <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>-->
+                            <div class="block-21 mb-4 d-flex" v-for="article in recommendArticles">
+                                <a class="blog-img mr-4" v-lazy-load-background :data-src="'/storage/images/articles/' + article.image"></a>
                                 <div class="text">
-                                    <h3><a href="#">Название записи</a></h3>
+                                    <h3><router-link :to="{name: 'article', params: { id: article.article_id } }">{{article.title}}</router-link></h3>
                                     <div class="meta">
-                                        <div><a href="#"><span class="icon-calendar"></span> февраль 12, 2020</a></div>
-                                        <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                                        <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                                        <div><a href="#"><span class="icon-calendar"></span>{{article.created_at}}</a></div>
+                                        <div><a href="#"><span class="icon-person"></span> {{article.author.name}}</a></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="sidebar-box ">
-                            <h3 class="heading mb-4">Реклама</h3>
-                        </div>
+<!--                        <div class="sidebar-box ">-->
+<!--                            <h3 class="heading mb-4">Реклама</h3>-->
+<!--                        </div>-->
                     </div>
 
                 </div>
@@ -121,6 +120,7 @@ export default {
 
     data: ()=>({
         article: {},
+        recommendArticles: {},
         author: {},
         category: {},
         categoriesList: {},
@@ -137,6 +137,14 @@ export default {
         user: auth.user,
     }),
 
+    watch: {
+        $route(to, from) {
+            this.loadingArticle();
+            this.loadCategories();
+            this.loadRecommendArticles();
+        }
+    },
+
     mounted() {
         this.loadingArticle();
         this.loadCategories();
@@ -150,9 +158,17 @@ export default {
             this.authenticated = false;
             this.user = null;
         });
+        this.loadRecommendArticles();
     },
 
     methods:{
+        loadRecommendArticles(){
+            api.call('get', '/api/article?sort=descending')
+                .then(res=>{
+                    this.recommendArticles = res.data.articles;
+                })
+        },
+
         loadingArticle(){
             axios.get(`/api/article/${this.$route.params.id}`).then(res=>{
                 this.article = res.data.article;
@@ -171,8 +187,8 @@ export default {
             })
         },
         loadCategories(){
-            axios.get(`/api/category`).then(res=>{
-                this.categoriesList = res.data;
+            axios.get(`/api/v1/category`).then(res=>{
+                this.categoriesList = res.data.data;
             })
             .catch(error=>{
                     console.log('Произошла ошибка при загрузке категорий');

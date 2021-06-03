@@ -83,6 +83,13 @@ const routes = [
     },
 
     {
+        path: '/admin/categories/create/:categoryId',
+        name: 'adminPanel.editCategory',
+        component: CreateCategory,
+        meta: { middlewareAuth: true , middlewareAdmin: true}
+    },
+
+    {
         path: '/admin/article/edit/:articleId',
         name: 'adminPanel.editArticle',
         component: AdminArticlesAdd,

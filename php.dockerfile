@@ -22,4 +22,3 @@ RUN chmod +x /usr/local/bin/install-php-extensions && sync && \
 install-php-extensions gd
 
 RUN docker-php-ext-install pdo pdo_mysql
-

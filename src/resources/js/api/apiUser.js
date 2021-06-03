@@ -120,8 +120,6 @@ class ApiUser{
                 data.append('banned', '0')
             }
 
-            console.log(this.admin)
-
             axios.post(`/api/user/${userId}/edit`, data)
                 .then(response => {
                     this.id = response.data.user.user_id;

@@ -3,132 +3,100 @@
 namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ArticleResource;
+use App\Http\Resources\CategoryResource;
 use App\Models\Article;
 use App\Models\Category;
+use App\Models\User;
+use App\Repositories\CategoryRepository;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Routing\ResponseFactory;
+use App\Http\Requests\CategoryRequest;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Http\Response;
 
 
 class CategoryApiController extends Controller
 {
+    private $categoryRepository;
+
+    public function __construct(CategoryRepository $categoryRepository){
+        $this->categoryRepository = $categoryRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return AnonymousResourceCollection
      */
     public function index()
     {
-        return Category::all();
-    }
-
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        if(!auth()->user()->admin){
-            return response(['status'=>403], 403);
-        }
-
-        $validator = Validator::make(request()->all(), [
-           'name'=>'required|string'
-        ]);
-
-        if($validator->fails()){
-            return response(['status'=>422, 'error'=>$validator->getMessageBag()], 422);
-        }
-
-        if(Category::where('name', '=', request('name'))->first()){
-            return response([
-                'message' => 'this category already exists',
-                'status' => 422
-            ], 422);
-        }
-
-        $category = new Category();
-        $category->name = request()->get('name');
-        $category->save();
-
-        return response(['status'=>201, 'message'=>'created', 'category'=>$category], 201);
+        return CategoryResource::collection($this->categoryRepository->all());
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param CategoryRequest $request
+     * @return void
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
-        //
+        return $this->categoryRepository->create($request->validated());
     }
 
     /**
      * Display the specified resource.
      *
      * @param Category $category
-     * @return array
+     * @return Application|Response|ResponseFactory
      */
     public function show(Category $category)
     {
-        $article = new Article();
-
-        $data = $article
-            ->makeHidden(['category_id', 'author_id'])
-            ->getWithConnections()
-            ->select(['title', 'article_id', 'shortDescription', 'rating', 'image', 'author_id', 'category_id', 'tags'])
-            ->where('category_id', '=', $category->category_id)
-            ->paginate(6)
-            ->jsonSerialize();
-
-        return $response =  [
-            'category'=>[
+        $data = $this->categoryRepository->get($category)->paginate()->jsonSerialize();
+        return response(
+            [
+            'articles'=>$data,
+            'category'=>
+                [
                 'name'=>$category->name,
                 'id'=>$category->category_id
-            ],
-            'articles'=>$data
-        ];
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param Category $category
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Category $category)
-    {
-        //
+                ]
+            ]
+        , 200);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param Category $category
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param $categoryId
+     * @return JsonResponse
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, $categoryId)
     {
-        //
+        $category = Category::findOrFail($categoryId);
+        $category->fill($request->except(['category_id']));
+//        $category->$request->get('name');
+        $category->save();
+        return response()->json($category);
     }
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param Category $category
-     * @return \Illuminate\Http\Response
+     * @param CategoryRequest $request
+     * @return Application|ResponseFactory|Response
      */
-    public function destroy(Category $category): \Illuminate\Http\Response
+    public function destroy($category, CategoryRequest $request)
     {
-        if(!auth()->user()->admin){
-            return response(['status'=>403], 403);
+        if(!$category = Category::findOrFail($category)){
+            return response(['message'=>"not found"], 404);
         }
 
-        $category->delete();
-        return response(['status'=>200, 'message'=>'category deleted'], 200);
+        if($category->delete()){
+            return response(['status'=>204], 204);
+        }
     }
 }

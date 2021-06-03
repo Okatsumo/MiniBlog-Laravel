@@ -17,7 +17,7 @@
                                     <li>
                                         <ul id="todo-task1" class="sub-task  show mt-2 p-0">
                                             <li class="active"><a href="#" v-on:click="loadArticles()"> Все категории </a></li>
-                                            <li v-for="category in categories"><a href="#" v-on:click="loadArticles(category.category_id)">{{category.name}}</a></li>
+                                            <li v-for="category in categories"><a href="#" v-on:click="loadArticles(category.categoryId)">{{category.name}}</a></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -32,7 +32,7 @@
                                 <div class="card-body">
                                     <spinner v-if="loading"></spinner>
                                     <router-link class="btn btn-gradient-primary px-4 btn-rounded float-right mt-0 mb-3" :to = "{name: 'adminPanel.articlesAdd'}">Добавить новую запись</router-link>
-                                    <h4 class="header-title mt-0" v-if="!totalArticles">Записи (всего: загрузка...)</h4>
+                                    <h4 class="header-title mt-0" v-if="loading">Записи (всего: загрузка...)</h4>
                                     <h4 class="header-title mt-0" v-else>Записи (всего: {{totalArticles}})</h4>
                                     <div class="table-responsive dash-social">
                                         <div id="datatable_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
@@ -153,7 +153,7 @@ export default {
 
         loadArticles(categoryId) {
             if(categoryId){
-                axios.get("/api/category/" + categoryId).then(res => {
+                axios.get("/api/article/?categoryId=" + categoryId).then(res => {
                     this.articles = res.data.articles.data;
                     this.lastPage = res.data.articles.last_page;
                     this.totalArticles = res.data.articles.total;
@@ -170,8 +170,8 @@ export default {
             }
         },
         loadCategories(){
-            axios.get("/api/category/").then(res => {
-                this.categories = res.data;
+            axios.get("/api/v1/category").then(res => {
+                this.categories = res.data.data;
             })
         },
         // Работа со страницами
@@ -189,8 +189,8 @@ export default {
         },
         loadPageArticles(categoryId, page) {
             if(categoryId){
-                axios.get("/api/category/" + categoryId + "?page=" + page).then(res => {
-                    this.articles = res.data.articles.data;
+                axios.get("/api/v1/category/" + categoryId + "?page=" + page).then(res => {
+                    this.articles = res.data.articles;
                     this.loading = false;
                 })
             }

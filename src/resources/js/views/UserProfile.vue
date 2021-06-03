@@ -3,20 +3,19 @@
                 <div class="sidebar-wrap">
                     <div class="sidebar-box p-4 about text-center ftco-animate" v-if="userId">
                         <img :src="'/storage/images/avatars/' + avatar" class="img-fluid">
-
-                        <avatar-cropper
-                            trigger="#uploadAvatar"
-                            :upload-url="'/api/user/upload-avatar/' + userId"
-                            upload-form-name="avatar"
-                            :labels = labels
-                            :uploadHeaders = uploadHeaders
-                            :output-options = outputOptions
-                            :cropper-options = cropperOptions
-                            @uploading="handleUploading"
-                            @uploaded="handleUploaded"
-                            @completed="handleCompleted"
-                            @error="handlerError"
-                        ></avatar-cropper>
+                            <avatar-cropper
+                                trigger="#uploadAvatar"
+                                :upload-url="'/api/user/upload-avatar/' + userId"
+                                upload-form-name="avatar"
+                                :labels = labels
+                                :uploadHeaders = uploadHeaders
+                                :output-options = outputOptions
+                                :cropper-options = cropperOptions
+                                @uploading="handleUploading"
+                                @uploaded="handleUploaded"
+                                @completed="handleCompleted"
+                                @error="handlerError"
+                            ></avatar-cropper>
                         <p class=" mb-2">{{name}}</p>
                         <p class="m-2" v-if="admin" style="color: red">Администратор</p>
                         <p class="m-2" v-if="banned" style="color: red">Заблокирован</p>
@@ -50,12 +49,6 @@
                                 <p>{{imageUploadMes}}</p>
                                 <button class="btn btn-primary btn-block" id="uploadAvatar">Загрузить новый аватар</button>
                             </div>
-
-<!--                            <div class="form-group">-->
-<!--                                <label for="uploadAvatar">Обновить аватар (150x150, только jpeg, png)</label>-->
-<!--&lt;!&ndash;                                <input class="form-control" id="avatar" type="file">&ndash;&gt;-->
-<!--                                <p>{{imageUploadMes}}</p>-->
-<!--                            </div>-->
                             <span class="btn btn-primary btn-block" v-on:click="updateProfile()">Обновить</span>
 
                         </div>
@@ -64,6 +57,23 @@
                                 <label for="emailInput">Email</label>
                                 <input type="text" class="form-control" id="emailInput" v-model="email">
                             </div>
+
+                            <div class="form-group">
+                                <label for="oldPasswordInput">Старый пароль</label>
+                                <input type="password" class="form-control" id="oldPasswordInput" v-model="oldPassword">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="passwordInput">Новый пароль</label>
+                                <input type="password" class="form-control" id="passwordInput" v-model="newPassword">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="confirmInput">Повторите пароль</label>
+                                <input type="password" class="form-control" id="confirmInput" v-model="confirmPassword">
+                            </div>
+
+                            <span class="btn btn-primary btn-block" v-on:click="updateAccount()">Обновить</span>
                         </div>
                     </div>
                 </div>
@@ -87,6 +97,10 @@ export default {
             updatedAt: null,
             avatar: null,
             email:null,
+
+            oldPassword: null,
+            confirmPassword: null,
+            newPassword: null,
 
             authenticated: auth.check(),
             authUser: auth.user,
@@ -124,20 +138,60 @@ export default {
         Event.$on('userLoggedIn', () => {
             this.authenticated = true;
             this.user = auth.user;
+            this.authUser = auth.user;
         });
 
         Event.$on('userLogout', ()=>{
             this.authenticated = false;
-            this.user = null;
+            this.authUser = null;
 
         });
     },
     methods:{
+        updateAccount(){
+            if(this.oldPassword){
+                this.updatePassword();
+            }
+
+            let user = new window.apiUser();
+            user.email = this.email;
+            user.update(this.authUser.user_id);
+            Vue.notify({group: 'auth', text: 'Пожалуйста, зайдите в вашу учетную запись ещё раз'});
+            auth.logout();
+        },
+
+        updatePassword(){
+            if(this.newPassword.length < 8){
+                Vue.notify({group: 'auth', title: 'Произошла ошибка', text: 'Поле с паролем должно быть длиннее 8 символов'});
+                return null;
+            }
+            if(this.newPassword !== this.confirmPassword){
+                Vue.notify({group: 'auth', title: 'Произошла ошибка', text: 'Пароли не совпадают'});
+                return null;
+            }
+
+            let data = new FormData();
+            data.append('oldPassword', this.oldPassword);
+            data.append('password', this.newPassword);
+            data.append('password_confirmation', this.confirmPassword);
+            api.call('post', '/api/user/password', data)
+                .then(res=>{
+                    Vue.notify({group: 'auth', title: 'Смена пароля', text: 'Пароль успешно обновлен'});
+                })
+                .catch(res=>{
+                    Vue.notify({group: 'auth', title: 'Произошла ошибка', text: 'Введен неверный старый пароль'});
+            });
+
+            this.newPassword = "";
+            this.oldPassword = "";
+            this.confirmPassword = "";
+        },
+
         updateProfile(){
            let user = new window.apiUser();
            user.name = this.name;
            user.description = this.description;
-           user.update(1);
+           user.update(this.authUser.user_id);
         },
 
         loadUser(){
@@ -168,10 +222,6 @@ export default {
         handlerError(message, type, xhr) {
             this.imageUploadMes = "Произошла ошибка при загрузке изображения"
         }
-
-
-
-
     }
 
 }

@@ -25,7 +25,7 @@ services:
     restart: unless-stopped
     tty: true
     ports:
-      - "3306:3306"
+      - "3307:3306"
     environment:
       MYSQL_DATABASE: miniBlog
       MYSQL_USER: dbuser
@@ -35,6 +35,8 @@ services:
       SERVICE_NAME: mysql
     networks:
       - laravel
+
+
 
   # контейнер для работы демонов вебсокетов и очередей
 #  demon:
@@ -80,6 +82,7 @@ services:
       - "8000:8000"
     networks:
       - laravel
+
 
   composer:
     build:

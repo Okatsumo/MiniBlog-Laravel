@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\Controller;
 use App\Models\Article;
+use App\Models\Category;
 use App\Models\Comment;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Routing\ResponseFactory;
@@ -23,11 +24,45 @@ class ArticleApiController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return array
+     * @return array|Application|ResponseFactory|Response
      */
     public function index()
     {
         $article = new Article();
+
+
+        $validator = Validator::make(request()->all(), [
+            'sort'=>'string',
+            'categoryId'=>'integer',
+        ]);
+
+        if($validator->fails()){
+            return response(['status'=>422, 'error'=>$validator->getMessageBag()], 422);
+        }
+
+        if(request()->get('categoryId')){
+            if($category = Category::find(request()->get('categoryId'))){
+                $articles = $article
+                    ->makeHidden(['category_id', 'author_id'])
+                    ->getWithConnections()
+                    ->select(['title', 'article_id', 'shortDescription', 'rating', 'image', 'author_id', 'category_id', 'tags'])
+                    ->where('category_id', '=', request()->get('categoryId'))
+                    ->paginate(6)
+                    ->jsonSerialize();
+
+                return [
+                    'category'=>[
+                        'name'=>$category->name,
+                        'id'=>$category->category_id
+                    ],
+                    'articles'=>$articles
+                ];
+            }
+            else{
+                return response(['status'=>404], 404);
+            }
+
+        }
 
         if(request()->get('sort') == "descending"){
             return [
@@ -39,6 +74,7 @@ class ArticleApiController extends Controller
                 'count'=>$article->count()
             ];
         }
+
         else{
             return $article
                 ->getWithConnections()
@@ -185,18 +221,6 @@ class ArticleApiController extends Controller
         }
 
         return response(['status'=>404], 404);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Article  $article
-     * @return Response
-     */
-    public function update(Request $request, Article $article)
-    {
-        //
     }
 
     /**

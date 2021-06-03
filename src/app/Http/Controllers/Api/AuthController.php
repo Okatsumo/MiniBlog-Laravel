@@ -67,7 +67,6 @@ class AuthController extends Controller
         $user->name = request('username');
         $user->email = request('email');
         $user->password = bcrypt(request('password'));
-        $user->password = bcrypt(request('password'));
         $user->save();
 
         event(new Registered($user));
@@ -241,6 +240,40 @@ class AuthController extends Controller
         return $status == Password::PASSWORD_RESET
             ? response([['status'=>201, 'message' => 'password recovered successfully']], 201)
             : response(['status'=>404 ,'message' => 'link is not valid'], 404);
+    }
+
+
+    function updatePassword(Request $request)
+    {
+        $validate = Validator::make($request->all(),[
+            'oldPassword' => 'required',
+            'password' => 'required|min:8|confirmed',
+        ]);
+
+        if($validate->fails()){
+            return response(['status'=>422, 'error'=>$validate->getMessageBag()], 422);
+        }
+
+        $user = Auth()->user();
+
+        if (!Hash::check(request('oldPassword'), $user->password)) {
+            return response([
+                'message' => 'Wrong old password',
+                'status' => 422
+            ], 422);
+        }
+
+        $user = User::find($user->user_id);
+        $user->password = bcrypt(request('password'));
+        $user->update();
+
+        $accessToken = auth()->user()->token();
+        $refreshToken = DB::table('oauth_refresh_tokens')
+            ->where('access_token_id', $accessToken->id)
+            ->update([
+                'revoked' => true
+            ]);
+        $accessToken->revoke();
     }
 
 }

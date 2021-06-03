@@ -4,12 +4,28 @@ class CategoryApi{
         this.name = null;
     }
 
+
+    static get(categoryId){
+        return new Promise((resolve, reject) => {
+            api.call('get','/api/v1/category/' + categoryId)
+                .then((res)=>{
+                    resolve(res.data);
+                })
+                .finally(()=>{
+                    resolve(true);
+                })
+                .catch(response=>{
+                })
+        });
+    }
+
+
     create(){
         let data = new FormData();
         data.append('name', this.name);
 
         return new Promise((resolve, reject) => {
-            api.call('post','/api/category', data)
+            api.call('post','/api/v1/category', data)
                 .then(()=>{
                     Vue.notify({group: 'auth',title: 'Добавление новой категории',text: "Категория успешно создана"})
                 })
@@ -32,7 +48,7 @@ class CategoryApi{
      */
     static remove(categoryId){
         return new Promise((resolve, reject) => {
-            api.call('delete','/api/category/' + categoryId)
+            api.call('delete','/api/v1/category/' + categoryId)
                 .then(response => {
                     resolve(response.data);
                 })
@@ -46,13 +62,26 @@ class CategoryApi{
     }
 
     /**
-     * Метод отвечающий за обновление информации о пользователе через API
-     * @param userId id пользователя
+     * Метод отвечающий за обновление категории через API
+     * @param categoryId id категории
      * @return resolve при удачном запросе
      * @return reject при ошибке
      */
-    update(userId){
-
+    update(categoryId){
+        return new Promise((resolve, reject) => {
+            api.call('put','/api/v1/category/' + categoryId + '?name=' + this.name)
+                .then(()=>{
+                    Vue.notify({group: 'auth',title: 'Обновление названия категории',text: "Название категории успешно обновлено"})
+                })
+                .finally(()=>{
+                    resolve(true);
+                })
+                .catch(response=>{
+                    if(response.status === 422){
+                        Vue.notify({group: 'auth',title: 'Обновление названия категории',text: "Категория с таким названием уже существует"})
+                    }
+                })
+        });
     }
 
     /**
@@ -63,9 +92,9 @@ class CategoryApi{
      */
     static getList(){
         return new Promise((resolve, reject) => {
-            api.call('get','/api/category/')
+            api.call('get','/api/v1/category/')
                 .then(response => {
-                    resolve(response.data);
+                    resolve(response.data.data);
                 })
                 .finally(()=>{
                     resolve(true);

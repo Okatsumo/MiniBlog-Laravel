@@ -40,6 +40,7 @@ Route::get('/get-user/{user}', [UserApiController::class, "show"]);
 Route::middleware('auth:api')->group(function () {
     Route::post('/logout', [AuthController::class, "logout"]);
     Route::get('/get-user', [AuthController::class, "getUser"]);
+    Route::post('user/password', [AuthController::class, 'updatePassword']);
     Route::post('/user/upload-avatar/{user}', [UserApiController::class, "uploadAvatar"]);
     Route::post('/upload-image', function (Request $request){
         if($request->file('image')){
@@ -47,12 +48,10 @@ Route::middleware('auth:api')->group(function () {
             return response(['status'=>201,'path'=> '/storage/images/upload/' . $image], 201);
         }
     });
-
     Route::get('/user/test', [AuthController::class, 'changeEmail']);
     Route::post('/user/{user}/edit', [UserApiController::class, 'edit']);
     Route::post('/article/{article}/edit', [ArticleApiController::class, 'edit']);
 });
-
 
 Route::get('/get-count-users', function (){
     return response(['status'=>200, 'total'=>User::all()->count()], 200);
@@ -61,9 +60,12 @@ Route::get('/get-count-category', function (){
     return response(['status'=>200, 'total'=>Category::all()->count()], 200);
 });
 
-Route::resource('category', CategoryApiController::class)->only(['index', 'show']);
-Route::resource('category', CategoryApiController::class)->only(['destroy'])->middleware('auth:api');
-Route::post('category', [CategoryApiController::class, 'create'])->middleware('auth:api');
+Route::apiResource('/v1/category', CategoryApiController::class)
+    ->only('show', 'index');
+
+Route::apiResource('/v1/category', CategoryApiController::class)
+    ->only('destroy', 'store', 'update', 'create')
+    ->middleware('auth:api');
 
 
 Route::resource('article', ArticleApiController::class)->only([
