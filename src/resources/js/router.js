@@ -4,18 +4,18 @@ import Vue from 'vue';
 Vue.use(VueRouter)
 
 
-import index from './views/index';
-import Article from './views/Article';
-import Articles from "./views/Articles";
-import AdminPanel from "./views/ArticlesAdmin";
-import AdminIndex from "./views/IndexAdmin";
-import AdminArticlesAdd from "./views/AddArticlesAdmin";
-import AdminUsersList from "./views/UsersAdmin";
-import UserProfile from "./views/UserProfile";
-import EditUserAdmin from "./views/EditUserAdmin";
-import CategoriesAdmin from "./views/CategoriesAdmin";
-import CreateCategory from "./views/CreateCategory";
-import resetPassword from "./views/resetPassword";
+const index = () => import('./views/index')
+const Article = () => import('./views/Article')
+const Articles = () => import("./views/Articles")
+const AdminPanel = () => import("./views/ArticlesAdmin")
+const AdminIndex = () => import("./views/IndexAdmin")
+const AdminArticlesAdd = () => import("./views/AddArticlesAdmin")
+const AdminUsersList = () => import("./views/UsersAdmin")
+const UserProfile = () => import("./views/UserProfile")
+const EditUserAdmin = () => import("./views/EditUserAdmin")
+const CategoriesAdmin = () => import("./views/CategoriesAdmin")
+const CreateCategory = () => import("./views/CreateCategory")
+const resetPassword = () => import("./views/resetPassword")
 
 const routes = [
     {

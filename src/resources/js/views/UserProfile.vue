@@ -105,7 +105,6 @@ export default {
             authenticated: auth.check(),
             authUser: auth.user,
 
-
             labels: {
                 submit: "загрузить",
                 cancel: "отмена"
@@ -128,7 +127,6 @@ export default {
                 movable: true,
                 zoomable: false
             },
-
             imageUploadMes: ""
         }
     },
@@ -144,7 +142,6 @@ export default {
         Event.$on('userLogout', ()=>{
             this.authenticated = false;
             this.authUser = null;
-
         });
     },
     methods:{

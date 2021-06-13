@@ -112,7 +112,7 @@
                                         <td>{{article.article_id}}</td>
                                         <td>{{article.title}}</td>
                                         <td>{{article.created_at}}</td>
-                                        <td> <span class="badge badge-md badge-soft-purple">{{article.rating}}</span> / 10</td>
+                                        <td> <span class="badge badge-md badge-soft-purple">{{article.rating.rating}}</span> / 5</td>
                                         <td><router-link :to="{name : 'user.profile', params: {userId: article.author.user_id}}">{{article.author.name}}</router-link></td>
                                         <td><router-link :to = "{name: 'Category', params: { id: article.category.category_id}}">{{article.category.name}}</router-link></td>
                                         <td>

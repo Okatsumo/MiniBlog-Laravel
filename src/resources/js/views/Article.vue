@@ -13,7 +13,7 @@
             </div>
         </section>
 
-        <section class="ftco-section container-content" v-if="!loading">
+        <section class="ftco-section container-content">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8 order-lg-last ">
@@ -25,6 +25,26 @@
                         <div class="tag-widget post-tag-container mb-5 mt-5">
                             <div class="tagcloud">
                                 <a v-for="tag in tags" href="#" class="tag-cloud-link">{{tag}}</a>
+                            </div>
+                        </div>
+
+                        <div class="rating-area">
+                            <p>Рейтинг: {{Math.round(rating)}}</p>
+                            <div class="rating-area" v-if="authenticated">
+                                <input type="radio" id="star-5" name="rating" v-on:click="sendRating(5)">
+                                <label for="star-5" title="Оценка «5»"></label>
+                                <input type="radio" id="star-4" name="rating" v-on:click="sendRating(4)">
+                                <label for="star-4" title="Оценка «4»"></label>
+                                <input type="radio" id="star-3" name="rating" v-on:click="sendRating(3)">
+                                <label for="star-3" title="Оценка «3»"></label>
+                                <input type="radio" id="star-2" name="rating" v-on:click="sendRating(2)">
+                                <label for="star-2" title="Оценка «2»"></label>
+                                <input type="radio" id="star-1" name="rating" v-on:click="sendRating(1)">
+                                <label for="star-1" title="Оценка «1»"></label>
+                            </div>
+
+                            <div v-else>
+                                <p class="text text-center">Для голосования вы должны авторизоваться</p>
                             </div>
                         </div>
 
@@ -60,8 +80,6 @@
                                 <li class="page-item" v-on:click="loadBackComments()"><a class="page-link"  v-if="thisPage > 1">Предыдущие комментарии</a></li>
                             </ul>
 
-                            <!-- END comment-list -->
-
                             <div class="comment-form-wrap pt-5" v-if="authenticated || user">
                                 <form action="#" class="p-5 bg-light">
                                     <div class="form-group">
@@ -78,7 +96,7 @@
                             </div>
                         </div>
 
-                    </div> <!-- .col-md-8 -->
+                    </div>
                     <div class="col-lg-4 sidebar pr-lg-5">
                         <div class="sidebar-box">
                             <ul class="categories">
@@ -100,7 +118,6 @@
                                 </div>
                             </div>
                         </div>
-
 <!--                        <div class="sidebar-box ">-->
 <!--                            <h3 class="heading mb-4">Реклама</h3>-->
 <!--                        </div>-->
@@ -113,16 +130,28 @@
 </template>
 
 <script>
+
 import axios from 'axios'
+
 
 export default {
     name: "Article",
+
+    metaInfo: {
+        title: 'Technology Plus | просмотр записи',
+        meta: [
+            { vmid: 'description', property: 'description', content: 'Technology Plus. Главная страница' },
+            { vmid: 'og:title', property: 'og:title', content: 'Technology Plus. Главная страница' },
+            { vmid: 'og:description', property: 'og:description', content: 'Technology Plus. Главная страница' },
+        ],
+    },
 
     data: ()=>({
         article: {},
         recommendArticles: {},
         author: {},
         category: {},
+        rating: 0,
         categoriesList: {},
         loading: true,
         comments: [],
@@ -139,9 +168,13 @@ export default {
 
     watch: {
         $route(to, from) {
+            this.loading = true;
+            this.article = {};
+
             this.loadingArticle();
             this.loadCategories();
             this.loadRecommendArticles();
+            scroll(0, 0);
         }
     },
 
@@ -159,9 +192,17 @@ export default {
             this.user = null;
         });
         this.loadRecommendArticles();
+        scroll(9, 0);
     },
 
     methods:{
+        sendRating(point){
+            api.call('get', `/api/rating/${this.$route.params.id}?points=${point}`)
+                .then(res=>{
+                    this.rating = res.data.rating.rating
+                })
+        },
+
         loadRecommendArticles(){
             api.call('get', '/api/article?sort=descending')
                 .then(res=>{
@@ -174,6 +215,7 @@ export default {
                 this.article = res.data.article;
                 this.author = res.data.author;
                 this.category = res.data.category;
+                this.rating = res.data.rating.rating;
                 if(res.data.article.tags){
                     this.tags = JSON.parse(res.data.article.tags)['tags'];
                 }
@@ -182,16 +224,10 @@ export default {
                 this.webSocketComment(res.data.article.article_id);
 
             })
-            .catch(error=>{
-                console.log('Произошла ошибка при загрузке записи');
-            })
         },
         loadCategories(){
             axios.get(`/api/v1/category`).then(res=>{
                 this.categoriesList = res.data.data;
-            })
-            .catch(error=>{
-                    console.log('Произошла ошибка при загрузке категорий');
             })
         },
 
@@ -309,5 +345,48 @@ export default {
 </script>
 
 <style scoped>
+    .rating-area {
+        overflow: hidden;
+        width: 265px;
+        margin: 0 auto;
+    }
+    .rating-area:not(:checked) > input {
+        display: none;
+    }
+    .rating-area:not(:checked) > label {
+        float: right;
+        width: 42px;
+        padding: 0;
+        cursor: pointer;
+        font-size: 32px;
+        line-height: 32px;
+        color: lightgrey;
+        text-shadow: 1px 1px #bbb;
+    }
+    .rating-area:not(:checked) > label:before {
+        content: '★';
+    }
+    .rating-area > input:checked ~ label {
+        color: gold;
+        text-shadow: 1px 1px #c60;
+    }
+    .rating-area:not(:checked) > label:hover,
+    .rating-area:not(:checked) > label:hover ~ label {
+        color: gold;
+    }
+    .rating-area > input:checked + label:hover,
+    .rating-area > input:checked + label:hover ~ label,
+    .rating-area > input:checked ~ label:hover,
+    .rating-area > input:checked ~ label:hover ~ label,
+    .rating-area > label:hover ~ input:checked ~ label {
+        color: gold;
+        text-shadow: 1px 1px goldenrod;
+    }
+    .rate-area > label:active {
+        position: relative;
+    }
 
+    .rating-area > p{
+        padding-left: 40%;
+    }
 </style>

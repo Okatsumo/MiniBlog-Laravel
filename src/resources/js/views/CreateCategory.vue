@@ -78,7 +78,7 @@ export default {
             let category = new window.apiCategory();
             category.name = this.name;
             category.update(this.$route.params.categoryId).then(res=>{
-                console.log(res.data)
+
             })
         }
     }

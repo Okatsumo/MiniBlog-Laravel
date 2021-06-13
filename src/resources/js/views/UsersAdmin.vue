@@ -15,8 +15,8 @@
                                             <table id="datatable" class="table dataTable no-footer" role="grid" aria-describedby="datatable_info">
                                     <thead>
                                     <tr role="row">
-                                        <th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Customer Name: activate to sort column descending" style="width: 216px;">Id</th>
-                                        <th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Customer Name: activate to sort column descending" style="width: 216px;">Имя пользователя</th>
+                                        <th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-sort="ascending" style="width: 216px;">Id</th>
+                                        <th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-sort="ascending" style="width: 216px;">Имя пользователя</th>
                                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" style="width: 117.6px;">Email</th>
                                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" style="width: 87.6px;">Дата регистрации</th>
                                         <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" style="width: 125.2px;">Администратор</th>
@@ -64,7 +64,6 @@
                             <div class="block-27">
                                 <ul>
                                     <li><a v-on:click="backPage()">&lt;</a></li>
-                                    <!--                            <li class="active"><span>1</span></li>-->
                                     <li v-for="page in lastPage" v-on:click="loadArticles(page)"><a>{{ page }}</a></li>
                                     <li><a v-on:click="nextPage()">&gt;</a></li>
                                 </ul>
@@ -87,7 +86,6 @@ export default {
         SideBarAdmin
     },
 
-
     data: ()=> ({
         users: [],
         totalUsers: null,
@@ -104,7 +102,6 @@ export default {
             if(this.thisPage < this.lastPage){
                 this.loadArticles(this.thisPage += 1)
             }
-
         },
 
         backPage(){
@@ -112,7 +109,6 @@ export default {
                 this.loadArticles(this.thisPage -= 1)
             }
         },
-
 
         loadArticles(page = null){
             let url = page ? "/api/users?page=" + page : "/api/users";
@@ -124,7 +120,6 @@ export default {
                 this.lastPage = res.last_page;
                 this.thisPage = res.current_page;
             })
-
         },
 
         removeUser(userId){
@@ -138,7 +133,6 @@ export default {
             }
         }
     }
-
 }
 </script>
 

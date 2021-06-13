@@ -16,6 +16,8 @@ services:
     depends_on:
       - php
       - mysql
+      - laravel-queue
+      - laravel-websockets
     networks:
       - laravel
 
@@ -36,41 +38,6 @@ services:
     networks:
       - laravel
 
-
-
-  # контейнер для работы демонов вебсокетов и очередей
-#  demon:
-#    build:
-#      context: .
-#      dockerfile: php.dockerfile
-#    container_name: demon
-#    volumes:
-#      - ./src:/var/www/html:delegated
-#    ports:
-#      - "6001:6001"
-#    depends_on:
-#      - mysql
-#    working_dir: /var/www/html
-#    user: laravel
-#    entrypoint: ['php', '/var/www/html/artisan']
-#    networks:
-#      - laravel
-
-#  demon:
-#    build:
-#      context: .
-#      dockerfile: ubuntu.dockerfile
-#    container_name: demon
-#    volumes:
-#      - ./src:/home/src
-#    working_dir: /home/src
-#    ports:
-#      - "6001:6001"
-#    networks:
-#      - laravel
-#    entrypoint: ["/bin/bash"]
-
-
   php:
     build:
       context: .
@@ -83,6 +50,30 @@ services:
     networks:
       - laravel
 
+  laravel-queue:
+    build:
+      context: .
+      dockerfile: php.dockerfile
+    restart: always
+    command: php artisan queue:work
+    volumes:
+      - ./src:/var/www/html
+    networks:
+      - laravel
+
+  laravel-websockets:
+    build:
+      context: .
+      dockerfile: php.dockerfile
+    restart: always
+    ports:
+      - "6001:6001"
+    command: php artisan websockets:serve
+#    command: php artisan websockets:listen
+    volumes:
+      - ./src:/var/www/html
+    networks:
+      - laravel
 
   composer:
     build:
@@ -114,8 +105,6 @@ services:
     container_name: artisan
     volumes:
       - ./src:/var/www/html:delegated
-    ports:
-      - "6001:6001"
     depends_on:
       - mysql
     working_dir: /var/www/html

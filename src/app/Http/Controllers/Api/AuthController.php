@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Notifications\LoginNotification;
 use Exception;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Auth\Events\Registered;
@@ -160,6 +161,7 @@ class AuthController extends Controller
             ], 422);
         }
 
+        $user->notify(new LoginNotification($user, $_SERVER['REMOTE_ADDR'], $_SERVER['HTTP_USER_AGENT']));
         $data = json_decode($response->getContent());
 
         return response()->json([

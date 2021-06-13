@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\Category;
 use App\Models\Comment;
+use App\Models\Rating;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -28,9 +29,6 @@ class ArticleApiController extends Controller
      */
     public function index()
     {
-        $article = new Article();
-
-
         $validator = Validator::make(request()->all(), [
             'sort'=>'string',
             'categoryId'=>'integer',
@@ -40,12 +38,14 @@ class ArticleApiController extends Controller
             return response(['status'=>422, 'error'=>$validator->getMessageBag()], 422);
         }
 
+        $article = new Article();
+
         if(request()->get('categoryId')){
             if($category = Category::find(request()->get('categoryId'))){
                 $articles = $article
                     ->makeHidden(['category_id', 'author_id'])
                     ->getWithConnections()
-                    ->select(['title', 'article_id', 'shortDescription', 'rating', 'image', 'author_id', 'category_id', 'tags'])
+                    ->select(['title', 'article_id', 'shortDescription', 'rating_id', 'image', 'author_id', 'category_id', 'tags'])
                     ->where('category_id', '=', request()->get('categoryId'))
                     ->paginate(6)
                     ->jsonSerialize();
@@ -61,7 +61,6 @@ class ArticleApiController extends Controller
             else{
                 return response(['status'=>404], 404);
             }
-
         }
 
         if(request()->get('sort') == "descending"){
@@ -70,7 +69,7 @@ class ArticleApiController extends Controller
                 ->getWithConnections()
                 ->orderBy('article_id', 'desc')
                 ->take(4)
-                ->get(['title', 'article_id', 'shortDescription', 'rating', 'image', 'author_id', 'category_id', 'tags']),
+                ->get(['title', 'article_id', 'shortDescription', 'rating_id', 'image', 'author_id', 'category_id', 'tags']),
                 'count'=>$article->count()
             ];
         }
@@ -78,7 +77,7 @@ class ArticleApiController extends Controller
         else{
             return $article
                 ->getWithConnections()
-                ->select(['title', 'article_id', 'shortDescription', 'rating', 'image', 'author_id', 'category_id', 'tags'])
+                ->select(['title', 'article_id', 'shortDescription', 'rating_id', 'image', 'author_id', 'category_id', 'tags'])
                 ->paginate(6)
 //                ->makeHidden(['category_id', 'author_id'])
                 ->jsonSerialize();
@@ -93,9 +92,13 @@ class ArticleApiController extends Controller
             },
             'author'=>function($query){
                 $query->select(['user_id','name', 'dec', 'avatar']);
+            },
+            'rating'=>function($query){
+                $query->select(['rating_id','rating']);
             }
+
         ])
-            ->select(['title', 'article_id', 'shortDescription', 'rating', 'image', 'author_id', 'category_id', 'tags'])
+            ->select(['title', 'article_id', 'shortDescription', 'rating_id', 'image', 'author_id', 'category_id', 'tags'])
             ->paginate(6)
             ->jsonSerialize();
 
@@ -128,11 +131,16 @@ class ArticleApiController extends Controller
             return \response(['status'=>403, "error"=>"admin?"], 403);
         }
 
+        $rating = new Rating();
+        $rating->save();
+
+
         $article = new Article();
         $article->author_id = auth()->user()->user_id;
         $article->title = $request->get("title");
         $article->content = $request->get("content");;
         $article->category_id = $request->get("categoryId");
+        $article->rating_id = $rating->rating_id;
 
         if($request->get("shortDescription")){
             $article->shortDescription = $request->get('shortDescription');
@@ -160,7 +168,8 @@ class ArticleApiController extends Controller
     public function show(Article $article)
     {
         $relations = $article
-            ->getWithConnections()->first()
+            ->getWithConnections()
+            ->first()
             ->getRelations();
 
         $data=  [

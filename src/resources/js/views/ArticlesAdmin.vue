@@ -57,7 +57,7 @@
                                                             <td>{{article.article_id}}</td>
                                                             <td><router-link :to = "{name: 'article', params: { id: article.article_id}}">{{article.title}}</router-link></td>
                                                             <td>{{article.created_at}}</td>
-                                                            <td>{{ article.rating }}</td>
+                                                            <td>{{ article.rating.rating }}</td>
                                                             <td>{{ article.author.name }}</td>
                                                             <td><router-link :to = "{name: 'Category', params: { id: article.category.category_id}}">{{article.category.name}}</router-link></td>
 
@@ -91,11 +91,18 @@
             <div class="row mt-5">
                 <div class="col text-center">
                     <div class="block-27">
-                        <ul>
+                        <ul v-if="!thisCategory">
                             <li><a v-on:click="backPage()">&lt;</a></li>
 <!--                            <li class="active"><span>1</span></li>-->
                             <li v-for="page in lastPage"><a v-on:click="loadPageArticles(false, page); thisPage = page">{{ page }}</a></li>
                             <li><a v-on:click="nextPage()">&gt;</a></li>
+                        </ul>
+
+                        <ul v-else>
+                            <li><a v-on:click="backPage(thisCategory)">&lt;</a></li>
+                            <!--                            <li class="active"><span>1</span></li>-->
+                            <li v-for="page in lastPage"><a v-on:click="loadPageArticles(thisCategory, page); thisPage = page">{{ page }}</a></li>
+                            <li><a v-on:click="nextPage(thisCategory)">&gt;</a></li>
                         </ul>
                     </div>
                 </div>
@@ -120,7 +127,8 @@ export default {
         thisPage: 1,
         lastPage: 1,
         totalArticles: null,
-        searchText: null
+        searchText: null,
+        thisCategory: null
     }),
     mounted(){
         this.loadArticles();
@@ -133,10 +141,6 @@ export default {
                     .then(res=>{
                         let articleIndex = this.getArticleItem(articleId)
                         this.articles.splice(articleIndex, 1);
-                    })
-                    .catch(res=>{
-
-                        console.log(res)
                     })
             }
         },
@@ -157,6 +161,7 @@ export default {
                     this.articles = res.data.articles.data;
                     this.lastPage = res.data.articles.last_page;
                     this.totalArticles = res.data.articles.total;
+                    this.thisCategory = res.data.category.id;
                     this.loading = false;
                 })
             }
@@ -165,6 +170,7 @@ export default {
                     this.articles = res.data.data;
                     this.lastPage = res.data.last_page;
                     this.totalArticles = res.data.total;
+                    this.thisCategory = null;
                     this.loading = false;
                 })
             }
@@ -174,6 +180,7 @@ export default {
                 this.categories = res.data.data;
             })
         },
+
         // Работа со страницами
         nextPage(){
             if(this.thisPage + 1 <= this.lastPage){
@@ -189,8 +196,11 @@ export default {
         },
         loadPageArticles(categoryId, page) {
             if(categoryId){
-                axios.get("/api/v1/category/" + categoryId + "?page=" + page).then(res => {
-                    this.articles = res.data.articles;
+                axios.get("/api/article/?categoryId=" + categoryId + "&page=" + page).then(res => {
+                    this.articles = res.data.articles.data;
+                    this.lastPage = res.data.articles.last_page;
+                    this.totalArticles = res.data.articles.total;
+                    this.thisCategory = res.data.category.id;
                     this.loading = false;
                 })
             }

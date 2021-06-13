@@ -18,7 +18,11 @@ class CreateArticlesTable extends Migration
             $table->string('title');
             $table->text('content');
             $table->text('shortDescription')->nullable(true);
-            $table->integer('rating')->default(0);
+
+            $table->bigInteger('rating_id')->unsigned();
+            $table->foreign('rating_id')->on('ratings')->references('rating_id')->onDelete('cascade');
+
+
             $table->string('image')->default("default.jpg");
 
             $table->bigInteger('author_id')->unsigned();

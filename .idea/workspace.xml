@@ -2,293 +2,166 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6440a0c1-d2a3-4629-81b2-fc7749b5402e" name="Default Changelist" comment="...">
-      <change afterPath="$PROJECT_DIR$/install.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/Http/Middleware/ForceJsonResponse.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/Http/Resources/ArticleResource.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/Http/Resources/CategoryCollection.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/Http/Resources/CategoryResource.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/Models/Rating.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/Repositories/CategoryRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/Repositories/Interfaces/CategoryInterface.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.composer.dockerfile.swp" beforeDir="false" afterPath="$PROJECT_DIR$/.composer.dockerfile.swp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/MiniBlog-Laravel.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/MiniBlog-Laravel.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/Http/Controllers/Api/v1/OtherApiController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/Models/Votes.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/Notifications/LoginNotification.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/database/migrations/2020_12_08_174238_create_ratings_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/database/migrations/2021_06_04_113711_create_votes_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/css/style.css.br" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/css/style.css.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/js/vuejs_code_split/10.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/js/vuejs_code_split/10.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/js/vuejs_code_split/11.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/js/vuejs_code_split/11.js.LICENSE.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/js/vuejs_code_split/11.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/js/vuejs_code_split/12.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/js/vuejs_code_split/12.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/js/vuejs_code_split/13.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/js/vuejs_code_split/13.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/js/vuejs_code_split/14.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/js/vuejs_code_split/14.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/js/vuejs_code_split/15.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/js/vuejs_code_split/15.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/js/vuejs_code_split/16.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/js/vuejs_code_split/16.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/js/vuejs_code_split/17.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/js/vuejs_code_split/17.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/js/vuejs_code_split/18.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/js/vuejs_code_split/18.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/js/vuejs_code_split/19.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/js/vuejs_code_split/19.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/js/vuejs_code_split/20.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/js/vuejs_code_split/20.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/js/vuejs_code_split/3.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/js/vuejs_code_split/5.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/js/vuejs_code_split/5.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/js/vuejs_code_split/6.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/js/vuejs_code_split/6.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/js/vuejs_code_split/7.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/js/vuejs_code_split/7.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/js/vuejs_code_split/8.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/js/vuejs_code_split/8.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/js/vuejs_code_split/9.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/public/js/vuejs_code_split/9.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/resources/js/vueMeta.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/39b1ccb4-dced-4a24-b7dd-963c03627c82.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/39b1ccb4-dced-4a24-b7dd-963c03627c82/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/deployment.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sshConfigs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/webServers.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/composer.dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nginx.dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/nginx.dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nginx/default.conf" beforeDir="false" afterPath="$PROJECT_DIR$/nginx/default.conf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nginx/nginx.conf" beforeDir="false" afterPath="$PROJECT_DIR$/nginx/nginx.conf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php.dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/php.dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/php.ini-development" beforeDir="false" afterPath="$PROJECT_DIR$/php/php.ini-development" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/php.ini-production" beforeDir="false" afterPath="$PROJECT_DIR$/php/php.ini-production" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/www.conf" beforeDir="false" afterPath="$PROJECT_DIR$/php/www.conf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/src/.editorconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/.gitattributes" beforeDir="false" afterPath="$PROJECT_DIR$/src/.gitattributes" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/src/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/.styleci.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/.styleci.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Console/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Console/Kernel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Events/CreateCommentsEven.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Events/CreateCommentsEven.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Exceptions/Handler.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Exceptions/Handler.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/Http/Controllers/Api/AuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Http/Controllers/Api/AuthController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Http/Controllers/Api/v1/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Http/Controllers/Api/v1/AdminController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/Http/Controllers/Api/v1/ArticleApiController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Http/Controllers/Api/v1/ArticleApiController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Http/Controllers/Api/v1/CategoryApiController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Http/Controllers/Api/v1/CategoryApiController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Http/Controllers/Api/v1/CommentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Http/Controllers/Api/v1/CommentController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Http/Controllers/Api/v1/UserApiController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Http/Controllers/Api/v1/UserApiController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Http/Controllers/Auth/ConfirmPasswordController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Http/Controllers/Auth/ConfirmPasswordController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Http/Controllers/Auth/ForgotPasswordController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Http/Controllers/Auth/ForgotPasswordController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Http/Controllers/Auth/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Http/Controllers/Auth/LoginController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Http/Controllers/Auth/RegisterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Http/Controllers/Auth/RegisterController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Http/Controllers/Auth/ResetPasswordController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Http/Controllers/Auth/ResetPasswordController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Http/Controllers/Auth/VerificationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Http/Controllers/Auth/VerificationController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Http/Controllers/Controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Http/Controllers/Controller.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Http/Controllers/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Http/Kernel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Http/Middleware/Authenticate.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Http/Middleware/Authenticate.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Http/Middleware/CheckApiToken.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Http/Middleware/CheckApiToken.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Http/Middleware/EncryptCookies.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Http/Middleware/EncryptCookies.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Http/Middleware/Jwt.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Http/Middleware/Jwt.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Http/Middleware/PreventRequestsDuringMaintenance.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Http/Middleware/PreventRequestsDuringMaintenance.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Http/Middleware/RedirectIfAuthenticated.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Http/Middleware/RedirectIfAuthenticated.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Http/Middleware/TrimStrings.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Http/Middleware/TrimStrings.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Http/Middleware/TrustHosts.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Http/Middleware/TrustHosts.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Http/Middleware/TrustProxies.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Http/Middleware/TrustProxies.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Http/Middleware/VerifyCsrfToken.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Http/Middleware/VerifyCsrfToken.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Jobs/CreateArticleJob.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Jobs/CreateArticleJob.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/Models/Article.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Models/Article.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Models/Category.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Models/Category.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Models/Comment.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Models/Comment.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Models/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Modules/JwtToken.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Modules/JwtToken.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Providers/AppServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Providers/AppServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Providers/AuthServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Providers/AuthServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Providers/BroadcastServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Providers/BroadcastServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Providers/EventServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Providers/EventServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Providers/RouteServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Providers/RouteServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/helpers.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/helpers.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/artisan" beforeDir="false" afterPath="$PROJECT_DIR$/src/artisan" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bootstrap/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/bootstrap/app.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bootstrap/cache/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/src/bootstrap/cache/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/src/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/app.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/auth.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/auth.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/broadcasting.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/broadcasting.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/cache.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/cache.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/cors.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/cors.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/database.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/database.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/filesystems.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/filesystems.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/hashing.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/hashing.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/image.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/image.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/jwt.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/jwt.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/logging.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/logging.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/mail.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/mail.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/queue.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/queue.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/services.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/services.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/session.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/session.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/view.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/websockets.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/websockets.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/database/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/database/factories/ArticleFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/factories/ArticleFactory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/database/factories/CategoryFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/factories/CategoryFactory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/database/factories/UserFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/factories/UserFactory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/database/migrations/0000_00_00_000000_create_websockets_statistics_entries_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/migrations/0000_00_00_000000_create_websockets_statistics_entries_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/database/migrations/2014_10_12_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/migrations/2014_10_12_000000_create_users_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/database/migrations/2014_10_12_100000_create_password_resets_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/migrations/2014_10_12_100000_create_password_resets_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/database/migrations/2016_06_01_000001_create_oauth_auth_codes_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/migrations/2016_06_01_000001_create_oauth_auth_codes_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/database/migrations/2016_06_01_000002_create_oauth_access_tokens_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/migrations/2016_06_01_000002_create_oauth_access_tokens_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/database/migrations/2016_06_01_000003_create_oauth_refresh_tokens_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/migrations/2016_06_01_000003_create_oauth_refresh_tokens_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/database/migrations/2016_06_01_000004_create_oauth_clients_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/migrations/2016_06_01_000004_create_oauth_clients_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/database/migrations/2016_06_01_000005_create_oauth_personal_access_clients_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/migrations/2016_06_01_000005_create_oauth_personal_access_clients_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/database/migrations/2019_08_19_000000_create_failed_jobs_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/migrations/2019_08_19_000000_create_failed_jobs_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/database/migrations/2020_12_08_173332_create_categories_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/migrations/2020_12_08_173332_create_categories_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/Models/Rating.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Models/Rating.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/database/migrations/2020_12_08_174239_create_articles_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/migrations/2020_12_08_174239_create_articles_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/database/migrations/2020_12_08_194523_create_comments_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/migrations/2020_12_08_194523_create_comments_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/database/migrations/2021_05_05_152025_create_jobs_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/migrations/2021_05_05_152025_create_jobs_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/database/seeders/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/seeders/DatabaseSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/docker-compose.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/phpunit.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/phpunit.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/public/.htaccess" beforeDir="false" afterPath="$PROJECT_DIR$/src/public/.htaccess" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/public/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/public/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/public/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/src/public/favicon.ico" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/public/images/back.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/public/images/back.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/public/images/vendor/vuejs-medium-editor/src/icons/image-align-expand-active.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/public/images/vendor/vuejs-medium-editor/src/icons/image-align-expand-active.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/public/images/vendor/vuejs-medium-editor/src/icons/image-align-expand.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/public/images/vendor/vuejs-medium-editor/src/icons/image-align-expand.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/public/images/vendor/vuejs-medium-editor/src/icons/image-align-full-active.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/public/images/vendor/vuejs-medium-editor/src/icons/image-align-full-active.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/public/images/vendor/vuejs-medium-editor/src/icons/image-align-full.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/public/images/vendor/vuejs-medium-editor/src/icons/image-align-full.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/public/images/vendor/vuejs-medium-editor/src/icons/image-align-normal-active.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/public/images/vendor/vuejs-medium-editor/src/icons/image-align-normal-active.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/public/images/vendor/vuejs-medium-editor/src/icons/image-align-normal.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/public/images/vendor/vuejs-medium-editor/src/icons/image-align-normal.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/public/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/public/index.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/public/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/public/mix-manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/public/robots.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/public/robots.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/public/web.config" beforeDir="false" afterPath="$PROJECT_DIR$/src/public/web.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/css/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/api.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/api/apiArticle.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/api/apiArticle.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/api/apiUser.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/api/apiUser.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/api/categoryApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/api/categoryApi.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/auth.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/resources/js/bootstrap.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/bootstrap.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/resources/js/components/ArticleItem.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/components/ArticleItem.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/components/ModalEditorProfile.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/components/ModalEditorProfile.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/components/ModalVue.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/components/ModalVue.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/resources/js/components/Navbar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/components/Navbar.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/components/SidebarAdmin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/components/SidebarAdmin.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/components/Spinner.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/components/Spinner.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/resources/js/directives/lazyLoadBackground.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/directives/lazyLoadBackground.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/directives/lazyload.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/directives/lazyload.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/helpers.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/helpers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/modal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/modal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/notifications.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/notifications.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/pusher.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/pusher.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/resources/js/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/router.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_alert.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_alert.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_badge.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_badge.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_breadcrumb.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_breadcrumb.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_button-group.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_button-group.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_buttons.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_buttons.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_card.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_card.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_carousel.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_carousel.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_close.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_close.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_code.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_code.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_custom-forms.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_custom-forms.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_dropdown.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_dropdown.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_forms.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_forms.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_functions.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_functions.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_grid.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_grid.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_images.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_images.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_input-group.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_input-group.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_jumbotron.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_jumbotron.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_list-group.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_list-group.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_media.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_media.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_mixins.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_mixins.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_modal.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_modal.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_nav.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_nav.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_navbar.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_navbar.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_pagination.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_pagination.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_popover.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_popover.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_print.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_print.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_progress.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_progress.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_reboot.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_reboot.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_root.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_root.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_spinners.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_spinners.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_tables.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_tables.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_toasts.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_toasts.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_tooltip.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_tooltip.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_transitions.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_transitions.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_type.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_type.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_utilities.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_utilities.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_variables.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_variables.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/bootstrap-grid.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/bootstrap-grid.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/bootstrap-reboot.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/bootstrap-reboot.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/bootstrap.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/bootstrap.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_alert.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_alert.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_background-variant.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_background-variant.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_badge.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_badge.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_border-radius.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_border-radius.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_box-shadow.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_box-shadow.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_breakpoints.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_breakpoints.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_buttons.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_buttons.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_caret.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_caret.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_clearfix.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_clearfix.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_float.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_float.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_forms.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_forms.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_gradients.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_gradients.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_grid-framework.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_grid-framework.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_grid.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_grid.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_hover.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_hover.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_image.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_image.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_list-group.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_list-group.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_lists.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_lists.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_nav-divider.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_nav-divider.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_pagination.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_pagination.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_reset-text.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_reset-text.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_resize.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_resize.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_screen-reader.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_screen-reader.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_size.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_size.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_table-row.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_table-row.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_text-emphasis.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_text-emphasis.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_text-hide.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_text-hide.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_text-truncate.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_text-truncate.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_transition.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_transition.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_visibility.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_visibility.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_align.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_align.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_background.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_background.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_borders.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_borders.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_clearfix.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_clearfix.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_display.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_display.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_embed.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_embed.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_flex.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_flex.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_float.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_float.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_overflow.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_overflow.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_position.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_position.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_screenreaders.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_screenreaders.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_shadows.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_shadows.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_sizing.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_sizing.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_spacing.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_spacing.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_text.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_text.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_visibility.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_visibility.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/scss/style.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/views/AddArticlesAdmin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/views/AddArticlesAdmin.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_alert.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_badge.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_breadcrumb.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_button-group.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_buttons.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_card.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_carousel.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_close.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_code.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_custom-forms.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_dropdown.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_forms.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_functions.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_grid.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_images.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_input-group.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_jumbotron.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_list-group.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_media.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_mixins.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_modal.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_nav.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_navbar.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_pagination.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_popover.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_print.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_progress.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_reboot.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_root.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_spinners.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_tables.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_toasts.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_tooltip.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_transitions.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_type.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_utilities.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/_variables.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/bootstrap-grid.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/bootstrap-reboot.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/bootstrap.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_alert.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_background-variant.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_badge.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_border-radius.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_box-shadow.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_breakpoints.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_buttons.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_caret.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_clearfix.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_float.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_forms.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_gradients.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_grid-framework.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_grid.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_hover.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_image.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_list-group.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_lists.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_nav-divider.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_pagination.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_reset-text.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_resize.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_screen-reader.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_size.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_table-row.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_text-emphasis.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_text-hide.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_text-truncate.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_transition.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/mixins/_visibility.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_align.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_background.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_borders.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_clearfix.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_display.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_embed.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_flex.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_float.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_overflow.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_position.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_screenreaders.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_shadows.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_sizing.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_spacing.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_text.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/bootstrap/utilities/_visibility.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/js/scss/style.scss" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/resources/js/views/Article.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/views/Article.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/resources/js/views/Articles.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/views/Articles.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/resources/js/views/ArticlesAdmin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/views/ArticlesAdmin.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/views/CategoriesAdmin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/views/CategoriesAdmin.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/resources/js/views/CreateCategory.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/views/CreateCategory.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/views/EditUserAdmin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/views/EditUserAdmin.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/resources/js/views/IndexAdmin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/views/IndexAdmin.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/resources/js/views/UserProfile.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/views/UserProfile.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/resources/js/views/UsersAdmin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/views/UsersAdmin.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/resources/js/views/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/views/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/js/views/resetPassword.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/js/views/resetPassword.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/lang/en/auth.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/lang/en/auth.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/lang/en/pagination.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/lang/en/pagination.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/lang/en/passwords.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/lang/en/passwords.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/lang/en/validation.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/lang/en/validation.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/sass/_variables.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/sass/_variables.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/resources/sass/app.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/sass/app.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/views/auth/confirmEmail.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/views/auth/confirmEmail.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/views/auth/reset.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/views/auth/reset.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/resources/views/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/views/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/api.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/channels.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/channels.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/console.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/console.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/server.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/storage/app/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/src/storage/app/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/storage/app/public/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/src/storage/app/public/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/storage/framework/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/src/storage/framework/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/storage/framework/cache/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/src/storage/framework/cache/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/storage/framework/cache/data/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/src/storage/framework/cache/data/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/storage/framework/sessions/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/src/storage/framework/sessions/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/storage/framework/testing/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/src/storage/framework/testing/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/storage/framework/views/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/src/storage/framework/views/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/storage/logs/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/src/storage/logs/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tests/CreatesApplication.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/CreatesApplication.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tests/Feature/ExampleTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/Feature/ExampleTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tests/TestCase.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/TestCase.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tests/Unit/ExampleTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/Unit/ExampleTest.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/webpack.mix.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/webpack.mix.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ubuntu.dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/ubuntu.dockerfile" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -457,12 +330,15 @@
     </include_path>
   </component>
   <component name="ProjectId" id="1t4wV2jjWNZjqFLmHAUe453nix4" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DatabaseDriversLRU" value="mysql" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
@@ -470,7 +346,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="php.override.implement.member.chooser.php.doc" value="NONE" />
-    <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Color Scheme Font" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -493,8 +369,29 @@
       <workItem from="1622481913787" duration="3000" />
       <workItem from="1622536609052" duration="3322000" />
       <workItem from="1622645866699" duration="9394000" />
-      <workItem from="1622726946482" duration="4087000" />
+      <workItem from="1622726946482" duration="10681000" />
+      <workItem from="1622801011492" duration="4000" />
+      <workItem from="1622801438731" duration="12105000" />
+      <workItem from="1622828901639" duration="6132000" />
+      <workItem from="1622915991452" duration="618000" />
+      <workItem from="1623225981743" duration="212000" />
+      <workItem from="1623516316602" duration="531000" />
+      <workItem from="1623516861074" duration="3679000" />
+      <workItem from="1623520673837" duration="2779000" />
+      <workItem from="1623575794161" duration="1911000" />
+      <workItem from="1623577804649" duration="3614000" />
+      <workItem from="1623581477671" duration="4913000" />
+      <workItem from="1623586544131" duration="1003000" />
+      <workItem from="1623588066929" duration="4677000" />
     </task>
+    <task id="LOCAL-00001" summary="...">
+      <created>1622731586090</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1622731586090</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -513,6 +410,7 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="..." />
     <option name="LAST_COMMIT_MESSAGE" value="..." />
   </component>

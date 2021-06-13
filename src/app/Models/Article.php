@@ -22,7 +22,10 @@ class Article extends Model
                 },
                 'author'=>function($query){
                     $query->select(['user_id','name', 'dec', 'avatar']);
-                }
+                },
+                'rating'=>function($query){
+                    $query->select(['rating_id','rating', 'NumberOfVotes']);
+                },
             ]);
     }
 
@@ -36,5 +39,9 @@ class Article extends Model
 
     public function author(){
         return $this->hasOne(User::class, 'user_id', 'author_id');
+    }
+
+    public function rating(){
+        return $this->hasOne(Rating::class, 'rating_id', 'rating_id');
     }
 }

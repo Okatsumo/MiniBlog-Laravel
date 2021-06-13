@@ -1,6 +1,6 @@
 <template>
     <div>
-        <section class="hero-wrap hero-wrap-2" style="background-image: url('https://i.pinimg.com/originals/ab/d3/91/abd391cf3428d8d3cb03c7993342ce91.jpg');">
+        <section class="hero-wrap hero-wrap-2" v-bind:style="'background-image: url(/images/back.jpg)'">
             <div class="overlay"></div>
             <div class="container">
                 <div class="row no-gutters slider-text align-items-end justify-content-center" v-if="loading">
@@ -67,11 +67,22 @@
 <script>
 
 import Axios from 'axios'
-import spin from '../components/Spinner'
-import articleItem from '../components/ArticleItem'
+// import spin from '../components/Spinner'
+const spin = () => import('../components/Spinner')
+// import articleItem from '../components/ArticleItem'
+const articleItem = () => import('../components/ArticleItem')
 
 export default {
     name: "Category",
+
+    metaInfo: {
+        title: 'Technology Plus | просмотр записей',
+        meta: [
+            { vmid: 'description', property: 'description', content: 'Technology Plus. Просмотр записей' },
+            { vmid: 'og:title', property: 'og:title', content: 'Technology Plus. Просмотр записей' },
+            { vmid: 'og:description', property: 'og:description', content: 'Technology Plus. Просмотр записей' },
+        ],
+    },
 
     components: {
         spin,

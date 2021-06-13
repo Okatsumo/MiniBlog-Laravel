@@ -53,6 +53,15 @@
 export default {
     name: "index",
 
+    metaInfo: {
+        title: 'Technology Plus | главная',
+        meta: [
+            { vmid: 'description', property: 'description', content: 'Technology Plus. Главная страница' },
+            { vmid: 'og:title', property: 'og:title', content: 'Technology Plus. Главная страница' },
+            { vmid: 'og:description', property: 'og:description', content: 'Technology Plus. Главная страница' },
+        ],
+    },
+
     data: ()=> ({
         articles: null,
         comments: null,
@@ -61,8 +70,8 @@ export default {
     }),
 
     mounted() {
-        this.loadArticles()
-        this.loadNewComments()
+        this.loadArticles();
+        this.loadNewComments();
     },
 
     methods: {

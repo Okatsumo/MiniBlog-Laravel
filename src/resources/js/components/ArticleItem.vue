@@ -4,7 +4,6 @@
             <div class="blog-entry d-lg-flex">
                 <div class="half">
                     <router-link :to="{name: 'article', params: { id: articleId } }" class="img d-flex align-items-end" v-lazy-load-background :data-src="'/storage/images/articles/' + image">
-<!--                    <router-link :to="{name: 'article', params: { id: articleId } }" class="img d-flex align-items-end" v-bind:style="'background-image: url(../storage/images/articles/'+image">-->
                         <div class="overlay"></div>
                     </router-link>
                 </div>
