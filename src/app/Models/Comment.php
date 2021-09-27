@@ -11,9 +11,8 @@ class Comment extends Model
 
     protected $primaryKey = 'comment_id';
 
-
-    public function author(){
+    public function author()
+    {
         return $this->hasOne(User::class, 'user_id', 'author_id');
     }
-
 }

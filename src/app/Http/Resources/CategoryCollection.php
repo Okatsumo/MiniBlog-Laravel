@@ -10,16 +10,17 @@ class CategoryCollection extends ResourceCollection
     /**
      * Transform the resource into an array.
      *
-     * @param  Request  $request
+     * @param Request $request
+     *
      * @return array
      */
     public function toArray($request)
     {
         return [
-          'data'=>$this->collection,
-           'links' => [
-               'self' => 'link-value',
-           ],
+            'data'  => $this->collection,
+            'links' => [
+                'self' => 'link-value',
+            ],
         ];
     }
 }

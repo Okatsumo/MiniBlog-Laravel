@@ -13,15 +13,14 @@ class Category extends Model
     protected $primaryKey = 'category_id';
     public $timestamps = false;
 
-    protected $fillable =['name'];
+    protected $fillable = ['name'];
 
-    function __construct(array $attributes = [])
+    public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
 
         $this->leftJoin('articles', 'categories.category_id', '=', 'category_id')
             ->groupBy('category_id');
 //            ->get('*', DB::raw('COUNT(1)'))
-
     }
 }

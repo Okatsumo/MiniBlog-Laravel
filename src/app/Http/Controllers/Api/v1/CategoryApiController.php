@@ -3,26 +3,23 @@
 namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\ArticleResource;
+use App\Http\Requests\CategoryRequest;
 use App\Http\Resources\CategoryResource;
-use App\Models\Article;
 use App\Models\Category;
-use App\Models\User;
 use App\Repositories\CategoryRepository;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Routing\ResponseFactory;
-use App\Http\Requests\CategoryRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
 
-
 class CategoryApiController extends Controller
 {
     private $categoryRepository;
 
-    public function __construct(CategoryRepository $categoryRepository){
+    public function __construct(CategoryRepository $categoryRepository)
+    {
         $this->categoryRepository = $categoryRepository;
     }
 
@@ -40,6 +37,7 @@ class CategoryApiController extends Controller
      * Store a newly created resource in storage.
      *
      * @param CategoryRequest $request
+     *
      * @return void
      */
     public function store(CategoryRequest $request)
@@ -51,21 +49,23 @@ class CategoryApiController extends Controller
      * Display the specified resource.
      *
      * @param Category $category
+     *
      * @return Application|Response|ResponseFactory
      */
     public function show(Category $category)
     {
         $data = $this->categoryRepository->get($category)->paginate()->jsonSerialize();
+
         return response(
             [
-            'articles'=>$data,
-            'category'=>
-                [
-                'name'=>$category->name,
-                'id'=>$category->category_id
-                ]
-            ]
-        , 200);
+                'articles'=> $data,
+                'category'=> [
+                        'name'=> $category->name,
+                        'id'  => $category->category_id,
+                    ],
+            ],
+            200
+        );
     }
 
     /**
@@ -73,6 +73,7 @@ class CategoryApiController extends Controller
      *
      * @param Request $request
      * @param $categoryId
+     *
      * @return JsonResponse
      */
     public function update(Request $request, $categoryId)
@@ -81,21 +82,24 @@ class CategoryApiController extends Controller
         $category->fill($request->except(['category_id']));
 //        $category->$request->get('name');
         $category->save();
+
         return response()->json($category);
     }
 
     /**
      * Remove the specified resource from storage.
+     *
      * @param CategoryRequest $request
+     *
      * @return Application|ResponseFactory|Response
      */
     public function destroy($category, CategoryRequest $request)
     {
-        if(!$category = Category::findOrFail($category)){
-            return response(['message'=>"not found"], 404);
+        if (!$category = Category::findOrFail($category)) {
+            return response(['message'=>'not found'], 404);
         }
 
-        if($category->delete()){
+        if ($category->delete()) {
             return response(['status'=>204], 204);
         }
     }

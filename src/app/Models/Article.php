@@ -11,37 +11,42 @@ class Article extends Model
     protected $primaryKey = 'article_id';
 
     /**
-     * Вернет модель со всеми связями
+     * Вернет модель со всеми связями.
+     *
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function getWithConnections(){
+    public function getWithConnections()
+    {
         return $this->
             with([
-                'category'=> function($query){
-                    $query->select(['category_id','name']);
+                'category'=> function ($query) {
+                    $query->select(['category_id', 'name']);
                 },
-                'author'=>function($query){
-                    $query->select(['user_id','name', 'dec', 'avatar']);
+                'author'=> function ($query) {
+                    $query->select(['user_id', 'name', 'dec', 'avatar']);
                 },
-                'rating'=>function($query){
-                    $query->select(['rating_id','rating', 'NumberOfVotes']);
+                'rating'=> function ($query) {
+                    $query->select(['rating_id', 'rating', 'NumberOfVotes']);
                 },
             ]);
     }
 
     protected $tags = [
-        'tags' => 'json'
+        'tags' => 'json',
     ];
 
-    public function category(){
+    public function category()
+    {
         return $this->hasOne(Category::class, 'category_id', 'category_id');
     }
 
-    public function author(){
+    public function author()
+    {
         return $this->hasOne(User::class, 'user_id', 'author_id');
     }
 
-    public function rating(){
+    public function rating()
+    {
         return $this->hasOne(Rating::class, 'rating_id', 'rating_id');
     }
 }

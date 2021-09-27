@@ -23,8 +23,7 @@ class CategoryFactory extends Factory
     public function definition()
     {
         return [
-            'name'=>Str::random(6)
+            'name'=> Str::random(6),
         ];
     }
-
 }

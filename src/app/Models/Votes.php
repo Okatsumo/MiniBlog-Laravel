@@ -13,7 +13,7 @@ class Votes extends Model
     public $timestamps = false;
 
     protected $fillable = [
-      'user_id',
-      'article_id'
+        'user_id',
+        'article_id',
     ];
 }

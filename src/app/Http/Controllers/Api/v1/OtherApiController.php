@@ -6,37 +6,36 @@ use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\Rating;
 use App\Models\Votes;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class OtherApiController extends Controller
 {
-    function updateRating(Article $article){
+    public function updateRating(Article $article)
+    {
         $rating = Rating::find($article->rating_id);
 
-        $validator = Validator::make(\request()->all(),[
-            'points'=>'required|integer|max:5',
+        $validator = Validator::make(\request()->all(), [
+            'points'=> 'required|integer|max:5',
         ]);
 
-        if ($validator->fails()){
+        if ($validator->fails()) {
             return response([
                 'status' => 422,
-                'errors' => $validator->getMessageBag()
+                'errors' => $validator->getMessageBag(),
             ], 422);
         }
 
-        if($vote = Votes::where(
+        if ($vote = Votes::where(
             [
-                ['user_id', "=", auth()->user()->user_id],
-                ['article_id', "=", $article->article_id]
+                ['user_id', '=', auth()->user()->user_id],
+                ['article_id', '=', $article->article_id],
             ]
         )->first()
-        ){
+        ) {
             $rating->totalPoints -= $vote->point;
             $vote->point = \request()->get('points');
             $vote->update();
-        }
-        else{
+        } else {
             $vote = new Votes();
             $vote->user_id = auth()->user()->user_id;
             $vote->article_id = $article->article_id;
@@ -48,17 +47,16 @@ class OtherApiController extends Controller
 
         $rating->totalPoints += \request()->get('points');
 
-        if($rating->NumberOfVotes <= 1){
+        if ($rating->NumberOfVotes <= 1) {
             $rating->rating = $rating->totalPoints;
-        }
-        else{
+        } else {
             $rating->rating = $rating->totalPoints / $rating->NumberOfVotes;
         }
         $rating->update();
 
         return response([
             'status' => 200,
-            'rating'=>$rating
+            'rating' => $rating,
         ], 200);
     }
 }
