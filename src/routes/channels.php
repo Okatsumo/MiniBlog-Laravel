@@ -1,8 +1,5 @@
 <?php
 
-use App\Models\Article;
-use App\Models\Comment;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Broadcast;
 
 /*
@@ -23,4 +20,3 @@ Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
 Broadcast::channel('comments.{comment}', function ($articleId) {
     return $articleId;
 });
-

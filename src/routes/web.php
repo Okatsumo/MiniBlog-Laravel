@@ -1,12 +1,8 @@
 <?php
 
 use App\Models\Category;
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
-use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Support\Facades\Route;
-use Laravel\Passport\Passport;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,27 +24,28 @@ Route::get('/reset-password/{token}', function ($token) {
     return view('index');
 })->middleware('guest')->name('password.reset');
 
-
 //Роут перенаправляющий всё на vue
 Route::get('/', function () {
-    return view('index',
+    return view(
+        'index',
         [
-            'categories'=>Category::all()
-        ]);
+            'categories'=> Category::all(),
+        ]
+    );
 });
 
-
-Broadcast::routes([
-    'middleware' => 'auth:api']
+Broadcast::routes(
+    [
+        'middleware' => 'auth:api', ]
 );
 
-
 Route::get('{any}', function () {
-    return view('index',
-    [
-        'categories'=>Category::all()
-    ]);
+    return view(
+        'index',
+        [
+            'categories'=> Category::all(),
+        ]
+    );
 })->where('any', '.*');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-

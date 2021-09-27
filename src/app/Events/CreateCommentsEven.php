@@ -3,19 +3,17 @@
 namespace App\Events;
 
 use App\Models\Comment;
-use App\Models\User;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Broadcasting\PresenceChannel;
-use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
 class CreateCommentsEven implements ShouldBroadcast
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels;
+    use Dispatchable;
+    use InteractsWithSockets;
+    use SerializesModels;
 
     public $comment;
     public $method;
@@ -30,7 +28,6 @@ class CreateCommentsEven implements ShouldBroadcast
         $this->comment = $comment;
         $this->method = $method;
     }
-
 
     /**
      * Get the channels the event should broadcast on.
@@ -47,11 +44,12 @@ class CreateCommentsEven implements ShouldBroadcast
         return 'CreateCommentsEven';
     }
 
-    public function broadcastWith(){
+    public function broadcastWith()
+    {
         return [
-            'method'=>$this->method,
-            'comment'=>$this->comment,
-            'author'=>$this->comment->author
+            'method' => $this->method,
+            'comment'=> $this->comment,
+            'author' => $this->comment->author,
         ];
     }
 }

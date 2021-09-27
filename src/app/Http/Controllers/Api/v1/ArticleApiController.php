@@ -2,23 +2,17 @@
 
 namespace App\Http\Controllers\Api\v1;
 
+use function App\Helpers\uploadImage;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\Category;
-use App\Models\Comment;
 use App\Models\Rating;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Routing\ResponseFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
-use Intervention\Image\Facades\Image;
-use function App\Helpers\uploadImage;
-use function MongoDB\BSON\fromJSON;
-use function MongoDB\BSON\toJSON;
-
 
 class ArticleApiController extends Controller
 {
@@ -30,18 +24,18 @@ class ArticleApiController extends Controller
     public function index()
     {
         $validator = Validator::make(request()->all(), [
-            'sort'=>'string',
-            'categoryId'=>'integer',
+            'sort'      => 'string',
+            'categoryId'=> 'integer',
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return response(['status'=>422, 'error'=>$validator->getMessageBag()], 422);
         }
 
         $article = new Article();
 
-        if(request()->get('categoryId')){
-            if($category = Category::find(request()->get('categoryId'))){
+        if (request()->get('categoryId')) {
+            if ($category = Category::find(request()->get('categoryId'))) {
                 $articles = $article
                     ->makeHidden(['category_id', 'author_id'])
                     ->getWithConnections()
@@ -51,30 +45,27 @@ class ArticleApiController extends Controller
                     ->jsonSerialize();
 
                 return [
-                    'category'=>[
-                        'name'=>$category->name,
-                        'id'=>$category->category_id
+                    'category'=> [
+                        'name'=> $category->name,
+                        'id'  => $category->category_id,
                     ],
-                    'articles'=>$articles
+                    'articles'=> $articles,
                 ];
-            }
-            else{
+            } else {
                 return response(['status'=>404], 404);
             }
         }
 
-        if(request()->get('sort') == "descending"){
+        if (request()->get('sort') == 'descending') {
             return [
-                'articles'=>$article
+                'articles'=> $article
                 ->getWithConnections()
                 ->orderBy('article_id', 'desc')
                 ->take(4)
                 ->get(['title', 'article_id', 'shortDescription', 'rating_id', 'image', 'author_id', 'category_id', 'tags']),
-                'count'=>$article->count()
+                'count'=> $article->count(),
             ];
-        }
-
-        else{
+        } else {
             return $article
                 ->getWithConnections()
                 ->select(['title', 'article_id', 'shortDescription', 'rating_id', 'image', 'author_id', 'category_id', 'tags'])
@@ -84,18 +75,19 @@ class ArticleApiController extends Controller
         }
     }
 
-    public function search(Request $request){
-        $articles = Article::where('title', 'LIKE', '%' . $request->get('text') . '%');
+    public function search(Request $request)
+    {
+        $articles = Article::where('title', 'LIKE', '%'.$request->get('text').'%');
         $data = $articles->with([
-            'category'=> function($query){
-                $query->select(['category_id','name']);
+            'category'=> function ($query) {
+                $query->select(['category_id', 'name']);
             },
-            'author'=>function($query){
-                $query->select(['user_id','name', 'dec', 'avatar']);
+            'author'=> function ($query) {
+                $query->select(['user_id', 'name', 'dec', 'avatar']);
             },
-            'rating'=>function($query){
-                $query->select(['rating_id','rating']);
-            }
+            'rating'=> function ($query) {
+                $query->select(['rating_id', 'rating']);
+            },
 
         ])
             ->select(['title', 'article_id', 'shortDescription', 'rating_id', 'image', 'author_id', 'category_id', 'tags'])
@@ -108,61 +100,61 @@ class ArticleApiController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return Response
      */
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'title'=>'required|string|max:80|min:4',
-            'content'=>'required|string',
-            'shortDescription'=>'string|min:0|max:140',
-            'categoryId'=>'required|integer',
-            'tags'=>'json',
-            'image'=>'mimes:jpeg,bmp,png'
+            'title'           => 'required|string|max:80|min:4',
+            'content'         => 'required|string',
+            'shortDescription'=> 'string|min:0|max:140',
+            'categoryId'      => 'required|integer',
+            'tags'            => 'json',
+            'image'           => 'mimes:jpeg,bmp,png',
         ]);
 
-
-        if($validator->fails()){
+        if ($validator->fails()) {
             return \response(['status'=>422, 'error'=>$validator->getMessageBag()], 422);
         }
 
-        if(!auth()->user()->admin){
-            return \response(['status'=>403, "error"=>"admin?"], 403);
+        if (!auth()->user()->admin) {
+            return \response(['status'=>403, 'error'=>'admin?'], 403);
         }
 
         $rating = new Rating();
         $rating->save();
 
-
         $article = new Article();
         $article->author_id = auth()->user()->user_id;
-        $article->title = $request->get("title");
-        $article->content = $request->get("content");;
-        $article->category_id = $request->get("categoryId");
+        $article->title = $request->get('title');
+        $article->content = $request->get('content');
+        $article->category_id = $request->get('categoryId');
         $article->rating_id = $rating->rating_id;
 
-        if($request->get("shortDescription")){
+        if ($request->get('shortDescription')) {
             $article->shortDescription = $request->get('shortDescription');
         }
 
-        if($request->get("tags")){
+        if ($request->get('tags')) {
             $article->tags = $request->get('tags');
         }
 
-        if($request->file('image')){
+        if ($request->file('image')) {
             $article->image = uploadImage('public/images/articles/', $request->file('image'), 300, 300);
         }
 
         $article->save();
 
-        return response(['status'=>201, "article"=>$article], 201);
+        return response(['status'=>201, 'article'=>$article], 201);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Article  $article
+     * @param \App\Models\Article $article
+     *
      * @return Application|ResponseFactory|Response
      */
     public function show(Article $article)
@@ -172,60 +164,61 @@ class ArticleApiController extends Controller
             ->first()
             ->getRelations();
 
-        $data=  [
-                'article' =>$article->makeHidden(['category_id', 'author_id'])
-            ] + $relations ;
-        return response($data, 200);
+        $data = [
+            'article' => $article->makeHidden(['category_id', 'author_id']),
+        ] + $relations;
 
+        return response($data, 200);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param \App\Models\Article $article
-     * @param Request $request
+     * @param Request             $request
+     *
      * @return Response
      */
     public function edit(Article $article, Request $request): Response
     {
         $validator = Validator::make($request->all(), [
-            'title'=>'string|max:80|min:4',
-            'shortDescription'=>'string|min:0|max:140',
-            'content'=>'string',
-            'categoryId'=>'integer',
-            'tags'=>'json',
-            'image'=>'mimes:jpeg,bmp,png'
+            'title'           => 'string|max:80|min:4',
+            'shortDescription'=> 'string|min:0|max:140',
+            'content'         => 'string',
+            'categoryId'      => 'integer',
+            'tags'            => 'json',
+            'image'           => 'mimes:jpeg,bmp,png',
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return \response(['status'=>422, 'error'=>$validator->getMessageBag()], 422);
         }
 
-        if($request->get("title")){
+        if ($request->get('title')) {
             $article->title = $request->get('title');
         }
 
-        if($request->get("shortDescription")){
+        if ($request->get('shortDescription')) {
             $article->shortDescription = $request->get('shortDescription');
         }
 
-        if($request->get("content")){
+        if ($request->get('content')) {
             $article->content = $request->get('content');
         }
 
-        if($request->file('image')){
+        if ($request->file('image')) {
             $article->image = uploadImage('public/images/articles/', $request->file('image'), 300, 300);
         }
 
-        if($request->get("tags")){
+        if ($request->get('tags')) {
             $article->tags = $request->get('tags');
         }
 
-        if($request->get("categoryId")){
+        if ($request->get('categoryId')) {
             $article->category_id = $request->get('categoryId');
         }
 
-        if($article->update()){
+        if ($article->update()) {
             return response(['status'=>201, 'article'=>$article], 201);
         }
 
@@ -236,23 +229,22 @@ class ArticleApiController extends Controller
      * Remove the specified resource from storage.
      *
      * @param $id
+     *
      * @return Response
      */
     public function destroy($id)
     {
-        if(!$article = Article::find($id)){
+        if (!$article = Article::find($id)) {
             return response(['status'=>404], 404);
         }
 
-        if(!auth()->user()->admin){
+        if (!auth()->user()->admin) {
             return response(['status'=>403], 403);
         }
 
-        if($article->delete()){
+        if ($article->delete()) {
             return response(['status'=>200], 200);
-        }
-
-        else{
+        } else {
             return response(['status'=>400], 400);
         }
     }

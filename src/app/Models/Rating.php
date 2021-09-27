@@ -9,6 +9,6 @@ class Rating extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = "rating_id";
+    protected $primaryKey = 'rating_id';
     public $timestamps = false;
 }

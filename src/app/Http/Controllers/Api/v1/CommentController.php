@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api\v1;
 
 use App\Events\CreateCommentsEven;
-use App\Events\removeCommentEven;
 use App\Http\Controllers\Controller;
 use App\Models\Comment;
 use Illuminate\Contracts\Foundation\Application;
@@ -18,26 +17,29 @@ class CommentController extends Controller
 {
     public function index()
     {
-        $comment = new Comment;
+        $comment = new Comment();
         $comments = $comment->with([
-            'author'=> function($query){
-                $query->select(['user_id','name', 'avatar']);
-            }
+            'author'=> function ($query) {
+                $query->select(['user_id', 'name', 'avatar']);
+            },
         ])->orderBy('comment_id', 'desc')->take(4)->get();
-        return response(['status'=>200,'comments'=>$comments], 200);
+
+        return response(['status'=>200, 'comments'=>$comments], 200);
     }
 
     /**
      * @return array
      */
-    public function show($articleId){
+    public function show($articleId)
+    {
         $comment = new Comment();
+
         return $comment
             ->where('article_id', '=', $articleId)
             ->with([
-                'author'=> function($query){
-                    $query->select(['user_id','name', 'avatar']);
-                }
+                'author'=> function ($query) {
+                    $query->select(['user_id', 'name', 'avatar']);
+                },
             ])
             ->paginate(4)
             ->jsonSerialize();
@@ -50,28 +52,28 @@ class CommentController extends Controller
      */
     public function create(Request $request)
     {
-        $validator = Validator::make($request->all(),[
-            'content'=>'required',
-            'articleId'=>'required',
+        $validator = Validator::make($request->all(), [
+            'content'  => 'required',
+            'articleId'=> 'required',
         ]);
 
-        if ($validator->fails()){
+        if ($validator->fails()) {
             return response([
                 'status' => 404,
-                'errors' => $validator->getMessageBag()
+                'errors' => $validator->getMessageBag(),
             ], 404);
         }
 
         $user = auth()->user();
 
-        if($user->banned){
+        if ($user->banned) {
             return response([
                 'status' => 403,
-                'errors' => "The account is blocked"
+                'errors' => 'The account is blocked',
             ], 403);
         }
 
-        try{
+        try {
             $comment = new Comment();
             $comment->author_id = $user->user_id;
             $comment->article_id = $request->get('articleId');
@@ -83,8 +85,7 @@ class CommentController extends Controller
             $comment->author;
 
             return response([$comment], 201);
-        }
-        catch (QueryException $ex){
+        } catch (QueryException $ex) {
             return response()->json(['status'=>404, 'message'=>$ex]);
         }
     }
@@ -92,7 +93,8 @@ class CommentController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return ResponseAlias
      */
     public function store(Request $request)
@@ -100,26 +102,26 @@ class CommentController extends Controller
         //
     }
 
-
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return ResponseAlias
      */
     public function edit(Comment $comment, Request $request): ResponseAlias
     {
-        if($request->get("content")){
+        if ($request->get('content')) {
             $comment->content = $request->get('content');
         }
 
-        if($comment->author_id != auth()->user()->user_id and !auth()->user()->admin){
+        if ($comment->author_id != auth()->user()->user_id and !auth()->user()->admin) {
             return response(['status'=>403, 'message'=>$comment->author_id], 403);
         }
 
-
-        if($comment->update()){
+        if ($comment->update()) {
             broadcast(new CreateCommentsEven($comment, 'edit'));
+
             return response(['status'=>201], 201);
         }
     }
@@ -127,8 +129,9 @@ class CommentController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return ResponseAlias
      */
     public function update(Request $request, $id)
@@ -139,23 +142,22 @@ class CommentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return ResponseAlias
      */
     public function destroy(Comment $comment): ResponseAlias
     {
-        if($comment->author_id != auth()->user()->user_id){
+        if ($comment->author_id != auth()->user()->user_id) {
             return response(['status'=>403], 403);
         }
-
 
         $removedComment = Comment::updateOrCreate($comment->jsonSerialize())->first();
         broadcast(new CreateCommentsEven($removedComment, 'remove'));
 
-        if($comment->delete()){
+        if ($comment->delete()) {
             return response(['status'=>200], 200);
-        }
-        else{
+        } else {
             return response(['status'=>400], 400);
         }
     }
